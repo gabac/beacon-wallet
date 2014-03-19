@@ -1,2 +1,2 @@
-beacon-wallet-ios
+beacon-wallet
 =================
