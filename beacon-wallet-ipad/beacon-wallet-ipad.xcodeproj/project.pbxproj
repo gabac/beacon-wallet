@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02FCF8F618E0B63B00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8F518E0B63B00E3C663 /* Foundation.framework */; };
+		02FCF8F818E0B63B00E3C663 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8F718E0B63B00E3C663 /* CoreGraphics.framework */; };
+		02FCF8FA18E0B63B00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8F918E0B63B00E3C663 /* UIKit.framework */; };
+		02FCF90018E0B63B00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF8FE18E0B63B00E3C663 /* InfoPlist.strings */; };
+		02FCF90218E0B63B00E3C663 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FCF90118E0B63B00E3C663 /* main.m */; };
+		02FCF90618E0B63B00E3C663 /* BWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FCF90518E0B63B00E3C663 /* BWAppDelegate.m */; };
+		02FCF90818E0B63B00E3C663 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF90718E0B63B00E3C663 /* Images.xcassets */; };
+		02FCF90F18E0B63B00E3C663 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF90E18E0B63B00E3C663 /* XCTest.framework */; };
+		02FCF91018E0B63B00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8F518E0B63B00E3C663 /* Foundation.framework */; };
+		02FCF91118E0B63B00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8F918E0B63B00E3C663 /* UIKit.framework */; };
+		02FCF91918E0B63B00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF91718E0B63B00E3C663 /* InfoPlist.strings */; };
+		02FCF91B18E0B63B00E3C663 /* beacon_wallet_ipadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FCF91A18E0B63B00E3C663 /* beacon_wallet_ipadTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		02FCF91218E0B63B00E3C663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02FCF8EA18E0B63B00E3C663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02FCF8F118E0B63B00E3C663;
+			remoteInfo = "beacon-wallet-ipad";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-ipad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FCF8F518E0B63B00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		02FCF8F718E0B63B00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		02FCF8F918E0B63B00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		02FCF8FD18E0B63B00E3C663 /* beacon-wallet-ipad-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "beacon-wallet-ipad-Info.plist"; sourceTree = "<group>"; };
+		02FCF8FF18E0B63B00E3C663 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		02FCF90118E0B63B00E3C663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		02FCF90318E0B63B00E3C663 /* beacon-wallet-ipad-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "beacon-wallet-ipad-Prefix.pch"; sourceTree = "<group>"; };
+		02FCF90418E0B63B00E3C663 /* BWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BWAppDelegate.h; sourceTree = "<group>"; };
+		02FCF90518E0B63B00E3C663 /* BWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BWAppDelegate.m; sourceTree = "<group>"; };
+		02FCF90718E0B63B00E3C663 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		02FCF90D18E0B63B00E3C663 /* beacon-wallet-ipadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "beacon-wallet-ipadTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FCF90E18E0B63B00E3C663 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		02FCF91618E0B63B00E3C663 /* beacon-wallet-ipadTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "beacon-wallet-ipadTests-Info.plist"; sourceTree = "<group>"; };
+		02FCF91818E0B63B00E3C663 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		02FCF91A18E0B63B00E3C663 /* beacon_wallet_ipadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = beacon_wallet_ipadTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02FCF8EF18E0B63B00E3C663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF8F818E0B63B00E3C663 /* CoreGraphics.framework in Frameworks */,
+				02FCF8FA18E0B63B00E3C663 /* UIKit.framework in Frameworks */,
+				02FCF8F618E0B63B00E3C663 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02FCF90A18E0B63B00E3C663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF90F18E0B63B00E3C663 /* XCTest.framework in Frameworks */,
+				02FCF91118E0B63B00E3C663 /* UIKit.framework in Frameworks */,
+				02FCF91018E0B63B00E3C663 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02FCF8E918E0B63B00E3C663 = {
+			isa = PBXGroup;
+			children = (
+				02FCF8FB18E0B63B00E3C663 /* beacon-wallet-ipad */,
+				02FCF91418E0B63B00E3C663 /* beacon-wallet-ipadTests */,
+				02FCF8F418E0B63B00E3C663 /* Frameworks */,
+				02FCF8F318E0B63B00E3C663 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		02FCF8F318E0B63B00E3C663 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */,
+				02FCF90D18E0B63B00E3C663 /* beacon-wallet-ipadTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02FCF8F418E0B63B00E3C663 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF8F518E0B63B00E3C663 /* Foundation.framework */,
+				02FCF8F718E0B63B00E3C663 /* CoreGraphics.framework */,
+				02FCF8F918E0B63B00E3C663 /* UIKit.framework */,
+				02FCF90E18E0B63B00E3C663 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02FCF8FB18E0B63B00E3C663 /* beacon-wallet-ipad */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF90418E0B63B00E3C663 /* BWAppDelegate.h */,
+				02FCF90518E0B63B00E3C663 /* BWAppDelegate.m */,
+				02FCF90718E0B63B00E3C663 /* Images.xcassets */,
+				02FCF8FC18E0B63B00E3C663 /* Supporting Files */,
+			);
+			path = "beacon-wallet-ipad";
+			sourceTree = "<group>";
+		};
+		02FCF8FC18E0B63B00E3C663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF8FD18E0B63B00E3C663 /* beacon-wallet-ipad-Info.plist */,
+				02FCF8FE18E0B63B00E3C663 /* InfoPlist.strings */,
+				02FCF90118E0B63B00E3C663 /* main.m */,
+				02FCF90318E0B63B00E3C663 /* beacon-wallet-ipad-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02FCF91418E0B63B00E3C663 /* beacon-wallet-ipadTests */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF91A18E0B63B00E3C663 /* beacon_wallet_ipadTests.m */,
+				02FCF91518E0B63B00E3C663 /* Supporting Files */,
+			);
+			path = "beacon-wallet-ipadTests";
+			sourceTree = "<group>";
+		};
+		02FCF91518E0B63B00E3C663 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02FCF91618E0B63B00E3C663 /* beacon-wallet-ipadTests-Info.plist */,
+				02FCF91718E0B63B00E3C663 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02FCF8F118E0B63B00E3C663 /* beacon-wallet-ipad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02FCF91E18E0B63B00E3C663 /* Build configuration list for PBXNativeTarget "beacon-wallet-ipad" */;
+			buildPhases = (
+				02FCF8EE18E0B63B00E3C663 /* Sources */,
+				02FCF8EF18E0B63B00E3C663 /* Frameworks */,
+				02FCF8F018E0B63B00E3C663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "beacon-wallet-ipad";
+			productName = "beacon-wallet-ipad";
+			productReference = 02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */;
+			productType = "com.apple.product-type.application";
+		};
+		02FCF90C18E0B63B00E3C663 /* beacon-wallet-ipadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02FCF92118E0B63B00E3C663 /* Build configuration list for PBXNativeTarget "beacon-wallet-ipadTests" */;
+			buildPhases = (
+				02FCF90918E0B63B00E3C663 /* Sources */,
+				02FCF90A18E0B63B00E3C663 /* Frameworks */,
+				02FCF90B18E0B63B00E3C663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02FCF91318E0B63B00E3C663 /* PBXTargetDependency */,
+			);
+			name = "beacon-wallet-ipadTests";
+			productName = "beacon-wallet-ipadTests";
+			productReference = 02FCF90D18E0B63B00E3C663 /* beacon-wallet-ipadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		02FCF8EA18E0B63B00E3C663 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BW;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Bahnhofstrasse24;
+				TargetAttributes = {
+					02FCF90C18E0B63B00E3C663 = {
+						TestTargetID = 02FCF8F118E0B63B00E3C663;
+					};
+				};
+			};
+			buildConfigurationList = 02FCF8ED18E0B63B00E3C663 /* Build configuration list for PBXProject "beacon-wallet-ipad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 02FCF8E918E0B63B00E3C663;
+			productRefGroup = 02FCF8F318E0B63B00E3C663 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02FCF8F118E0B63B00E3C663 /* beacon-wallet-ipad */,
+				02FCF90C18E0B63B00E3C663 /* beacon-wallet-ipadTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02FCF8F018E0B63B00E3C663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF90018E0B63B00E3C663 /* InfoPlist.strings in Resources */,
+				02FCF90818E0B63B00E3C663 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02FCF90B18E0B63B00E3C663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF91918E0B63B00E3C663 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02FCF8EE18E0B63B00E3C663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF90218E0B63B00E3C663 /* main.m in Sources */,
+				02FCF90618E0B63B00E3C663 /* BWAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02FCF90918E0B63B00E3C663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FCF91B18E0B63B00E3C663 /* beacon_wallet_ipadTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		02FCF91318E0B63B00E3C663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02FCF8F118E0B63B00E3C663 /* beacon-wallet-ipad */;
+			targetProxy = 02FCF91218E0B63B00E3C663 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		02FCF8FE18E0B63B00E3C663 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02FCF8FF18E0B63B00E3C663 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		02FCF91718E0B63B00E3C663 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02FCF91818E0B63B00E3C663 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		02FCF91C18E0B63B00E3C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		02FCF91D18E0B63B00E3C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		02FCF91F18E0B63B00E3C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
+				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		02FCF92018E0B63B00E3C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
+				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		02FCF92218E0B63B00E3C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/beacon-wallet-ipad.app/beacon-wallet-ipad";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "beacon-wallet-ipadTests/beacon-wallet-ipadTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		02FCF92318E0B63B00E3C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/beacon-wallet-ipad.app/beacon-wallet-ipad";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
+				INFOPLIST_FILE = "beacon-wallet-ipadTests/beacon-wallet-ipadTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02FCF8ED18E0B63B00E3C663 /* Build configuration list for PBXProject "beacon-wallet-ipad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02FCF91C18E0B63B00E3C663 /* Debug */,
+				02FCF91D18E0B63B00E3C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02FCF91E18E0B63B00E3C663 /* Build configuration list for PBXNativeTarget "beacon-wallet-ipad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02FCF91F18E0B63B00E3C663 /* Debug */,
+				02FCF92018E0B63B00E3C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		02FCF92118E0B63B00E3C663 /* Build configuration list for PBXNativeTarget "beacon-wallet-ipadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02FCF92218E0B63B00E3C663 /* Debug */,
+				02FCF92318E0B63B00E3C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 02FCF8EA18E0B63B00E3C663 /* Project object */;
+}
