@@ -1,0 +1,928 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>beacon-wallet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+@page {
+    size: a4;
+    margin: 30mm 20mm 40mm 25mm;
+    
+    @top-left {
+        content: "Fabian Vogler, Cyril Gabathuler";
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 1em;
+        color: #aaa;
+    }
+    
+    @top-right {
+        content: "Version 1.0";
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 1em;
+        color: #aaa;
+    }
+
+    @bottom-left {
+        content: "beacon-wallet";
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 1em;
+        color: #aaa;
+        padding-left: 3.75em;
+    }
+
+
+    @footnotes {
+        margin-bottom: -13mm;
+    }
+}
+
+html { 
+    color: #333;
+    font-size: 1em;
+    line-height: 1.6;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    text-rendering: optimizeLegibility; 
+}
+
+footer {
+    clear: both;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure figcaption,
+figure.inline {
+    clear: both;
+    font-weight: normal;
+    padding-left: 60px;
+}
+
+ul {
+    padding-left: 40px;
+}
+
+td ul {
+     padding-left: 15px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+p {
+    font-size: 1em;
+}
+
+pre.code,
+p.code {
+    padding-left: 40px;
+}
+
+pre.code code,
+p.code code {
+    font-size: 0.7em;
+    display: block;
+    border-left: 1px solid #126396;
+    padding: 0.5em 0 0.5em 19px;
+    background-color: #f6f6f6;
+}
+
+ul li {
+    padding-bottom: 1em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table td,
+table th {
+    padding: 0.2em 0.4em;
+    border: 1px solid #ddd;
+    font-size: 0.75em;
+    text-align: left;
+}
+
+figure {
+    padding: 1.5em 0;
+    margin: 0;
+}
+
+figure img {
+    max-width: 100%;
+}
+
+figure table {
+    margin-bottom: 1em;
+}
+
+figure figcaption {
+    font-size: 0.75em;
+}
+
+figure.inline figcaption {
+    padding-left: 0;
+}
+
+a[href^="http"]:after {
+    content: attr(href);
+    float: footnote;
+    margin-left: 60px;
+    counter-increment: footnote;
+    font-size: 0.75em;
+    footnote-style-position: inside;
+}
+
+a[href^="http"]:after::footnote-call {
+    content: " [" counter(footnote) "]";
+    font-size: 1.3em;
+}
+
+a[href^="http"]:after::footnote-marker {
+    content: "[" counter(footnote) "] ";
+}
+
+div.chapter {
+    counter-increment: chapter;
+    counter-reset: footnote;
+    margin-top: 3em;
+}
+
+div.chapter h2 {
+    padding-left: 0;
+}
+
+div.chapter h2:before {
+    content: counter(chapter);
+    width: 1.5em;
+    padding-right: 0.375em;
+    display: inline-block;
+    text-align: right;
+}
+
+div.chapter h3 {
+    counter-increment: sub-chapter;
+    padding-left: 0;
+}
+
+div.chapter h3:before {
+    content: counter(chapter) "." counter(sub-chapter);
+    width: 2em;
+    padding-right: 0.5em;
+    display: inline-block;
+    text-align: right;
+}
+
+h3.break,
+h4.break,
+p.break,
+figure.break,
+div.chapter {
+    page-break-before: always;
+}
+
+#front {
+    page-break-after: always;
+}
+
+#front h1 {
+    margin: 1em 0 0.5em 0;
+}
+
+#front .logo {
+    display: none;
+}
+
+#front .screenshot {
+    padding-top: 4em;
+    padding-bottom: 0em;
+    margin-left: -0.5em;
+}
+
+#front,
+#second {
+    margin-bottom: 3em;
+}
+
+#toc,
+#toc ol,
+#figures,
+#sources {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sources {
+    counter-reset: sources;
+}
+
+#sources li {
+    padding-left: 60px;
+    padding-bottom: 0.75em;
+}
+
+#sources li:before {
+	content: "[" counter(sources) "] ";
+	counter-increment: sources;
+}
+
+#toc > li {
+    padding-bottom: 1em;
+}
+
+#toc a:after,
+#figures a:after {
+    content: " " leader(".") " " target-counter(attr(href), page);
+}
+
+#toc .chapter {
+    display: inline-block;
+    padding-left: 1em;
+    padding-right: 0.75em;
+    text-align: left;
+    width: 2em;
+}
+
+#figure-aufwand table td:not(:first-child) {
+    text-align: center;
+}
+    
+#figure-aufwand table tr.total td {
+    font-weight: bold;
+}
+
+@media screen {
+
+    html {
+        font-size: 0.8em;
+    }
+
+    body {
+        margin: 3em 0 4em 0;
+    }
+
+    p {
+        padding-right: 3em;
+    }
+
+    a {
+        color: #1b60a7;
+    }
+
+    a[href^="http"]:after {
+        display: none;
+    }
+
+    #front h1 {
+        margin: 1em 0 0 0;
+    }
+
+    #front .logo {
+        display: block;
+        padding-bottom: 2em;
+    }
+
+    #front .screenshot {
+        display: none;
+    }
+
+    #second,
+    div.chapter {
+        border-top: 1px solid #ddd;
+    }
+
+    pre.code code,
+    p.code code {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (min-width: 40.5em) {
+
+    html {
+        font-size: 1em;
+    }
+
+    body {
+        margin: 4em 3em 6em 3em;
+    }
+
+    #second,
+    div.chapter {
+        max-width: 40em;
+    }
+
+    #front {
+        position: relative;
+        top: -4em;
+        left: -3em;
+        width: 100%;
+        padding: 4em 3em 2em 3em;
+        margin-bottom: -4em;
+    }
+
+    #front h1 {
+        margin: 1em 0 5.5em 0;
+    }
+
+    #front .logo {
+        display: block;
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        top: 4em;
+        right: 4.5em;
+        width: 50px;
+        height: 50px;
+        opacity: 0.1;
+        -webkit-transition: opacity 0.5s linear;
+        -moz-transition: opacity 0.5s linear;
+    }
+
+    #front:hover .logo {
+        opacity: 1;
+    }
+}
+
+</style>
+<script>
+
+function item(node, id, chapter, subChapter) {
+
+    var li, a, spanChapter, spanTitle;
+
+    node.setAttribute('id', id);
+
+    li = document.createElement('li');
+
+    a = document.createElement('a');
+    a.setAttribute('href', '#' + id);
+
+    chapter = '' + chapter;
+    if (typeof subChapter != 'undefined') {
+        chapter += '.' + subChapter;
+    }
+
+    spanChapter = document.createElement('span');
+    spanChapter.setAttribute('class', 'chapter');
+    spanChapter.appendChild(document.createTextNode(chapter));
+    a.appendChild(spanChapter);
+
+    spanTitle = document.createElement('span');
+    spanTitle.setAttribute('class', 'title');
+    spanTitle.appendChild(document.createTextNode(node.innerHTML));
+    a.appendChild(spanTitle);
+
+    li.appendChild(a);
+
+    return li;
+}
+
+function toc() {
+
+    var headers = document.getElementsByTagName('h2'),
+        toc = document.getElementById('toc'),
+        i, j, node, id, chapter, li, childs, ol;
+
+    // skip first header (TOC)
+    for (i = 1; i < headers.length; i++) {
+
+        node = headers[i];
+        id = 'chapter-' + i;
+        li = item(node, id, i);
+
+        childs = node.parentNode.getElementsByTagName("h3");
+        ol = document.createElement('ol');
+
+        for (j = 0; j < childs.length; j++) {
+
+            node = childs[j];
+            id = 'chapter-' + i + '-' + (j + 1);
+            sli = item(node, id, i, j + 1);
+            ol.appendChild(sli); 
+        }
+
+        li.appendChild(ol);
+        toc.appendChild(li);
+    }
+}
+
+function sources() {
+
+    var sources = document.getElementsByTagName('a'),
+        index = document.getElementById('sources'),
+        i, source, li, href, text;
+
+    for (i = 0; i < sources.length; i++) {
+
+        source = sources[i];
+        href = source.getAttribute('href');
+        text = source.getAttribute('title');
+
+        if (href.indexOf('http') != 0) {
+            continue;
+        }
+
+        if (!text) {
+            text = source.innerHTML;
+        }
+
+        li = document.createElement('li');
+        li.appendChild(document.createTextNode(text + ': ' + href));
+        index.appendChild(li); 
+    }
+}
+
+
+function figures() {
+
+    var captions = document.getElementsByTagName('figcaption'),
+        figures = document.getElementById('figures'),
+        i, caption, figure, li, a;
+
+    for (i = 0; i < captions.length; i++) {
+
+        caption = captions[i];
+        figure = caption.parentNode;
+
+        caption.innerHTML = 'Abb. ' + (i + 1) + ' ' + caption.innerHTML;
+
+        li = document.createElement('li');
+
+        a = document.createElement('a');
+        a.setAttribute('href', '#' + figure.getAttribute('id'));
+
+        a.appendChild(document.createTextNode(caption.textContent));
+
+        li.appendChild(a);
+        figures.appendChild(li); 
+    }
+}
+
+function init() {
+    sources();
+    figures();
+    toc();
+}
+
+</script>
+</head>
+<body onload="init();">
+
+<div id="front">
+<p>
+ZHAW Zürcher Hochschule für Angewandte Wissenschaften<br/>
+Bachelorstudium Informatik<br/>
+Seminararbeit<br/>
+Dozent: Peter Egli<br/>
+Herbstsemester 2013
+</p>
+<h1>beacon-wallet</h1>
+<p class="screenshot">
+<img src="icon/beacon-wallet.png" height="380" />
+</p>
+<p>
+Fabian Vogler, <a href="mailto:voglefab@students.zhaw.ch">voglefab@students.zhaw.ch</a><br/>
+Cyril Gabathuler, <a href="mailto:gabatcyr@students.zhaw.ch">gabatcyr@students.zhaw.ch</a><br/>
+14. April 2014
+</p>
+</div>
+
+<div id="second">
+<h2>Inhaltsverzeichnis</h2>
+<ol id="toc"></ol>
+</div>
+
+<div class="chapter">
+<h2>Zusammenfassung</h2>
+<p>Text</p>
+
+</div>
+
+<div class="chapter">
+<h2>Einleitung</h2>
+
+<h3>Ausgangslage</h3>
+<p>
+Die Arbeit soll aufzeigen, wie moderne Kundenbindung sowie bargeldlose Bezahlung im Detailhandel mittels neuer Technologien vereinfacht werden kann. Spezifisch soll die Integration von Beacons in einem Supermarkt untersucht werden. Diese Beacons kommunizieren via Bluetooth Low Energy mit einer Mobile App.
+</p>
+<p>
+Um alltägliche Use Cases aufzuzeigen, hat man sich für eine exemplarische Integration des System in eine Filiale eines lokalen Detailhandelsunternehmen (Coop) entschieden.
+</p>
+
+<h3>Ziele der Arbeit</h3>
+<p>
+Betritt ein Kunde die Filiale, wird ein eindeutiges Beacon erkannt und eine iOS App begrüsst den Kunden über eine Benachrichtigung. Der Kunde erhält Informationen über die Filiale und hat Zugriff auf sein Kundenkonto. Diese Situation könnte auch verwendet werden, um spezielle Aktionen anzupreisen.
+</p>
+<p>
+Während des Einkaufs hat der Kunde die Möglichkeit, die Produkte direkt mit der App zu scannen und nützliche Informationen zu dem Produkt zu erhalten.
+</p>
+<p>
+Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu legt er sein iPhone direkt auf ein iPad, welches als Kasse dient. Es wird eine sichere Verbindung zwischen den zwei Geräten aufgebaut um die Transaktion durchzuführen. Danach schliesst das iPad die Transaktion über das Zahlungssystem auf dem Server ab. Diese Lösung hat den Vorteil, dass das iPhone des Kunden keinen Internetzugang braucht. Die Transaktion kann also schnell abgewickelt werden, obwohl in vielen Filialen der Empfang für Smartphones schlecht ist.
+</p>
+
+<h3>Aufgabenstellung</h3>
+<p>Folgende Aufgabenstellungen wurden definiert:</p>
+<ul>
+    <li>Entwicklung einer Datenbank für Produkte und Kunden (Fabian Vogler)</li>
+    <li>Programmierung einer API für Produkte und Kundeninformationen (Fabian Vogler)</li>
+    <li>iPhone App für den Einkauf und der Kommunikation mit den Beacons (Cyril Gabathuler)</li>
+    <li>iPad App für die Bezahlung (Cyril Gabathuler)</li>
+    <li>Umsetzung einer sicheren Kommunikation per Bluetooth 4.0 zur Bezahlung (Fabian Vogler)</li>
+</ul>
+
+<h3>Erwartete Resultate</h3>
+<p>Folgende Resultate werden erwartet:</p>
+<ul>
+    <li>MySQL-Datenbank mit Beispielprodukten und Testkunden</li>
+    <li>API für den Zugriff auf die Datenbank</li>
+    <li>iPhone App für den Zugriff auf das Backendsystem, wie auch die Integration von Beacons</li>
+    <li>iPad App für die Kommunikation mit dem iPhone und daraus resultierende Bezahlung des Einkaufes</li>
+    <li>Kommunikationsprotokoll für die Bezahlung zwischen iPhone und iPad App</li>
+</div>
+
+<div class="chapter">
+    <h2>Projektmanagement</h2>
+    
+    <h3>Projektplanung</h3>
+    <p>
+    Der folgende Projektplan gibt einen Überblick über den Ablauf des Projekts
+    und dessen wichtigsten Meilensteine.
+    </p>
+
+    <figure id="figure-gantt">
+    <table>
+        <colgroup>
+            <col width="160" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+            <col width="25" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>&#160;</th>
+                <th colspan="2">April</th>
+                <th colspan="4">Mai</th>
+                <th colspan="4">Juni</th>
+                <th colspan="4">Juli</th>
+                <th colspan="4">September</th>
+                <th colspan="2">Oktober</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Freigabe der Arbeit</td>
+                <td colspan="4" style="border-left: 0;">◆ 19.04.13</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Kick-Off-Meeting</td>
+                <td>&#160;</td>
+                <td colspan="4" style="border-left: 0;">◆ 25.04.13</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Umsetzung</td>
+                <td colspan="16" style="background-color: #e8f0f8;">&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Dokumentation</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="15" style="background-color: #e8f0f8;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Design-Review</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="4" style="border-left: 0;">◆ 26.06.13</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Abgabe der Arbeit</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="3" style="border-left: 0;">◆ 19.10.13</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>Projektplanung</figcaption>
+    </figure>
+    <p>Die Abschlusspräsentation wird nach Abgabe der Semesterarbeit durchgeführt.</p>
+    
+    <h3 class="break">Aufwand</h3>
+
+    <p>
+    Laut <a href="https://ebs.zhaw.ch/files/ebs_files/Reglemente/Bachelor/Semesterarbeit/a_Reglement-Semesterarbeit_Studiengang-Informatik_V4.1.pdf">Reglement</a>
+    sollte der Aufwand für die Fertigstellung der Semesterarbeit mindestens
+    120 Stunden betragen. Entsprechend wurde die Planung darauf ausgelegt.
+    </p>
+
+    <figure id="figure-aufwand" class="inline">
+        <table>
+            <colgroup>
+                <col width="200" />
+                <col width="100" />
+                <col width="100" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Beschreibung</th>
+                    <th>Soll</th>
+                    <th>Ist</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Projekt aufsetzen</td>
+                    <td>3h</td>
+                    <td>2.5h</td>
+                </tr>
+                <tr>
+                    <td>Kick-Of-Meeting</td>
+                    <td>1h</td>
+                    <td>1h</td>
+                </tr>
+                <tr>
+                    <td>Design-Review</td>
+                    <td>3h</td>
+                    <td>2h</td>
+                </tr>
+                <tr>
+                    <td>Schlusspräsentation</td>
+                    <td>2h</td>
+                    <td>2h</td>
+                </tr>
+                <tr>
+                    <td>Requirements Engineering iOS App</td>
+                    <td>4h</td>
+                    <td>3h</td>
+                </tr>
+                <tr>
+                    <td>Bearbeitung GameKit API</td>
+                    <td>4h</td>
+                    <td>5h</td>
+                </tr>
+                <tr>
+                    <td>Internetsuche nach GameKit</td>
+                    <td>2h</td>
+                    <td>2h</td>
+                </tr>
+                <tr>
+                    <td>Definition Netzwerkverkehrs</td>
+                    <td>2h</td>
+                    <td>4h</td>
+                </tr>
+                <tr>
+                    <td>Continuous Integration</td>
+                    <td>3h</td>
+                    <td>4h</td>
+                </tr>
+                <tr>
+                    <td>Integration GameKit in App</td>
+                    <td>2h</td>
+                    <td>1.5h</td>
+                </tr>
+                <tr>
+                    <td>Client/Server Kommunikation</td>
+                    <td>22h</td>
+                    <td>30h</td>
+                </tr>
+                <tr>
+                    <td>Client GUI</td>
+                    <td>11h</td>
+                    <td>8h</td>
+                </tr>
+                <tr>
+                    <td>Server GUI</td>
+                    <td>11h</td>
+                    <td>10h</td>
+                </tr>
+                <tr>
+                    <td>Testing</td>
+                    <td>10h</td>
+                    <td>15h</td>
+                </tr>
+                <tr>
+                    <td>Dokumentation</td>
+                    <td>32h</td>
+                    <td>40h</td>
+                </tr>
+                <tr>
+                    <td>Reserve</td>
+                    <td>8h</td>
+                    <td>0h</td>
+                </tr>
+                <tr class="total">
+                    <td>Total</td>
+                    <td>120h</td>
+                    <td>130h</td>
+                </tr>
+            </tbody>
+        </table>
+        <figcaption>Soll / Ist Vergleich Aufwand</figcaption>
+    </figure>
+    <p>Der Ist-Aufwand ist ein wenig höher als anfangs geplant. Die Aufwände für die Kommunikation zwischen den Clients und dem Server ist höher ausgefallen als geplant. Das Schreiben der Dokumentation hat ebenfalls mehr Zeit benötigt als vorgesehen.</p>
+
+    <h3>Dokumentation</h3>
+
+    <p>
+    Die Dokumentation wurde ausschliesslich in HTML und CSS geschrieben. Das Inhalts- und das
+    Abbildungsverzeichnis wurden dynamisch mit JavaScript generiert. Um die Seite
+    auch korrekt ausdrucken zu können, wurde die Software
+    <a href="http://www.princexml.com/">Prince</a> verwendet, welche HTML-Seiten
+    in PDFs umwandelt. Dadurch konnte diese Dokumentation, gleich wie der Source-Code
+    der Applikation, mit der Versionsverwaltungssoftware Git verwaltet und über
+    den Online-Service <a href="https://github.com/">GitHub</a> geteilt werden.
+    </p>
+    
+    <h3>Sourcecode</h3>
+    
+    <p>
+    Der Sourcecode der iOS App wurde ebenfalls mit der Versionsverwaltungssoftware
+    Git verwaltet und kann über den Online-Service GitHub abgerufen werden.
+    </p>
+    
+    <h3>Open Source</h3>
+    <p>
+        Ich habe mich, in Absprache mit Beat Seeliger, entschieden den Sourcecode wie auch die Dokumentation als Open Source
+        zur Verfügung zu stellen. Als Lizenz wurde die <a href="https://raw.github.com/gabac/iPlanningPoker/master/LICENSE">MIT License</a> gewählt.
+    </p>
+    <p>
+        Die GitHub Repositories sind unter diesen zwei Adressen zu finden:
+    </p>
+    <ul>
+        <li>iOS App: <a href="https://github.com/gabac/iPlanningPoker">https://github.com/gabac/iPlanningPoker</a></li>
+        <li>Dokumentation: <a href="https://github.com/gabac/iPlanningPoker-doc">https://github.com/gabac/iPlanningPoker-doc</a></li>
+    </ul>
+    
+</div>
+
+<div class="chapter">
+<h2>Chapter</h2>
+
+<p>text</p>
+
+</div>
+
+<div class="chapter">
+<h2>Fazit</h2>
+<p>fazit</p>
+
+</div>
+
+
+<div class="chapter">
+<h2>Anhang</h2>
+<h3>Glossar</h3>
+<p>
+API: Application Programming Interface, bezeichnet die Schnittstelle, über
+welche der Client Daten vom Server abruft.
+</p>
+<p>
+Client: Ein Anwendungsprogramm, welches auf dem Gerät des Benutzers läuft und
+meist mit einem Server kommuniziert.
+</p>
+<p>
+Server: Eine Komponente, welche verschiedene Requests von Clients erhält und auf diese reagieren kann.
+</p>
+<p>
+UI: Kurzschreibweise für User Interface. Das Aussehen einer Applikation.
+</p>
+<p>
+Enum: Ein Aufzählungstyp mit einer endlichen Menge an konstanten Typen.
+</p>
+<p>
+UUID: Steht für Universally Unique Identifier. In diesem Projekt eine eindeutige Nummer für einen Client.
+</p>
+<p>
+Byte: Ein Byte besteht aus 8 Bit. Es ist eine Masseinheit in der Informatik
+</p>
+<p>
+Hexadezimalsystem: Dieses Stellwertsystem wird zur Basis 16 dargestellt. Im Unteschied zum Dezimalsystem, welches zur Basis 10 dargestellt wird.
+</p>
+<p>SVN: Ist eine Software zur Versionsverwaltung von Dateien von Apache.</p>
+<p>Git: Ebenfalls eine Software zur Versionsverwaltung. Wurde ursprünglich für Linux entwickelt. Der grösste Unteschied zu SVN ist die dezentrale Verwaltung des Sourcecodes.</p>
+<p>Artefakt: Ist das Ergebnis eines Buildprozesses. Es ist die fertige Software, welche auf Endgärten installiert werden kann.</p>
+
+<h3 class="break">Literaturverzeichnis</h3>
+<p>Stephen G. Kochan: Programming in Objective-C 2.0(5. Auflage), 2013, 978-0321887283, Amsterdam: Addison-Wesley Longman</p>
+<p>Ken Schwaber, Mike Beedle: Agile Software Development with Scrum, 2001, 978-0130676344</p>
+
+<h3 class="break">Quellenverzeichnis</h3>
+
+<ol id="sources"></ol>
+
+<h3 class="break">Abbildungsverzeichnis</h3>
+
+<ul id="figures"></ul>
+
+</div>
+
+<footer>&#160;</footer>
+
+</body>
+</html>
