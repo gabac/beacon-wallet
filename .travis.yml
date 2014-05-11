@@ -1,5 +1,6 @@
 language: objective-c
 before_install:
+    - export LANG=en_US.UTF-8
     - cd beacon-wallet-iphone
     - gem install cocoapods -v '0.32.1'
 script: 
