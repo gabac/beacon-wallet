@@ -1,4 +1,7 @@
 language: objective-c
 before_install:
-  - cd beacon-wallet-iphone
-script: xctool -workspace beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - cd beacon-wallet-iphone
+    - gem install cocoapods -v '0.32.1'
+script: 
+    - xctool -workspace beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - xctool test -workspace beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
