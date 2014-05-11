@@ -1,1 +1,2 @@
 language: objective-c
+script: xcodebuild -workspace beacon-wallet-iphone/beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
