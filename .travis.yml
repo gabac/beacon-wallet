@@ -10,3 +10,8 @@ before_install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/b
 install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/install.sh; fi
 
 script: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/script.sh; fi
+
+matrix:
+    fast_finish: true
+    allow_failures:
+        - env: PROJECT=beacon-wallet-iphone
