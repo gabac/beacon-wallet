@@ -7,6 +7,7 @@
 //
 
 #import "BWAppDelegate.h"
+#import "BWIPhoneClient.h"
 
 @implementation BWAppDelegate
 
