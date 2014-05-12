@@ -20,6 +20,9 @@
 		0200FA6E1921224A00929264 /* BWUpdateAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */; };
 		0200FA6F1921224A00929264 /* BWUpdateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */; };
 		0200FA72192136C500929264 /* BWAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA71192136C500929264 /* BWAccountTableViewController.m */; };
+		0200FA7419213FCC00929264 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7319213FCC00929264 /* CoreBluetooth.framework */; };
+		0200FA7619213FD200929264 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7519213FD200929264 /* CoreLocation.framework */; };
+		0200FA7819213FE200929264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7719213FE200929264 /* CoreGraphics.framework */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
 		02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF8C318E0B57A00E3C663 /* InfoPlist.strings */; };
@@ -67,6 +70,9 @@
 		0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWUpdateAppViewController.xib; sourceTree = "<group>"; };
 		0200FA70192136C500929264 /* BWAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccountTableViewController.h; sourceTree = "<group>"; };
 		0200FA71192136C500929264 /* BWAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccountTableViewController.m; sourceTree = "<group>"; };
+		0200FA7319213FCC00929264 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		0200FA7519213FD200929264 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0200FA7719213FE200929264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BE18E0B57A00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -91,6 +97,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0200FA7819213FE200929264 /* CoreGraphics.framework in Frameworks */,
+				0200FA7619213FD200929264 /* CoreLocation.framework in Frameworks */,
+				0200FA7419213FCC00929264 /* CoreBluetooth.framework in Frameworks */,
 				02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */,
 				02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */,
 				2BF8DF461BD947469EA37C64 /* libPods.a in Frameworks */,
@@ -162,6 +171,9 @@
 		02FCF8B918E0B57A00E3C663 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0200FA7719213FE200929264 /* CoreGraphics.framework */,
+				0200FA7519213FD200929264 /* CoreLocation.framework */,
+				0200FA7319213FCC00929264 /* CoreBluetooth.framework */,
 				02FCF8BA18E0B57A00E3C663 /* Foundation.framework */,
 				02FCF8BE18E0B57A00E3C663 /* UIKit.framework */,
 				02FCF8D318E0B57A00E3C663 /* XCTest.framework */,
