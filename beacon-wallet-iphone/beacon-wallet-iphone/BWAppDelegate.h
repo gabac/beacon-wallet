@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "BWAccountViewController.h"
 #import "BWTabBarViewController.h"
+#import "BWScanViewController.h"
 
 @interface BWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) BWAccountViewController *accountViewController;
-@property (strong, nonatomic) BWTabBarViewController  *tabBarViewController;
+@property (strong, nonatomic) BWAccountViewController   *accountViewController;
+@property (strong, nonatomic) BWTabBarViewController    *tabBarViewController;
+@property (strong, nonatomic) BWScanViewController      *scanViewController;
 
 @end

@@ -17,11 +17,13 @@
     // Override point for customization after application launch.
     
     self.accountViewController = [[BWAccountViewController alloc] initWithNibName:nil bundle:nil];
+    self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
+    
     
     self.tabBarViewController = [[BWTabBarViewController alloc] init];
-    self.tabBarViewController.viewControllers = @[self.accountViewController];
+    self.tabBarViewController.viewControllers = @[self.accountViewController, self.scanViewController];
     
-    [self.window addSubview:self.tabBarViewController.view];
+    self.window.rootViewController = self.tabBarViewController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

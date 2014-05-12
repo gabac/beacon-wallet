@@ -13,6 +13,37 @@
 		0200F9B51920B6DC00929264 /* BWAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9B41920B6DC00929264 /* BWAccount.m */; };
 		0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FB1920C91900929264 /* BWTabBarViewController.m */; };
 		0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FE1920C94500929264 /* BWAccountViewController.m */; };
+		0200FA021920DEB800929264 /* BWScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA011920DEB800929264 /* BWScanViewController.m */; };
+		0200FA351920E7E100929264 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA1D1920E7E100929264 /* beep.wav */; };
+		0200FA361920E7E100929264 /* camera-swap-icon-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA1E1920E7E100929264 /* camera-swap-icon-pressed.png */; };
+		0200FA371920E7E100929264 /* camera-swap-icon-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA1F1920E7E100929264 /* camera-swap-icon-pressed@2x.png */; };
+		0200FA381920E7E100929264 /* camera-swap-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA201920E7E100929264 /* camera-swap-icon.png */; };
+		0200FA391920E7E100929264 /* camera-swap-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA211920E7E100929264 /* camera-swap-icon@2x.png */; };
+		0200FA3A1920E7E100929264 /* CHANGELOG.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA221920E7E100929264 /* CHANGELOG.txt */; };
+		0200FA3B1920E7E100929264 /* scanditsdk.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA231920E7E100929264 /* scanditsdk.strings */; };
+		0200FA3C1920E7E100929264 /* empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA251920E7E100929264 /* empty.cpp */; };
+		0200FA3D1920E7E100929264 /* flashlight-turn-off-icon-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA271920E7E100929264 /* flashlight-turn-off-icon-pressed.png */; };
+		0200FA3E1920E7E100929264 /* flashlight-turn-off-icon-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA281920E7E100929264 /* flashlight-turn-off-icon-pressed@2x.png */; };
+		0200FA3F1920E7E100929264 /* flashlight-turn-off-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA291920E7E100929264 /* flashlight-turn-off-icon.png */; };
+		0200FA401920E7E100929264 /* flashlight-turn-off-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA2A1920E7E100929264 /* flashlight-turn-off-icon@2x.png */; };
+		0200FA411920E7E100929264 /* flashlight-turn-on-icon-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA2B1920E7E100929264 /* flashlight-turn-on-icon-pressed.png */; };
+		0200FA421920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA2C1920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png */; };
+		0200FA431920E7E100929264 /* flashlight-turn-on-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA2D1920E7E100929264 /* flashlight-turn-on-icon.png */; };
+		0200FA441920E7E100929264 /* flashlight-turn-on-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA2E1920E7E100929264 /* flashlight-turn-on-icon@2x.png */; };
+		0200FA451920E7E100929264 /* libscanditsdk-iphone-4.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA2F1920E7E100929264 /* libscanditsdk-iphone-4.0.0.a */; };
+		0200FA461920E7E100929264 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA301920E7E100929264 /* LICENSE-2.0.txt */; };
+		0200FA471920E7E100929264 /* poweredby.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA311920E7E100929264 /* poweredby.png */; };
+		0200FA481920E7E100929264 /* poweredby@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA321920E7E100929264 /* poweredby@2x.png */; };
+		0200FA4A1920E7F900929264 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA491920E7F900929264 /* libc++.dylib */; };
+		0200FA4C1920E80300929264 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA4B1920E80300929264 /* libiconv.dylib */; };
+		0200FA4E1920E80B00929264 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA4D1920E80B00929264 /* CoreVideo.framework */; };
+		0200FA501920E81C00929264 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA4F1920E81C00929264 /* AudioToolbox.framework */; };
+		0200FA521920E82500929264 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA511920E82500929264 /* libz.dylib */; };
+		0200FA541920E82B00929264 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA531920E82B00929264 /* AVFoundation.framework */; };
+		0200FA561920E83300929264 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA551920E83300929264 /* CoreMedia.framework */; };
+		0200FA581920E83B00929264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA571920E83B00929264 /* QuartzCore.framework */; };
+		0200FA5A1920E84100929264 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA591920E84100929264 /* CoreLocation.framework */; };
+		0200FA5C1920E84900929264 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA5B1920E84900929264 /* SystemConfiguration.framework */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BD18E0B57A00E3C663 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
@@ -49,6 +80,41 @@
 		0200F9FB1920C91900929264 /* BWTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTabBarViewController.m; sourceTree = "<group>"; };
 		0200F9FD1920C94500929264 /* BWAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccountViewController.h; sourceTree = "<group>"; };
 		0200F9FE1920C94500929264 /* BWAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccountViewController.m; sourceTree = "<group>"; };
+		0200FA001920DEB800929264 /* BWScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWScanViewController.h; sourceTree = "<group>"; };
+		0200FA011920DEB800929264 /* BWScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWScanViewController.m; sourceTree = "<group>"; };
+		0200FA1D1920E7E100929264 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
+		0200FA1E1920E7E100929264 /* camera-swap-icon-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-swap-icon-pressed.png"; sourceTree = "<group>"; };
+		0200FA1F1920E7E100929264 /* camera-swap-icon-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-swap-icon-pressed@2x.png"; sourceTree = "<group>"; };
+		0200FA201920E7E100929264 /* camera-swap-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-swap-icon.png"; sourceTree = "<group>"; };
+		0200FA211920E7E100929264 /* camera-swap-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-swap-icon@2x.png"; sourceTree = "<group>"; };
+		0200FA221920E7E100929264 /* CHANGELOG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.txt; sourceTree = "<group>"; };
+		0200FA241920E7E100929264 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/scanditsdk.strings; sourceTree = "<group>"; };
+		0200FA251920E7E100929264 /* empty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = empty.cpp; sourceTree = "<group>"; };
+		0200FA261920E7E100929264 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/scanditsdk.strings; sourceTree = "<group>"; };
+		0200FA271920E7E100929264 /* flashlight-turn-off-icon-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-off-icon-pressed.png"; sourceTree = "<group>"; };
+		0200FA281920E7E100929264 /* flashlight-turn-off-icon-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-off-icon-pressed@2x.png"; sourceTree = "<group>"; };
+		0200FA291920E7E100929264 /* flashlight-turn-off-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-off-icon.png"; sourceTree = "<group>"; };
+		0200FA2A1920E7E100929264 /* flashlight-turn-off-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-off-icon@2x.png"; sourceTree = "<group>"; };
+		0200FA2B1920E7E100929264 /* flashlight-turn-on-icon-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-on-icon-pressed.png"; sourceTree = "<group>"; };
+		0200FA2C1920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-on-icon-pressed@2x.png"; sourceTree = "<group>"; };
+		0200FA2D1920E7E100929264 /* flashlight-turn-on-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-on-icon.png"; sourceTree = "<group>"; };
+		0200FA2E1920E7E100929264 /* flashlight-turn-on-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashlight-turn-on-icon@2x.png"; sourceTree = "<group>"; };
+		0200FA2F1920E7E100929264 /* libscanditsdk-iphone-4.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libscanditsdk-iphone-4.0.0.a"; sourceTree = "<group>"; };
+		0200FA301920E7E100929264 /* LICENSE-2.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE-2.0.txt"; sourceTree = "<group>"; };
+		0200FA311920E7E100929264 /* poweredby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredby.png; sourceTree = "<group>"; };
+		0200FA321920E7E100929264 /* poweredby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poweredby@2x.png"; sourceTree = "<group>"; };
+		0200FA331920E7E100929264 /* ScanditSDKBarcodePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanditSDKBarcodePicker.h; sourceTree = "<group>"; };
+		0200FA341920E7E100929264 /* ScanditSDKOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanditSDKOverlayController.h; sourceTree = "<group>"; };
+		0200FA491920E7F900929264 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		0200FA4B1920E80300929264 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		0200FA4D1920E80B00929264 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		0200FA4F1920E81C00929264 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0200FA511920E82500929264 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		0200FA531920E82B00929264 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0200FA551920E83300929264 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		0200FA571920E83B00929264 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0200FA591920E84100929264 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0200FA5B1920E84900929264 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,7 +140,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0200FA5C1920E84900929264 /* SystemConfiguration.framework in Frameworks */,
+				0200FA5A1920E84100929264 /* CoreLocation.framework in Frameworks */,
+				0200FA581920E83B00929264 /* QuartzCore.framework in Frameworks */,
+				0200FA561920E83300929264 /* CoreMedia.framework in Frameworks */,
+				0200FA541920E82B00929264 /* AVFoundation.framework in Frameworks */,
+				0200FA521920E82500929264 /* libz.dylib in Frameworks */,
+				0200FA501920E81C00929264 /* AudioToolbox.framework in Frameworks */,
+				0200FA4E1920E80B00929264 /* CoreVideo.framework in Frameworks */,
+				0200FA4C1920E80300929264 /* libiconv.dylib in Frameworks */,
+				0200FA4A1920E7F900929264 /* libc++.dylib in Frameworks */,
 				02FCF8BD18E0B57A00E3C663 /* CoreGraphics.framework in Frameworks */,
+				0200FA451920E7E100929264 /* libscanditsdk-iphone-4.0.0.a in Frameworks */,
 				02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */,
 				02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */,
 				2BF8DF461BD947469EA37C64 /* libPods.a in Frameworks */,
@@ -121,9 +198,39 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		0200FA1C1920E7E100929264 /* ScanditSDK */ = {
+			isa = PBXGroup;
+			children = (
+				0200FA1D1920E7E100929264 /* beep.wav */,
+				0200FA1E1920E7E100929264 /* camera-swap-icon-pressed.png */,
+				0200FA1F1920E7E100929264 /* camera-swap-icon-pressed@2x.png */,
+				0200FA201920E7E100929264 /* camera-swap-icon.png */,
+				0200FA211920E7E100929264 /* camera-swap-icon@2x.png */,
+				0200FA221920E7E100929264 /* CHANGELOG.txt */,
+				0200FA231920E7E100929264 /* scanditsdk.strings */,
+				0200FA251920E7E100929264 /* empty.cpp */,
+				0200FA271920E7E100929264 /* flashlight-turn-off-icon-pressed.png */,
+				0200FA281920E7E100929264 /* flashlight-turn-off-icon-pressed@2x.png */,
+				0200FA291920E7E100929264 /* flashlight-turn-off-icon.png */,
+				0200FA2A1920E7E100929264 /* flashlight-turn-off-icon@2x.png */,
+				0200FA2B1920E7E100929264 /* flashlight-turn-on-icon-pressed.png */,
+				0200FA2C1920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png */,
+				0200FA2D1920E7E100929264 /* flashlight-turn-on-icon.png */,
+				0200FA2E1920E7E100929264 /* flashlight-turn-on-icon@2x.png */,
+				0200FA2F1920E7E100929264 /* libscanditsdk-iphone-4.0.0.a */,
+				0200FA301920E7E100929264 /* LICENSE-2.0.txt */,
+				0200FA311920E7E100929264 /* poweredby.png */,
+				0200FA321920E7E100929264 /* poweredby@2x.png */,
+				0200FA331920E7E100929264 /* ScanditSDKBarcodePicker.h */,
+				0200FA341920E7E100929264 /* ScanditSDKOverlayController.h */,
+			);
+			path = ScanditSDK;
+			sourceTree = "<group>";
+		};
 		02FCF8AE18E0B57A00E3C663 = {
 			isa = PBXGroup;
 			children = (
+				0200FA1C1920E7E100929264 /* ScanditSDK */,
 				02FCF8C018E0B57A00E3C663 /* beacon-wallet-iphone */,
 				02FCF8D918E0B57A00E3C663 /* beacon-wallet-iphoneTests */,
 				02FCF8B918E0B57A00E3C663 /* Frameworks */,
@@ -144,6 +251,16 @@
 		02FCF8B918E0B57A00E3C663 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0200FA5B1920E84900929264 /* SystemConfiguration.framework */,
+				0200FA591920E84100929264 /* CoreLocation.framework */,
+				0200FA571920E83B00929264 /* QuartzCore.framework */,
+				0200FA551920E83300929264 /* CoreMedia.framework */,
+				0200FA531920E82B00929264 /* AVFoundation.framework */,
+				0200FA511920E82500929264 /* libz.dylib */,
+				0200FA4F1920E81C00929264 /* AudioToolbox.framework */,
+				0200FA4D1920E80B00929264 /* CoreVideo.framework */,
+				0200FA4B1920E80300929264 /* libiconv.dylib */,
+				0200FA491920E7F900929264 /* libc++.dylib */,
 				02FCF8BA18E0B57A00E3C663 /* Foundation.framework */,
 				02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */,
 				02FCF8BE18E0B57A00E3C663 /* UIKit.framework */,
@@ -166,6 +283,8 @@
 				0200F9FB1920C91900929264 /* BWTabBarViewController.m */,
 				0200F9FD1920C94500929264 /* BWAccountViewController.h */,
 				0200F9FE1920C94500929264 /* BWAccountViewController.m */,
+				0200FA001920DEB800929264 /* BWScanViewController.h */,
+				0200FA011920DEB800929264 /* BWScanViewController.m */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -263,6 +382,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 			);
 			mainGroup = 02FCF8AE18E0B57A00E3C663;
 			productRefGroup = 02FCF8B818E0B57A00E3C663 /* Products */;
@@ -280,8 +400,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0200FA381920E7E100929264 /* camera-swap-icon.png in Resources */,
+				0200FA3F1920E7E100929264 /* flashlight-turn-off-icon.png in Resources */,
+				0200FA391920E7E100929264 /* camera-swap-icon@2x.png in Resources */,
+				0200FA411920E7E100929264 /* flashlight-turn-on-icon-pressed.png in Resources */,
+				0200FA401920E7E100929264 /* flashlight-turn-off-icon@2x.png in Resources */,
+				0200FA461920E7E100929264 /* LICENSE-2.0.txt in Resources */,
+				0200FA481920E7E100929264 /* poweredby@2x.png in Resources */,
+				0200FA471920E7E100929264 /* poweredby.png in Resources */,
+				0200FA351920E7E100929264 /* beep.wav in Resources */,
+				0200FA441920E7E100929264 /* flashlight-turn-on-icon@2x.png in Resources */,
+				0200FA3A1920E7E100929264 /* CHANGELOG.txt in Resources */,
+				0200FA361920E7E100929264 /* camera-swap-icon-pressed.png in Resources */,
 				02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */,
+				0200FA3B1920E7E100929264 /* scanditsdk.strings in Resources */,
+				0200FA431920E7E100929264 /* flashlight-turn-on-icon.png in Resources */,
+				0200FA371920E7E100929264 /* camera-swap-icon-pressed@2x.png in Resources */,
+				0200FA421920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png in Resources */,
+				0200FA3D1920E7E100929264 /* flashlight-turn-off-icon-pressed.png in Resources */,
 				02FCF8CD18E0B57A00E3C663 /* Images.xcassets in Resources */,
+				0200FA3E1920E7E100929264 /* flashlight-turn-off-icon-pressed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +502,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0200F9B51920B6DC00929264 /* BWAccount.m in Sources */,
+				0200FA3C1920E7E100929264 /* empty.cpp in Sources */,
 				0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */,
+				0200FA021920DEB800929264 /* BWScanViewController.m in Sources */,
 				0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */,
 				0200F9A7191FF6FA00929264 /* BWIPhoneClient.m in Sources */,
 				02FCF8C718E0B57A00E3C663 /* main.m in Sources */,
@@ -393,6 +533,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0200FA231920E7E100929264 /* scanditsdk.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0200FA241920E7E100929264 /* de */,
+				0200FA261920E7E100929264 /* en */,
+			);
+			name = scanditsdk.strings;
+			sourceTree = "<group>";
+		};
 		02FCF8C318E0B57A00E3C663 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -491,7 +640,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "beacon-wallet-iphone/beacon-wallet-iphone-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-iphone/beacon-wallet-iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ScanditSDK",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -505,7 +660,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "beacon-wallet-iphone/beacon-wallet-iphone-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-iphone/beacon-wallet-iphone-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ScanditSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -527,8 +687,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "beacon-wallet-iphoneTests/beacon-wallet-iphoneTests-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -548,6 +710,7 @@
 				INFOPLIST_FILE = "beacon-wallet-iphoneTests/beacon-wallet-iphoneTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
