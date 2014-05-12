@@ -46,6 +46,8 @@
 		0200FA5C1920E84900929264 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA5B1920E84900929264 /* SystemConfiguration.framework */; };
 		0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA611920F80500929264 /* BWReceiptDataItem.m */; };
 		0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA641920FB6700929264 /* BWReceiptTableViewController.m */; };
+		0200FA69192110A200929264 /* BWLoginViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA67192110A200929264 /* BWLoginViewViewController.m */; };
+		0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA68192110A200929264 /* BWLoginViewViewController.xib */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BD18E0B57A00E3C663 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
@@ -121,6 +123,9 @@
 		0200FA611920F80500929264 /* BWReceiptDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWReceiptDataItem.m; sourceTree = "<group>"; };
 		0200FA631920FB6700929264 /* BWReceiptTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWReceiptTableViewController.h; sourceTree = "<group>"; };
 		0200FA641920FB6700929264 /* BWReceiptTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWReceiptTableViewController.m; sourceTree = "<group>"; };
+		0200FA66192110A200929264 /* BWLoginViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWLoginViewViewController.h; sourceTree = "<group>"; };
+		0200FA67192110A200929264 /* BWLoginViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWLoginViewViewController.m; sourceTree = "<group>"; };
+		0200FA68192110A200929264 /* BWLoginViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWLoginViewViewController.xib; sourceTree = "<group>"; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -295,6 +300,9 @@
 				0200FA011920DEB800929264 /* BWScanViewController.m */,
 				0200FA631920FB6700929264 /* BWReceiptTableViewController.h */,
 				0200FA641920FB6700929264 /* BWReceiptTableViewController.m */,
+				0200FA66192110A200929264 /* BWLoginViewViewController.h */,
+				0200FA67192110A200929264 /* BWLoginViewViewController.m */,
+				0200FA68192110A200929264 /* BWLoginViewViewController.xib */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@
 				02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */,
 				0200FA3B1920E7E100929264 /* scanditsdk.strings in Resources */,
 				0200FA431920E7E100929264 /* flashlight-turn-on-icon.png in Resources */,
+				0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */,
 				0200FA371920E7E100929264 /* camera-swap-icon-pressed@2x.png in Resources */,
 				0200FA421920E7E100929264 /* flashlight-turn-on-icon-pressed@2x.png in Resources */,
 				0200FA3D1920E7E100929264 /* flashlight-turn-off-icon-pressed.png in Resources */,
@@ -517,6 +526,7 @@
 				0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */,
 				0200FA021920DEB800929264 /* BWScanViewController.m in Sources */,
 				0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */,
+				0200FA69192110A200929264 /* BWLoginViewViewController.m in Sources */,
 				0200F9A7191FF6FA00929264 /* BWIPhoneClient.m in Sources */,
 				0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */,
 				02FCF8C718E0B57A00E3C663 /* main.m in Sources */,

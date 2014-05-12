@@ -11,6 +11,7 @@
 #import "BWTabBarViewController.h"
 #import "BWScanViewController.h"
 #import "BWReceiptTableViewController.h"
+#import "BWLoginViewViewController.h"
 
 @interface BWAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,5 +21,6 @@
 @property (strong, nonatomic) BWTabBarViewController    *tabBarViewController;
 @property (strong, nonatomic) BWScanViewController      *scanViewController;
 @property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
+@property  BWLoginViewViewController *loginViewController;
 
 @end
