@@ -7,5 +7,8 @@ set -e -x
 cd `dirname $0`/../..
 
 brew update
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php
 brew install php55
 composer self-update
