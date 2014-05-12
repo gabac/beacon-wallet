@@ -43,7 +43,7 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
 }
 
 - (void) getAccountDetails:(void (^)(BWAccount *account, NSError *error))block {
-    [self GET:@"account/card" parameters:@{@"card": @"123"} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:@"accounts/2501032235098" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         BWAccount *account = [[BWAccount alloc] init];
         

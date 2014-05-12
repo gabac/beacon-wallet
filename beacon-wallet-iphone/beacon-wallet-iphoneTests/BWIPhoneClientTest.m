@@ -66,4 +66,20 @@
     }];
 }
 
+- (void)testGetAccountDetails {
+    
+    __block BOOL done = NO;
+    
+    [self.apiClient getAccountDetails:^(BWAccount *account, NSError *error) {
+        done = YES;
+        
+        XCTAssertEqualObjects(account.card, @"2501032235098", @"supercard nr");
+        
+    }];
+    
+    while(!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+}
+
 @end
