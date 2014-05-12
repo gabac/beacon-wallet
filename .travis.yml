@@ -1,11 +1,10 @@
 language: objective-c
+
+env:
+    - BEFORE_INSTALL=beacon-wallet-iphone/bin/travis/before_install.sh SCRIPT=beacon-wallet-iphone/bin/travis/script.sh
+
 before_install:
-    - brew unlink xctool
-    - brew update
-    - brew install xctool
-    - export LANG=en_US.UTF-8
-    - cd beacon-wallet-iphone
-    - gem install cocoapods -v '0.32.1'
+    - $BEFORE_INSTALL
+
 script: 
-    - xctool -workspace beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-    - xctool test -workspace beacon-wallet-iphone.xcworkspace -scheme beacon-wallet-iphone -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - $SCRIPT
