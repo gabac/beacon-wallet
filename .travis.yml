@@ -1,11 +1,11 @@
 language: objective-c
 
 env:
-    - BEFORE_INSTALL=beacon-wallet-api/bin/travis/before_install.sh INSTALL=beacon-wallet-api/bin/travis/install.sh SCRIPT=beacon-wallet-api/bin/travis/script.sh
-    - BEFORE_INSTALL=beacon-wallet-iphone/bin/travis/before_install.sh INSTALL=beacon-wallet-iphone/bin/travis/install.sh SCRIPT=beacon-wallet-iphone/bin/travis/script.sh
+    - PROJECT=beacon-wallet-api
+    - PROJECT=beacon-wallet-iphone
 
-before_install: $BEFORE_INSTALL
+before_install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/before_install.sh; fi
 
-install: $INSTALL
+install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/install.sh; fi
 
-script: $SCRIPT
+script: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/script.sh; fi
