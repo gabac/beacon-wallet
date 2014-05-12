@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BWAccountViewController.h"
+#import "BWTabBarViewController.h"
 
 @interface BWAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) BWAccountViewController *accountViewController;
+@property (strong, nonatomic) BWTabBarViewController  *tabBarViewController;
 
 @end

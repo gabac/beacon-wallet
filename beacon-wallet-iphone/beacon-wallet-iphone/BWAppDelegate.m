@@ -15,6 +15,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    self.accountViewController = [[BWAccountViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.tabBarViewController = [[BWTabBarViewController alloc] init];
+    self.tabBarViewController.viewControllers = @[self.accountViewController];
+    
+    [self.window addSubview:self.tabBarViewController.view];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

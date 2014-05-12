@@ -11,6 +11,8 @@
 		0200F9A8191FF6FA00929264 /* BWIPhoneClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9A6191FF6FA00929264 /* BWIPhoneClient.m */; };
 		0200F9AE191FFA9500929264 /* BWIPhoneClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9AD191FFA9500929264 /* BWIPhoneClientTest.m */; };
 		0200F9B51920B6DC00929264 /* BWAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9B41920B6DC00929264 /* BWAccount.m */; };
+		0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FB1920C91900929264 /* BWTabBarViewController.m */; };
+		0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FE1920C94500929264 /* BWAccountViewController.m */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BD18E0B57A00E3C663 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
@@ -43,6 +45,10 @@
 		0200F9AD191FFA9500929264 /* BWIPhoneClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWIPhoneClientTest.m; sourceTree = "<group>"; };
 		0200F9B31920B6DC00929264 /* BWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccount.h; sourceTree = "<group>"; };
 		0200F9B41920B6DC00929264 /* BWAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccount.m; sourceTree = "<group>"; };
+		0200F9FA1920C91900929264 /* BWTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTabBarViewController.h; sourceTree = "<group>"; };
+		0200F9FB1920C91900929264 /* BWTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTabBarViewController.m; sourceTree = "<group>"; };
+		0200F9FD1920C94500929264 /* BWAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccountViewController.h; sourceTree = "<group>"; };
+		0200F9FE1920C94500929264 /* BWAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccountViewController.m; sourceTree = "<group>"; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +162,10 @@
 				02FCF8CA18E0B57A00E3C663 /* BWAppDelegate.m */,
 				02FCF8CC18E0B57A00E3C663 /* Images.xcassets */,
 				02FCF8C118E0B57A00E3C663 /* Supporting Files */,
+				0200F9FA1920C91900929264 /* BWTabBarViewController.h */,
+				0200F9FB1920C91900929264 /* BWTabBarViewController.m */,
+				0200F9FD1920C94500929264 /* BWAccountViewController.h */,
+				0200F9FE1920C94500929264 /* BWAccountViewController.m */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -354,6 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0200F9B51920B6DC00929264 /* BWAccount.m in Sources */,
+				0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */,
+				0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */,
 				0200F9A7191FF6FA00929264 /* BWIPhoneClient.m in Sources */,
 				02FCF8C718E0B57A00E3C663 /* main.m in Sources */,
 				02FCF8CB18E0B57A00E3C663 /* BWAppDelegate.m in Sources */,
