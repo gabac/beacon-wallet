@@ -44,6 +44,8 @@
 		0200FA581920E83B00929264 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA571920E83B00929264 /* QuartzCore.framework */; };
 		0200FA5A1920E84100929264 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA591920E84100929264 /* CoreLocation.framework */; };
 		0200FA5C1920E84900929264 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA5B1920E84900929264 /* SystemConfiguration.framework */; };
+		0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA611920F80500929264 /* BWReceiptDataItem.m */; };
+		0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA641920FB6700929264 /* BWReceiptTableViewController.m */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BD18E0B57A00E3C663 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
@@ -115,6 +117,10 @@
 		0200FA571920E83B00929264 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0200FA591920E84100929264 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0200FA5B1920E84900929264 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0200FA601920F80500929264 /* BWReceiptDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWReceiptDataItem.h; sourceTree = "<group>"; };
+		0200FA611920F80500929264 /* BWReceiptDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWReceiptDataItem.m; sourceTree = "<group>"; };
+		0200FA631920FB6700929264 /* BWReceiptTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWReceiptTableViewController.h; sourceTree = "<group>"; };
+		0200FA641920FB6700929264 /* BWReceiptTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWReceiptTableViewController.m; sourceTree = "<group>"; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BC18E0B57A00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -194,6 +200,8 @@
 			children = (
 				0200F9B31920B6DC00929264 /* BWAccount.h */,
 				0200F9B41920B6DC00929264 /* BWAccount.m */,
+				0200FA601920F80500929264 /* BWReceiptDataItem.h */,
+				0200FA611920F80500929264 /* BWReceiptDataItem.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -285,6 +293,8 @@
 				0200F9FE1920C94500929264 /* BWAccountViewController.m */,
 				0200FA001920DEB800929264 /* BWScanViewController.h */,
 				0200FA011920DEB800929264 /* BWScanViewController.m */,
+				0200FA631920FB6700929264 /* BWReceiptTableViewController.h */,
+				0200FA641920FB6700929264 /* BWReceiptTableViewController.m */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -503,10 +513,12 @@
 			files = (
 				0200F9B51920B6DC00929264 /* BWAccount.m in Sources */,
 				0200FA3C1920E7E100929264 /* empty.cpp in Sources */,
+				0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */,
 				0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */,
 				0200FA021920DEB800929264 /* BWScanViewController.m in Sources */,
 				0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */,
 				0200F9A7191FF6FA00929264 /* BWIPhoneClient.m in Sources */,
+				0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */,
 				02FCF8C718E0B57A00E3C663 /* main.m in Sources */,
 				02FCF8CB18E0B57A00E3C663 /* BWAppDelegate.m in Sources */,
 			);

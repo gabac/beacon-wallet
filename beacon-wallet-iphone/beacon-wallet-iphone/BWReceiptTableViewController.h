@@ -1,5 +1,5 @@
 //
-//  BWScanViewController.h
+//  BWReceiptTableViewController.h
 //  beacon-wallet-iphone
 //
 //  Created by Cyril Gabathuler on 12.05.14.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScanditSDKOverlayController.h"
 #import "BWReceiptDataItem.h"
 
-@interface BWScanViewController : UIViewController<ScanditSDKOverlayControllerDelegate>
+@interface BWReceiptTableViewController : UITableViewController
 
 @end

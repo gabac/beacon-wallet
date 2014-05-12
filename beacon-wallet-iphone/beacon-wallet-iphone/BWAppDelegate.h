@@ -10,6 +10,7 @@
 #import "BWAccountViewController.h"
 #import "BWTabBarViewController.h"
 #import "BWScanViewController.h"
+#import "BWReceiptTableViewController.h"
 
 @interface BWAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,5 +19,6 @@
 @property (strong, nonatomic) BWAccountViewController   *accountViewController;
 @property (strong, nonatomic) BWTabBarViewController    *tabBarViewController;
 @property (strong, nonatomic) BWScanViewController      *scanViewController;
+@property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
 
 @end

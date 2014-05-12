@@ -18,10 +18,13 @@
     
     self.accountViewController = [[BWAccountViewController alloc] initWithNibName:nil bundle:nil];
     self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
+    self.receiptTableViewController = [[BWReceiptTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(245/255.0) green:(156/255.0) blue:0 alpha:1]];
     
     self.tabBarViewController = [[BWTabBarViewController alloc] init];
-    self.tabBarViewController.viewControllers = @[self.accountViewController, self.scanViewController];
+    self.tabBarViewController.viewControllers = @[self.accountViewController, self.scanViewController, self.receiptTableViewController];
     
     self.window.rootViewController = self.tabBarViewController;
     

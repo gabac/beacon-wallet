@@ -10,6 +10,9 @@
 
 @interface BWScanViewController ()
 
+@property (strong, nonatomic) ScanditSDKBarcodePicker *scanditSDKBarcodePicker;
+@property NSMutableArray *receiptDataItems;
+
 @end
 
 @implementation BWScanViewController
@@ -32,6 +35,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.receiptDataItems = [[NSMutableArray alloc] init];
+    
     self.scanditSDKBarcodePicker = [[ScanditSDKBarcodePicker alloc]
 									initWithAppKey:@"1eHrynHTEeGVqLMegY9OCNXiWpxx0xHhmR4zth7UBoU"];
     
@@ -56,6 +62,22 @@
     NSString *symbology = [barcodeResult objectForKey:@"symbology"];
     NSString *barcode = [barcodeResult objectForKey:@"barcode"];
     NSLog(@"scanned %@ barcode: %@", symbology, barcode);
+    
+    BWReceiptDataItem *dataItem = [[BWReceiptDataItem alloc] init];
+    dataItem.barcode = barcode;
+    [self.receiptDataItems addObject:dataItem];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
+    
+    NSMutableArray *storedReceiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    if(storedReceiptDataItems) {
+        [self.receiptDataItems addObjectsFromArray:storedReceiptDataItems];
+    }
+    
+    [NSKeyedArchiver archiveRootObject:self.receiptDataItems toFile:docFile];
 }
 
 - (void)scanditSDKOverlayController: (ScanditSDKOverlayController *)scanditSDKOverlayController
@@ -68,16 +90,5 @@
     // add your own code to handle user input in the search bar
     // (only required if you use the search bar provided by the Scandit SDK
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
