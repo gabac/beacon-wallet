@@ -55,8 +55,18 @@
     self.scanditSDKBarcodePicker.overlayController.delegate = self;
     
     [self.view addSubview:self.scanditSDKBarcodePicker.view];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-	[self.scanditSDKBarcodePicker startScanning];
+    [self.scanditSDKBarcodePicker startScanning];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.scanditSDKBarcodePicker stopScanning];
 }
 
 - (void)didReceiveMemoryWarning
