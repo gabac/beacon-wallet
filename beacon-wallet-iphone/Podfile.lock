@@ -19,13 +19,16 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - OCMock (2.2.4)
+  - ScanditSDK (4.0.0)
 
 DEPENDENCIES:
   - AFNetworking
   - OCMock
+  - ScanditSDK
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   OCMock: 5008fae4b4789b8fc3e48cd7660f2eb5ef8ce89e
+  ScanditSDK: ad9c7fa536daa92d88e372a042248bb27a294a43
 
 COCOAPODS: 0.32.1
