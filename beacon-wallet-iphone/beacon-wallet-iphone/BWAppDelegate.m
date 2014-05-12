@@ -16,7 +16,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    self.accountViewController = [[BWAccountViewController alloc] initWithNibName:nil bundle:nil];
+    self.accountTableViewController = [[BWAccountTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
     self.receiptTableViewController = [[BWReceiptTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
@@ -24,7 +24,7 @@
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(245/255.0) green:(156/255.0) blue:0 alpha:1]];
     
     self.tabBarViewController = [[BWTabBarViewController alloc] init];
-    self.tabBarViewController.viewControllers = @[self.accountViewController, self.scanViewController, self.receiptTableViewController];
+    self.tabBarViewController.viewControllers = @[self.accountTableViewController, self.scanViewController, self.receiptTableViewController];
     
     self.window.rootViewController = self.tabBarViewController;
     
@@ -34,7 +34,7 @@
     
     if(true) {
         self.loginViewController = [[BWLoginViewViewController alloc] initWithNibName:@"BWLoginViewViewController" bundle:[NSBundle mainBundle]];
-        [self.accountViewController presentViewController:self.loginViewController animated:NO completion:nil];
+        [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
     }
     
     return YES;

@@ -12,7 +12,6 @@
 		0200F9AE191FFA9500929264 /* BWIPhoneClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9AD191FFA9500929264 /* BWIPhoneClientTest.m */; };
 		0200F9B51920B6DC00929264 /* BWAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9B41920B6DC00929264 /* BWAccount.m */; };
 		0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FB1920C91900929264 /* BWTabBarViewController.m */; };
-		0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200F9FE1920C94500929264 /* BWAccountViewController.m */; };
 		0200FA021920DEB800929264 /* BWScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA011920DEB800929264 /* BWScanViewController.m */; };
 		0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA611920F80500929264 /* BWReceiptDataItem.m */; };
 		0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA641920FB6700929264 /* BWReceiptTableViewController.m */; };
@@ -20,6 +19,7 @@
 		0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA68192110A200929264 /* BWLoginViewViewController.xib */; };
 		0200FA6E1921224A00929264 /* BWUpdateAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */; };
 		0200FA6F1921224A00929264 /* BWUpdateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */; };
+		0200FA72192136C500929264 /* BWAccountTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA71192136C500929264 /* BWAccountTableViewController.m */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
 		02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF8C318E0B57A00E3C663 /* InfoPlist.strings */; };
@@ -53,8 +53,6 @@
 		0200F9B41920B6DC00929264 /* BWAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccount.m; sourceTree = "<group>"; };
 		0200F9FA1920C91900929264 /* BWTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTabBarViewController.h; sourceTree = "<group>"; };
 		0200F9FB1920C91900929264 /* BWTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTabBarViewController.m; sourceTree = "<group>"; };
-		0200F9FD1920C94500929264 /* BWAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccountViewController.h; sourceTree = "<group>"; };
-		0200F9FE1920C94500929264 /* BWAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccountViewController.m; sourceTree = "<group>"; };
 		0200FA001920DEB800929264 /* BWScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWScanViewController.h; sourceTree = "<group>"; };
 		0200FA011920DEB800929264 /* BWScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWScanViewController.m; sourceTree = "<group>"; };
 		0200FA601920F80500929264 /* BWReceiptDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWReceiptDataItem.h; sourceTree = "<group>"; };
@@ -67,6 +65,8 @@
 		0200FA6B1921224A00929264 /* BWUpdateAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWUpdateAppViewController.h; sourceTree = "<group>"; };
 		0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWUpdateAppViewController.m; sourceTree = "<group>"; };
 		0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWUpdateAppViewController.xib; sourceTree = "<group>"; };
+		0200FA70192136C500929264 /* BWAccountTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWAccountTableViewController.h; sourceTree = "<group>"; };
+		0200FA71192136C500929264 /* BWAccountTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWAccountTableViewController.m; sourceTree = "<group>"; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BE18E0B57A00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -181,8 +181,6 @@
 				02FCF8C118E0B57A00E3C663 /* Supporting Files */,
 				0200F9FA1920C91900929264 /* BWTabBarViewController.h */,
 				0200F9FB1920C91900929264 /* BWTabBarViewController.m */,
-				0200F9FD1920C94500929264 /* BWAccountViewController.h */,
-				0200F9FE1920C94500929264 /* BWAccountViewController.m */,
 				0200FA001920DEB800929264 /* BWScanViewController.h */,
 				0200FA011920DEB800929264 /* BWScanViewController.m */,
 				0200FA631920FB6700929264 /* BWReceiptTableViewController.h */,
@@ -193,6 +191,8 @@
 				0200FA6B1921224A00929264 /* BWUpdateAppViewController.h */,
 				0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */,
 				0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */,
+				0200FA70192136C500929264 /* BWAccountTableViewController.h */,
+				0200FA71192136C500929264 /* BWAccountTableViewController.m */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 			files = (
 				0200F9B51920B6DC00929264 /* BWAccount.m in Sources */,
 				0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */,
-				0200F9FF1920C94500929264 /* BWAccountViewController.m in Sources */,
+				0200FA72192136C500929264 /* BWAccountTableViewController.m in Sources */,
 				0200FA021920DEB800929264 /* BWScanViewController.m in Sources */,
 				0200F9FC1920C91900929264 /* BWTabBarViewController.m in Sources */,
 				0200FA69192110A200929264 /* BWLoginViewViewController.m in Sources */,

@@ -1,28 +1,26 @@
 //
-//  BWReceiptTableViewController.m
+//  BWAccountTableViewController.m
 //  beacon-wallet-iphone
 //
 //  Created by Cyril Gabathuler on 12.05.14.
 //  Copyright (c) 2014 Bahnhofstrasse24. All rights reserved.
 //
 
-#import "BWReceiptTableViewController.h"
+#import "BWAccountTableViewController.h"
 
-@interface BWReceiptTableViewController ()
-
-@property NSArray *receiptDataItems;
+@interface BWAccountTableViewController ()
 
 @end
 
-@implementation BWReceiptTableViewController
+@implementation BWAccountTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.title = @"Receipt";
-        self.tabBarItem.image = [UIImage imageNamed:@"ReceiptIcon"];
+        self.title = @"Account";
+        self.tabBarItem.image = [UIImage imageNamed:@"AccountIcon"];
     }
     return self;
 }
@@ -30,30 +28,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.bottomLayoutGuide.length, 0);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = [paths objectAtIndex: 0];
-    NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
-    
-    self.receiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
-    self.receiptDataItems = [[self.receiptDataItems reverseObjectEnumerator] allObjects];
-    
-    NSLog(@"%lu", [self.receiptDataItems count]);
-    
-    [self.tableView reloadData];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,14 +46,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.receiptDataItems count];
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if(section == 0)
+		return @"User";
+	else
+		return @"Supercard";
+    
 }
 
 
@@ -81,15 +71,15 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
-    BWReceiptDataItem *dataItem = [self.receiptDataItems objectAtIndex:indexPath.row];
-    
-    
-    cell.textLabel.text = dataItem.barcode;
+   
+    cell.textLabel.text = @"Test";
+    cell.detailTextLabel.text =@"test2";
     
     return cell;
 }
+
 
 /*
 // Override to support conditional editing of the table view.

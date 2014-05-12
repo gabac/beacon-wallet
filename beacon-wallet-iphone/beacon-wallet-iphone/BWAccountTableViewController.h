@@ -1,5 +1,5 @@
 //
-//  BWAccountViewController.h
+//  BWAccountTableViewController.h
 //  beacon-wallet-iphone
 //
 //  Created by Cyril Gabathuler on 12.05.14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BWAccountViewController : UIViewController
+@interface BWAccountTableViewController : UITableViewController
 
 @end

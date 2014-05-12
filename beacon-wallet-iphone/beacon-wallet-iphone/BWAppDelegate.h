@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BWAccountViewController.h"
+#import "BWAccountTableViewController.h"
 #import "BWTabBarViewController.h"
 #import "BWScanViewController.h"
 #import "BWReceiptTableViewController.h"
@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) BWAccountViewController   *accountViewController;
+@property (strong, nonatomic) BWAccountTableViewController   *accountTableViewController;
 @property (strong, nonatomic) BWTabBarViewController    *tabBarViewController;
 @property (strong, nonatomic) BWScanViewController      *scanViewController;
 @property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
