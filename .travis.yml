@@ -3,6 +3,7 @@ language: objective-c
 env:
     - PROJECT=beacon-wallet-api
     - PROJECT=beacon-wallet-iphone
+    - PROJECT=beacon-wallet-ipad
 
 before_install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/before_install.sh; fi
 
