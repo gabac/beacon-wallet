@@ -6,4 +6,4 @@ set -e -x
 # change to working dir
 cd `dirname $0`/../..
 
-php composer.phar install
+php composer.phar install --prefer-source
