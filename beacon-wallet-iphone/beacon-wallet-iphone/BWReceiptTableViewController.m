@@ -47,6 +47,7 @@
     NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
     
     self.receiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    self.receiptDataItems = [[self.receiptDataItems reverseObjectEnumerator] allObjects];
     
     NSLog(@"%lu", [self.receiptDataItems count]);
     

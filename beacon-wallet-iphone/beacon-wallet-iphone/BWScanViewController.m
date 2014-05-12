@@ -38,6 +38,17 @@
     
     self.receiptDataItems = [[NSMutableArray alloc] init];
     
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
+    
+    //add old data
+    NSMutableArray *storedReceiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    if(storedReceiptDataItems) {
+        [self.receiptDataItems addObjectsFromArray:storedReceiptDataItems];
+    }
+    
     self.scanditSDKBarcodePicker = [[ScanditSDKBarcodePicker alloc]
 									initWithAppKey:@"1eHrynHTEeGVqLMegY9OCNXiWpxx0xHhmR4zth7UBoU"];
     
@@ -71,13 +82,8 @@
     NSString *docDir = [paths objectAtIndex: 0];
     NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
     
-    NSMutableArray *storedReceiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
-    
-    if(storedReceiptDataItems) {
-        [self.receiptDataItems addObjectsFromArray:storedReceiptDataItems];
-    }
-    
     [NSKeyedArchiver archiveRootObject:self.receiptDataItems toFile:docFile];
+    //[NSKeyedArchiver archiveRootObject:nil toFile:docFile];
 }
 
 - (void)scanditSDKOverlayController: (ScanditSDKOverlayController *)scanditSDKOverlayController
