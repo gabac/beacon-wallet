@@ -10,3 +10,4 @@ brew update
 brew install xctool
 export LANG=en_US.UTF-8
 gem install cocoapods -v '0.32.1'
+pod install
