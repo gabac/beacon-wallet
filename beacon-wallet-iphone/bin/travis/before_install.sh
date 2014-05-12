@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # abort script on failure
-set -e
+set -e -x
 
 cd `dirname $0`/../..
 
