@@ -18,6 +18,8 @@
 		0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA641920FB6700929264 /* BWReceiptTableViewController.m */; };
 		0200FA69192110A200929264 /* BWLoginViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA67192110A200929264 /* BWLoginViewViewController.m */; };
 		0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA68192110A200929264 /* BWLoginViewViewController.xib */; };
+		0200FA6E1921224A00929264 /* BWUpdateAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */; };
+		0200FA6F1921224A00929264 /* BWUpdateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */; };
 		02FCF8BB18E0B57A00E3C663 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BA18E0B57A00E3C663 /* Foundation.framework */; };
 		02FCF8BF18E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
 		02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF8C318E0B57A00E3C663 /* InfoPlist.strings */; };
@@ -62,6 +64,9 @@
 		0200FA66192110A200929264 /* BWLoginViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWLoginViewViewController.h; sourceTree = "<group>"; };
 		0200FA67192110A200929264 /* BWLoginViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWLoginViewViewController.m; sourceTree = "<group>"; };
 		0200FA68192110A200929264 /* BWLoginViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWLoginViewViewController.xib; sourceTree = "<group>"; };
+		0200FA6B1921224A00929264 /* BWUpdateAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWUpdateAppViewController.h; sourceTree = "<group>"; };
+		0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWUpdateAppViewController.m; sourceTree = "<group>"; };
+		0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWUpdateAppViewController.xib; sourceTree = "<group>"; };
 		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BE18E0B57A00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -185,6 +190,9 @@
 				0200FA66192110A200929264 /* BWLoginViewViewController.h */,
 				0200FA67192110A200929264 /* BWLoginViewViewController.m */,
 				0200FA68192110A200929264 /* BWLoginViewViewController.xib */,
+				0200FA6B1921224A00929264 /* BWUpdateAppViewController.h */,
+				0200FA6C1921224A00929264 /* BWUpdateAppViewController.m */,
+				0200FA6D1921224A00929264 /* BWUpdateAppViewController.xib */,
 			);
 			path = "beacon-wallet-iphone";
 			sourceTree = "<group>";
@@ -302,6 +310,7 @@
 			files = (
 				02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */,
 				0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */,
+				0200FA6F1921224A00929264 /* BWUpdateAppViewController.xib in Resources */,
 				02FCF8CD18E0B57A00E3C663 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +403,7 @@
 				0200FA651920FB6700929264 /* BWReceiptTableViewController.m in Sources */,
 				02FCF8C718E0B57A00E3C663 /* main.m in Sources */,
 				02FCF8CB18E0B57A00E3C663 /* BWAppDelegate.m in Sources */,
+				0200FA6E1921224A00929264 /* BWUpdateAppViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
