@@ -1,0 +1,15 @@
+<?php
+
+return array(
+    'debug' => false,
+    'database' => array(
+        'default' => array(
+            'user' => 'travis',
+            'password' => '',
+            'dbname' => 'beacon_wallet',
+            'host' => '127.0.0.1',
+            'driver' => 'pdo_mysql',
+            'charset' => 'utf8',
+        ),
+    ),
+);
