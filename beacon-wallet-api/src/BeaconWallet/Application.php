@@ -18,6 +18,9 @@ class Application extends \Silex\Application
         // silex providers
         $app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
+        $app->register(new \Silex\Provider\DoctrineServiceProvider(), array(
+            'dbs.options' => $app['config']['database'],
+        ));
 
         // application service and controller provider
         $app->register(new ServiceProvider());

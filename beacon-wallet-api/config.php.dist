@@ -2,4 +2,14 @@
 
 return array(
     'debug' => true,
+    'database' => array(
+        'default' => array(
+            'user' => 'root',
+            'password' => '',
+            'dbname' => 'beacon_wallet',
+            'host' => '127.0.0.1',
+            'driver' => 'pdo_mysql',
+            'charset' => 'utf8',
+        ),
+    ),
 );
