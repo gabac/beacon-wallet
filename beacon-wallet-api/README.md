@@ -14,3 +14,14 @@ cp config.php.dist config.php
 ```
 php -S localhost:8000 -t web/
 ```
+
+For development you can use the built-in PHP server by running the previous 
+command and accessing the API at [http://localhost:8000/](http://localhost:8000/).
+
+## Tests
+
+To run the test suite use the PHPUnit binary from the Composer vendors.
+
+```
+vendor/bin/phpunit
+```
