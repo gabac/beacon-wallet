@@ -8,3 +8,4 @@ cd `dirname $0`/../..
 
 brew update
 brew install mysql
+mysql.server start
