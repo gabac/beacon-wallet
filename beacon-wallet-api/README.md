@@ -7,7 +7,7 @@ git clone git@github.com:gabac/beacon-wallet.git
 cd beacon-wallet/beacon-wallet-api
 php composer.phar install
 cp config.php.dist config.php
-mysql < install.sql
+mysql < sql/install.sql
 ```
 
 ## Development
