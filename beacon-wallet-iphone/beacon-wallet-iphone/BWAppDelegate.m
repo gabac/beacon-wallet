@@ -121,8 +121,6 @@
                     *stop = TRUE;
                 }
             }
-            
-            NSLog(@"%@", beacon.minor);
         }];
     }
 }
