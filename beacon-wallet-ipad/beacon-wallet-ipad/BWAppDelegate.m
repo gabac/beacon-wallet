@@ -14,9 +14,29 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    NSUUID *cashierUUID = [[NSUUID alloc] initWithUUIDString:@"11111111-1111-1111-1111-111111111111"];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:cashierUUID
+                                                                major:2
+                                                                minor:1
+                                                           identifier:@"ch.beacon-wallet"];
+    NSDictionary *peripheralDictionary = [self.beaconRegion peripheralDataWithMeasuredPower:nil];
+    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+    self.peripheralManager.delegate = self;
+    [self.peripheralManager startAdvertising:peripheralDictionary];
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
+    
+}
+
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
+    NSLog(@"error %@", [error description]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface BWAppDelegate : UIResponder <UIApplicationDelegate>
+@interface BWAppDelegate : UIResponder <UIApplicationDelegate, CBPeripheralManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property CLBeaconRegion *beaconRegion;
+@property CBPeripheralManager *peripheralManager;
 
 @end
