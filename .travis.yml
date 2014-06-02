@@ -5,9 +5,9 @@ env:
     - PROJECT=beacon-wallet-iphone
     - PROJECT=beacon-wallet-ipad
 
-before_install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/before_install.sh; fi
+before_install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then time $PROJECT/bin/travis/before_install.sh; fi
 
-install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/install.sh; fi
+install: if [ -s $PROJECT/bin/travis/before_install.sh ]; then time $PROJECT/bin/travis/install.sh; fi
 
 script: if [ -s $PROJECT/bin/travis/before_install.sh ]; then $PROJECT/bin/travis/script.sh; fi
 
