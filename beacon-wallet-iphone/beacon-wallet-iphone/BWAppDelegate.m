@@ -9,6 +9,7 @@
 #import "BWAppDelegate.h"
 #import "BWIPhoneClient.h"
 #import "BWWelcomeViewController.h"
+#import "BWPaymentViewController.h"
 
 @implementation BWAppDelegate
 
@@ -112,8 +113,10 @@
                 if(beacon.proximity == CLProximityImmediate) {
                     NSLog(@"start the payment process");
                     
+                    [self startPaymentProcess];
+                    
                     //stop ranging
-                    [self.locationManager stopMonitoringForRegion:self.beaconRegion];
+                    [self.locationManager stopRangingBeaconsInRegion:self.cashierBeaconRegion];
                     
                     *stop = TRUE;
                 }
@@ -126,6 +129,12 @@
 
 - (void) locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
     NSLog(@"%@", [error description]);
+}
+
+- (void) startPaymentProcess {
+    BWPaymentViewController *paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
+    
+    [self.accountTableViewController presentViewController:paymentViewController animated:YES completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BWWelcomeViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BWPaymentViewController">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -14,30 +14,30 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Coop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMy-2f-Dan">
-                    <rect key="frame" x="91" y="20" width="138" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQA-pj-ewT">
+                    <rect key="frame" x="126" y="20" width="68" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7O0-9d-eQa">
-                    <rect key="frame" x="142" y="518" width="37" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2E-T0-KqN">
+                    <rect key="frame" x="145" y="518" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Done">
+                    <state key="normal" title="Pay">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="pressedDone:" destination="-1" eventType="touchUpInside" id="QL1-HE-Z3a"/>
+                        <action selector="pressedPay:" destination="-1" eventType="touchUpInside" id="yLR-xc-uED"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="LMy-2f-Dan" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="QaC-sd-Eh0"/>
-                <constraint firstItem="LMy-2f-Dan" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cl8-2X-DVb"/>
-                <constraint firstItem="LMy-2f-Dan" firstAttribute="centerX" secondItem="7O0-9d-eQa" secondAttribute="centerX" id="iPs-3C-OWu"/>
-                <constraint firstAttribute="bottom" secondItem="7O0-9d-eQa" secondAttribute="bottom" constant="20" symbolic="YES" id="lKw-Eh-Xxn"/>
+                <constraint firstItem="yQA-pj-ewT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="48E-EA-XjC"/>
+                <constraint firstAttribute="bottom" secondItem="R2E-T0-KqN" secondAttribute="bottom" constant="20" symbolic="YES" id="mXh-xe-A0p"/>
+                <constraint firstItem="yQA-pj-ewT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vFH-Jf-OcH"/>
+                <constraint firstItem="R2E-T0-KqN" firstAttribute="centerX" secondItem="yQA-pj-ewT" secondAttribute="centerX" id="vTa-ir-Yv1"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
