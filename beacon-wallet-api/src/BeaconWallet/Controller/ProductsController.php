@@ -8,33 +8,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class AccountsController
+class ProductsController
 {
-    protected $accounts;
+    protected $products;
 
     /**
      * @var \Symfony\Component\Routing\Generator\UrlGenerator
      */
     protected $url;
 
-    public function __construct($accounts, $url)
+    public function __construct($products, $url)
     {
-        $this->accounts = $accounts;
+        $this->products = $products;
         $this->url = $url;
     }
 
-    public function getAccount($card, Request $request)
+    public function getProducts(Request $request)
     {
-        $account = $this->accounts->getAccount($card);
+        $products = $this->products->getProducts();
 
-        if ($account) {
-
-            return new JsonResponse($account);
-
-        } else {
-
-            throw new HttpException(404, 'Account not found');
-
-        }
+        return new JsonResponse(array(
+            'products' => $products
+        ));
     }
 }

@@ -9,7 +9,8 @@ class ControllerProvider implements \Silex\ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', 'controller.home:indexAction')->bind('home');
-        $controllers->get('/accounts/{card}', 'controller.accounts:getAccountAction')->bind('account');
+        $controllers->get('/accounts/{card}', 'controller.accounts:getAccount')->bind('account');
+        $controllers->get('/products', 'controller.products:getProducts')->bind('products');
 
         return $controllers;
     }

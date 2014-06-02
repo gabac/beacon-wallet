@@ -9,7 +9,8 @@
     },
     "autoload" : {
         "psr-0" : {
-            "BeaconWallet" : "src/"
+            "BeaconWallet" : "src/",
+            "BeaconWallet\\Tests": "tests/"
         }
     }
 }

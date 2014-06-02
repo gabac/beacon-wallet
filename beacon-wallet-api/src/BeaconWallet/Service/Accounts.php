@@ -13,7 +13,7 @@ class Accounts
 
     public function getAccount($card)
     {
-        $sql = 'SELECT card, pin, cc_nr, cc_date, cc_ccv FROM `accounts` WHERE `card` = ?';
+        $sql = 'SELECT a.card, a.pin, a.cc_nr, a.cc_date, a.cc_ccv FROM `accounts` a WHERE a.card = ?';
 
         $account = $this->database->fetchAssoc($sql, array($card));
 

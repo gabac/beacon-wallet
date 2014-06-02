@@ -11,7 +11,13 @@ class ServiceProvider implements \Silex\ServiceProviderInterface
                 $app['db']
             );
         });
-        
+
+        $app['service.products'] = $app->share(function() use ($app) {
+            return new \BeaconWallet\Service\Products(
+                $app['db']
+            );
+        });
+
         $app['controller.home'] = $app->share(function() use ($app) {
             return new \BeaconWallet\Controller\HomeController(
                 $app['url_generator']
@@ -21,6 +27,13 @@ class ServiceProvider implements \Silex\ServiceProviderInterface
         $app['controller.accounts'] = $app->share(function() use ($app) {
             return new \BeaconWallet\Controller\AccountsController(
                 $app['service.accounts'],
+                $app['url_generator']
+            );
+        });
+
+        $app['controller.products'] = $app->share(function() use ($app) {
+            return new \BeaconWallet\Controller\ProductsController(
+                $app['service.products'],
                 $app['url_generator']
             );
         });
