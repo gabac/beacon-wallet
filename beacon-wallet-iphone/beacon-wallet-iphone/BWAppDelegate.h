@@ -13,7 +13,7 @@
 #import "BWReceiptTableViewController.h"
 #import "BWLoginViewViewController.h"
 
-@interface BWAppDelegate : UIResponder <UIApplicationDelegate>
+@interface BWAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -21,6 +21,8 @@
 @property (strong, nonatomic) BWTabBarViewController    *tabBarViewController;
 @property (strong, nonatomic) BWScanViewController      *scanViewController;
 @property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
-@property  BWLoginViewViewController *loginViewController;
+@property BWLoginViewViewController *loginViewController;
+@property CLBeaconRegion *beaconRegion;
+@property CLLocationManager *locationManager;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "BWAppDelegate.h"
 #import "BWIPhoneClient.h"
+#import "BWWelcomeViewController.h"
 
 @implementation BWAppDelegate
 
@@ -15,6 +16,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+//    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+//                                                           identifier:@"ch.beacon-wallet"];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:23099 minor:1039 identifier:@"ch.beacon-wallet"];
+    self.beaconRegion.notifyEntryStateOnDisplay = YES;
+    
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    [self.locationManager startMonitoringForRegion:self.beaconRegion];
+   
     
     self.accountTableViewController = [[BWAccountTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
@@ -38,6 +51,60 @@
     }
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+
+    if(self.accountTableViewController.view.superview == nil) {
+        BWWelcomeViewController *welcome = [[BWWelcomeViewController alloc] initWithNibName:@"BWWelcomeViewController" bundle:[NSBundle mainBundle]];
+        
+        [self.accountTableViewController presentViewController:welcome animated:YES completion:nil];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    NSLog(@"something happened");
+    UILocalNotification *notice = [[UILocalNotification alloc] init];
+    
+    notice.alertBody = @"Welcome to Coop Baden";
+    notice.alertAction = @"Open";
+    notice.userInfo = @{@"test": @"hallo"};
+    
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notice];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray *)beacons
+               inRegion:(CLBeaconRegion *)region {
+    
+    if ([beacons count] > 0) {
+        CLBeacon *nearestExhibit = [beacons firstObject];
+        NSString * const proximities[] = {
+            [CLProximityFar] = @"far",
+            [CLProximityImmediate] = @"immediate",
+            [CLProximityNear] = @"near",
+            [CLProximityUnknown] = @"unknown"
+        };
+        // Present the exhibit-specific UI only when
+        // the user is relatively close to the exhibit.
+//        if (CLProximityNear == nearestExhibit.proximity) {
+//            NSLog(@"%ld", (long)nearestExhibit.major.integerValue);
+//        } else {
+//            NSLog(@"not there any more %@", proximities[nearestExhibit.proximity]);
+//        }
+//        NSLog(@"did range beacons %@", proximities[nearestExhibit.proximity]);
+        
+        [beacons enumerateObjectsUsingBlock:^(CLBeacon *beacon, NSUInteger idx, BOOL *stop) {
+            if ([beacon.major isEqualToNumber:@23099]) {
+//                NSLog(@"coop baden");
+                
+            }
+            if([beacon.minor isEqualToNumber:@1039]) {
+//                NSLog(@"Welcome to the coop");
+            }
+//            NSLog(@"%@", beacon.minor);
+        }];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
