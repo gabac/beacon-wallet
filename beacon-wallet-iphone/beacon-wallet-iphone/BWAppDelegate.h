@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "BWAccountTableViewController.h"
 #import "BWTabBarViewController.h"
 #import "BWScanViewController.h"
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
 @property BWLoginViewViewController *loginViewController;
 @property CLBeaconRegion *beaconRegion;
+@property CLBeaconRegion *cashierBeaconRegion;
 @property CLLocationManager *locationManager;
 
 @end

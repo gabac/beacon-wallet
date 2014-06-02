@@ -25,7 +25,8 @@
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:23099 minor:1039 identifier:@"ch.beacon-wallet"];
     self.beaconRegion.notifyEntryStateOnDisplay = YES;
     
-    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    //not useful for entering a branch
+    //[self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
    
     
@@ -33,8 +34,7 @@
     self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
     self.receiptTableViewController = [[BWReceiptTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
-    
-    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(245/255.0) green:(156/255.0) blue:0 alpha:1]];
+    self.window.tintColor = [UIColor colorWithRed:(245/255.0) green:(156/255.0) blue:0 alpha:1];
     
     self.tabBarViewController = [[BWTabBarViewController alloc] init];
     self.tabBarViewController.viewControllers = @[self.accountTableViewController, self.scanViewController, self.receiptTableViewController];
@@ -45,7 +45,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if(true) {
+    if(false) {
         self.loginViewController = [[BWLoginViewViewController alloc] initWithNibName:@"BWLoginViewViewController" bundle:[NSBundle mainBundle]];
         [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
     }
@@ -55,15 +55,15 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
 
-    if(self.accountTableViewController.view.superview == nil) {
-        BWWelcomeViewController *welcome = [[BWWelcomeViewController alloc] initWithNibName:@"BWWelcomeViewController" bundle:[NSBundle mainBundle]];
-        
-        [self.accountTableViewController presentViewController:welcome animated:YES completion:nil];
-    }
+    
+    BWWelcomeViewController *welcome = [[BWWelcomeViewController alloc] initWithNibName:@"BWWelcomeViewController" bundle:[NSBundle mainBundle]];
+    
+    [self.accountTableViewController presentViewController:welcome animated:YES completion:nil];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    NSLog(@"something happened");
+    NSLog(@"we entered coop");
     UILocalNotification *notice = [[UILocalNotification alloc] init];
     
     notice.alertBody = @"Welcome to Coop Baden";
@@ -71,40 +71,61 @@
     notice.userInfo = @{@"test": @"hallo"};
     
     [[UIApplication sharedApplication] presentLocalNotificationNow:notice];
+    
+    //start ranging for cashierBeacon
+    [self startRagingForCashierBeacon];
+}
+
+- (void) startRagingForCashierBeacon {
+    NSUUID *cashierUUID = [[NSUUID alloc] initWithUUIDString:@"11111111-1111-1111-1111-111111111111"];
+    self.cashierBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:cashierUUID
+                                                           identifier:@"ch.beacon-wallet"];
+    
+    self.cashierBeaconRegion.notifyEntryStateOnDisplay = YES;
+    [self.locationManager startRangingBeaconsInRegion:self.cashierBeaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    NSLog(@"raus!");
 }
 
 - (void)locationManager:(CLLocationManager *)manager
         didRangeBeacons:(NSArray *)beacons
                inRegion:(CLBeaconRegion *)region {
-    
     if ([beacons count] > 0) {
-        CLBeacon *nearestExhibit = [beacons firstObject];
-        NSString * const proximities[] = {
-            [CLProximityFar] = @"far",
-            [CLProximityImmediate] = @"immediate",
-            [CLProximityNear] = @"near",
-            [CLProximityUnknown] = @"unknown"
-        };
-        // Present the exhibit-specific UI only when
-        // the user is relatively close to the exhibit.
-//        if (CLProximityNear == nearestExhibit.proximity) {
-//            NSLog(@"%ld", (long)nearestExhibit.major.integerValue);
-//        } else {
-//            NSLog(@"not there any more %@", proximities[nearestExhibit.proximity]);
-//        }
-//        NSLog(@"did range beacons %@", proximities[nearestExhibit.proximity]);
+        //is this true??
+        CLBeacon *nearestCashier = [beacons firstObject];
         
         [beacons enumerateObjectsUsingBlock:^(CLBeacon *beacon, NSUInteger idx, BOOL *stop) {
-            if ([beacon.major isEqualToNumber:@23099]) {
-//                NSLog(@"coop baden");
+            //check if its a cashier
+            if([beacon.minor isEqualToNumber:@1]) {
+                NSString * const proximities[] = {
+                    [CLProximityFar] = @"far",
+                    [CLProximityImmediate] = @"immediate",
+                    [CLProximityNear] = @"near",
+                    [CLProximityUnknown] = @"unknown"
+                };
                 
+                
+                NSLog(@"did range cashier beacons %@", proximities[beacon.proximity]);
+                //it has to be near to pay
+                if(beacon.proximity == CLProximityImmediate) {
+                    NSLog(@"start the payment process");
+                    
+                    //stop ranging
+                    [self.locationManager stopMonitoringForRegion:self.beaconRegion];
+                    
+                    *stop = TRUE;
+                }
             }
-            if([beacon.minor isEqualToNumber:@1039]) {
-//                NSLog(@"Welcome to the coop");
-            }
-//            NSLog(@"%@", beacon.minor);
+            
+            NSLog(@"%@", beacon.minor);
         }];
     }
+}
+
+- (void) locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
+    NSLog(@"%@", [error description]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
