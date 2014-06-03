@@ -861,9 +861,29 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
 </div>
 
 <div class="chapter">
-<h2>Chapter</h2>
+<h2>Design</h2>
 
-<p>text</p>
+<h3>Bluetooth Payment</h3>
+
+<p>
+Sowohl in <em>A secure account-based mobile payment protocol</em> wie auch in 
+<em>Design, implementation, and deployment of the iKP secure electronic payment system</em>
+werden Protokolle für ein sicheres Bezahlungssystem für Mobile Geräte beschrieben.
+Die Umsetzung der Systeme ist allerdings kompliziert und aufwändig, da diverse 
+Anforderungen abgedeckt werden, welche in unserem System nicht existieren.
+Die Anforderungen unseres System schränken sich auf folgende Liste ein:
+</p>
+
+<ul>
+<li>Die Authentifizierung des Kunden muss sicher gestellt werden.</li>
+<li>Die Bezahlung muss ohne Internetverbindung auf dem iPhone des Kunden möglich sein.</li>
+<li>Die Authorisierung einer Bezahlung darf nur einmal verwendet werden können.</li>
+</ul>
+
+<figure class="inline">
+    <img src="images/Sequenzdiagram Bluetooth.png" width="300" />
+    <figcaption>Sequenzdiagramm Bluetooth Payment</figcaption>
+</figure>
 
 </div>
 
@@ -913,7 +933,10 @@ Hexadezimalsystem: Dieses Stellwertsystem wird zur Basis 16 dargestellt. Im Unte
 
 <h3 class="break">Quellenverzeichnis</h3>
 
-<ol id="sources"></ol>
+<ol id="sources">
+<li>Kungpisdan, S.; Srinivasan, B.; Phu Dung Le: A secure account-based mobile payment protocol, 2004</li>
+<li>Bellare, M.; Garay, J.A.; Hauser, R.; Herzberg, A.; Krawczyk, H.; Steiner, M.; Tsudik, G.; Van Herreweghen, E.; Waidner, M.: Design, implementation, and deployment of the iKP secure electronic payment system, 2000</li>
+</ol>
 
 <h3 class="break">Abbildungsverzeichnis</h3>
 
