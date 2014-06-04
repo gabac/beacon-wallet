@@ -69,6 +69,7 @@
     
     notice.alertBody = @"Welcome to Coop Baden";
     notice.alertAction = @"Open";
+    notice.soundName = UILocalNotificationDefaultSoundName;
     notice.userInfo = @{@"test": @"hallo"};
     
     [[UIApplication sharedApplication] presentLocalNotificationNow:notice];
