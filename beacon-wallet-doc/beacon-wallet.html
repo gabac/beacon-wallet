@@ -155,12 +155,27 @@ a[href^="http"]:after {
 }
 
 a[href^="http"]:after::footnote-call {
-    content: " [" counter(footnote) "]";
-    font-size: 1.3em;
+    vertical-align: super;
+    line-height: none;
 }
 
 a[href^="http"]:after::footnote-marker {
-    content: "[" counter(footnote) "] ";
+    content: counter(footnote) " ";
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: none;
+}
+
+a[href^='#']:after {
+    content: " [" target-counter(attr(href), reference) "]";
+}
+
+.ref {
+    counter-increment: reference;
+}
+
+.ref:before {
+    content: "[" counter(reference) "] ";
 }
 
 div.chapter {
@@ -429,33 +444,6 @@ function toc() {
     }
 }
 
-function sources() {
-
-    var sources = document.getElementsByTagName('a'),
-        index = document.getElementById('sources'),
-        i, source, li, href, text;
-
-    for (i = 0; i < sources.length; i++) {
-
-        source = sources[i];
-        href = source.getAttribute('href');
-        text = source.getAttribute('title');
-
-        if (href.indexOf('http') != 0) {
-            continue;
-        }
-
-        if (!text) {
-            text = source.innerHTML;
-        }
-
-        li = document.createElement('li');
-        li.appendChild(document.createTextNode(text + ': ' + href));
-        index.appendChild(li); 
-    }
-}
-
-
 function figures() {
 
     var captions = document.getElementsByTagName('figcaption'),
@@ -482,7 +470,6 @@ function figures() {
 }
 
 function init() {
-    sources();
     figures();
     toc();
 }
@@ -872,8 +859,7 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
     auch korrekt ausdrucken zu können, wurde die Software
     <a href="http://www.princexml.com/">Prince</a> verwendet, welche HTML-Seiten
     in PDFs umwandelt. Dadurch konnte diese Dokumentation, gleich wie der Source-Code
-    der Applikation, mit der Versionsverwaltungssoftware Git verwaltet und über
-    den Online-Service <a href="https://github.com/">GitHub</a> geteilt werden.
+    der Applikation, mit der Versionsverwaltungssoftware Git verwaltet werden.
     </p>
     
     <h3>Sourcecode</h3>
@@ -1299,8 +1285,8 @@ TODO
 <h3>Bluetooth Payment</h3>
 
 <p>
-Sowohl in <em>A secure account-based mobile payment protocol</em> wie auch in 
-<em>Design, implementation, and deployment of the iKP secure electronic payment system</em>
+Sowohl in <a href="#ref-secure-payment"><em>A secure account-based mobile payment protocol</em></a> wie auch in 
+<a href="#ref-ikp"><em>Design, implementation, and deployment of the iKP secure electronic payment system</em></a>
 werden Protokolle für ein sicheres Bezahlungssystem für Mobile Geräte beschrieben.
 Die Umsetzung der Systeme ist allerdings kompliziert und aufwändig, da diverse 
 Anforderungen abgedeckt werden, welche in unserem System nicht existieren.
@@ -1460,15 +1446,10 @@ Hexadezimalsystem: Dieses Stellwertsystem wird zur Basis 16 dargestellt. Im Unte
 <p>RMDBS: Ein relationales Datenbankmanagementsystem ist eine Software welche das Speichern und Abfragen von Daten ermöglicht.</p>
 
 <h3 class="break">Literaturverzeichnis</h3>
-<p>Stephen G. Kochan: Programming in Objective-C 2.0(5. Auflage), 2013, 978-0321887283, Amsterdam: Addison-Wesley Longman</p>
-<p>Ken Schwaber, Mike Beedle: Agile Software Development with Scrum, 2001, 978-0130676344</p>
-<p>Kungpisdan, S.; Srinivasan, B.; Phu Dung Le: A secure account-based mobile payment protocol, 2004</p>
-<p>Bellare, M.; Garay, J.A.; Hauser, R.; Herzberg, A.; Krawczyk, H.; Steiner, M.; Tsudik, G.; Van Herreweghen, E.; Waidner, M.: Design, implementation, and deployment of the iKP secure electronic payment system, 2000</p>
-
-<h3 class="break">Quellenverzeichnis</h3>
-
-<ol id="sources">
-</ol>
+<p id="ref-programming-objective-c" class="ref">Stephen G. Kochan: Programming in Objective-C 2.0(5. Auflage), 2013, 978-0321887283, Amsterdam: Addison-Wesley Longman</p>
+<p id="ref-scrum" class="ref">Ken Schwaber, Mike Beedle: Agile Software Development with Scrum, 2001, 978-0130676344</p>
+<p id="ref-secure-payment" class="ref">Kungpisdan, S.; Srinivasan, B.; Phu Dung Le: A secure account-based mobile payment protocol, 2004</p>
+<p id="ref-ikp" class="ref">Bellare, M.; Garay, J.A.; Hauser, R.; Herzberg, A.; Krawczyk, H.; Steiner, M.; Tsudik, G.; Van Herreweghen, E.; Waidner, M.: Design, implementation, and deployment of the iKP secure electronic payment system, 2000</p>
 
 <h3 class="break">Abbildungsverzeichnis</h3>
 
