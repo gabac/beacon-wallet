@@ -1362,13 +1362,38 @@ die App weiss, dass die Ansicht zur Bezahlung aktiviert werden soll.
     <figcaption>Platzierung der iBeacons</figcaption>
 </figure>
 
-<h3>Architektur</h3>
+<h3 class="break">Architektur</h3>
 <figure class="inline">
     <img src="images/architektur.png" width="400px" />
-    <figcaption>Platzierung der iBeacons</figcaption>
+    <figcaption>Architektur</figcaption>
 </figure>
+
 <p>
-TODO
+Das Software-System basiert auf dem Client-Server-Prinzip. Auf einem 
+zentralen Server werden die Daten gespeichert und verwaltet. Eine 
+PHP-Applikation erlaubt den Zugriff auf diese Daten über das Internet. Als 
+Datenbank kommt das RMDBS von MySQL zum Einsatz.
+</p>
+
+<p>
+Der Kunde installierte eine iOS-App, welche über den Apple App Store vertrieben 
+wird, auf seinem iPhone und kann damit Produktinformationen abfragen. Jede Kasse 
+wird mit einem iPad ausgerüstet. Auf dem iPad wird über ein internes 
+Verteilungssystem eine zweite iOS-App installiert, welche für die Abwicklung 
+der Bezahlung zuständig ist.
+</p>
+
+<p>
+Die Kommunikation zwischen dem iPhone des Kunden und dem iPad der Kasse erfolgt 
+über Bluetooth, da der Internetzugang für das iPhone nicht immer garantiert 
+werden kann.
+</p>
+
+<p>
+Für die Abfrage der Produktinformationen ist keine Authentifizierung notwendig. 
+Das iPad authentifiziert sich mit dem Benutzeraccount des Kassierers.
+Die Kommunikation zwischen dem iPhone und dem Server für die Bezahlung werden 
+asymetrisch mit einem Public Key auf dem iPhone verschlüsselt.
 </p>
 
 </div>
@@ -1432,6 +1457,7 @@ Hexadezimalsystem: Dieses Stellwertsystem wird zur Basis 16 dargestellt. Im Unte
 <p>SVN: Ist eine Software zur Versionsverwaltung von Dateien von Apache.</p>
 <p>Git: Ebenfalls eine Software zur Versionsverwaltung. Wurde ursprünglich für Linux entwickelt. Der grösste Unteschied zu SVN ist die dezentrale Verwaltung des Sourcecodes.</p>
 <p>Artefakt: Ist das Ergebnis eines Buildprozesses. Es ist die fertige Software, welche auf Endgärten installiert werden kann.</p>
+<p>RMDBS: Ein relationales Datenbankmanagementsystem ist eine Software welche das Speichern und Abfragen von Daten ermöglicht.</p>
 
 <h3 class="break">Literaturverzeichnis</h3>
 <p>Stephen G. Kochan: Programming in Objective-C 2.0(5. Auflage), 2013, 978-0321887283, Amsterdam: Addison-Wesley Longman</p>
