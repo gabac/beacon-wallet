@@ -861,6 +861,440 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
 </div>
 
 <div class="chapter">
+<h2>Requirements Engineering</h2>
+<h3>Use Cases</h3>
+
+<figure class="inline">
+    <img src="images/use_cases.png" />
+    <figcaption>Use Cases</figcaption>
+</figure>
+
+<h3>Nicht funktionale Anforderungen</h3>
+<p>Die Anforderungen wurden direkt aus den Use Cases bzw. von den Befragungs- und Beobachtungstechnik abgeleitet. Die Beobachtungstechnik wurde während diversen im Coop eingesetzt, um direkt vor Ort die wichtigsten Anforderungen heraus zu filtern.</p>
+
+<h4>Vorlage</h4>
+<p>Alle Anforderungen wurden anhand folgender Vorlage erstellt</p>
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>Eindeutige Nummer des Anwendungsfalls.</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Kurzname des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Priorität</td>
+                <td>Dringlichkeit des Anwendungsfalls mit dem Wertebereich tief, mittel und hoch.</td>
+            </tr>
+            <tr>
+                <td>Auslöser</td>
+                <td>Beschreibung des Ereignisses, welches diesen Anwendungsfall relevant macht.</td>
+            </tr>
+            <tr>
+                <td>Beschreibung</td>
+                <td>Kurze Zusammenfassung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Vorbedingungen</td>
+                <td>Voraussetzungen welche für die Ausführung dieses Anwendungsfalls erfüllt sein müssen.</td>
+            </tr>
+            <tr>
+                <td>Standardablauf</td>
+                <td>Schritte zur erfolgreichen Ausführung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Ergebnis</td>
+                <td>Das Resultat nach der erfolgreichen Ausführung des Standardablaufs.</td>
+            </tr>
+            <tr>
+                <td>Ausnahmen</td>
+                <td>Eventuell auftretende Ausnahmesituationen sowie deren Konsequenzen.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>Attribute Anforderungen</figcaption>
+</figure>
+
+<h4>Anforderungen</h4>
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>UC1</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Einscannen eines Produkts</td>
+            </tr>
+            <tr>
+                <td>Priorität</td>
+                <td>Dringlichkeit des Anwendungsfalls mit dem Wertebereich tief, mittel und hoch.</td>
+            </tr>
+            <tr>
+                <td>Auslöser</td>
+                <td>Beschreibung des Ereignisses, welches diesen Anwendungsfall relevant macht.</td>
+            </tr>
+            <tr>
+                <td>Beschreibung</td>
+                <td>Kurze Zusammenfassung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Vorbedingungen</td>
+                <td>Voraussetzungen welche für die Ausführung dieses Anwendungsfalls erfüllt sein müssen.</td>
+            </tr>
+            <tr>
+                <td>Standardablauf</td>
+                <td>Schritte zur erfolgreichen Ausführung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Ergebnis</td>
+                <td>Das Resultat nach der erfolgreichen Ausführung des Standardablaufs.</td>
+            </tr>
+            <tr>
+                <td>Ausnahmen</td>
+                <td>Eventuell auftretende Ausnahmesituationen sowie deren Konsequenzen.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>UC1: Einscannen eines Produkts</figcaption>
+</figure>
+    
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>UC2</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Bezahlen des Einkaufes</td>
+            </tr>
+            <tr>
+                <td>Priorität</td>
+                <td>Dringlichkeit des Anwendungsfalls mit dem Wertebereich tief, mittel und hoch.</td>
+            </tr>
+            <tr>
+                <td>Auslöser</td>
+                <td>Beschreibung des Ereignisses, welches diesen Anwendungsfall relevant macht.</td>
+            </tr>
+            <tr>
+                <td>Beschreibung</td>
+                <td>Kurze Zusammenfassung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Vorbedingungen</td>
+                <td>Voraussetzungen welche für die Ausführung dieses Anwendungsfalls erfüllt sein müssen.</td>
+            </tr>
+            <tr>
+                <td>Standardablauf</td>
+                <td>Schritte zur erfolgreichen Ausführung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Ergebnis</td>
+                <td>Das Resultat nach der erfolgreichen Ausführung des Standardablaufs.</td>
+            </tr>
+            <tr>
+                <td>Ausnahmen</td>
+                <td>Eventuell auftretende Ausnahmesituationen sowie deren Konsequenzen.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>UC2: Bezahlen des Einkaufes</figcaption>
+</figure>
+
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>UC3</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Bezahlung mit App auslösen</td>
+            </tr>
+            <tr>
+                <td>Priorität</td>
+                <td>Dringlichkeit des Anwendungsfalls mit dem Wertebereich tief, mittel und hoch.</td>
+            </tr>
+            <tr>
+                <td>Auslöser</td>
+                <td>Beschreibung des Ereignisses, welches diesen Anwendungsfall relevant macht.</td>
+            </tr>
+            <tr>
+                <td>Beschreibung</td>
+                <td>Kurze Zusammenfassung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Vorbedingungen</td>
+                <td>Voraussetzungen welche für die Ausführung dieses Anwendungsfalls erfüllt sein müssen.</td>
+            </tr>
+            <tr>
+                <td>Standardablauf</td>
+                <td>Schritte zur erfolgreichen Ausführung des Anwendungsfalls.</td>
+            </tr>
+            <tr>
+                <td>Ergebnis</td>
+                <td>Das Resultat nach der erfolgreichen Ausführung des Standardablaufs.</td>
+            </tr>
+            <tr>
+                <td>Ausnahmen</td>
+                <td>Eventuell auftretende Ausnahmesituationen sowie deren Konsequenzen.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>UC3: Bezahlung mit App auslösen</figcaption>
+</figure>
+
+<h3>Akzeptanz Tests</h3>
+<p>Die Akzeptanz Tests werden anhand der Requirements definiert und haben daher eine direkte Verbindung zu den Use cases.</p>
+
+<h4>Vorlage</h4>
+<p>Alle Akzeptanz Tests wurden anhand folgender Vorlage erstellt.</p>
+
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>Eindeutige Nummer des Tests.</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Name des Tests.</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>Erfüllt oder nicht erfüllt.</td>
+            </tr>
+            <tr>
+                <td>Geprüfte Use cases</td>
+                <td>Uses cases, welche durche diese Akzeptanz Tests geprüft werden</td>
+            </tr>
+            <tr>
+                <td>Aktivität</td>
+                <td>Aktivität, welche ausgeführt werden soll.</td>
+            </tr>
+            <tr>
+                <td>Soll Verhalten</td>
+                <td>Erwartetes Verhalten.</td>
+            </tr>
+            <tr>
+                <td>Ist Verhalten</td>
+                <td>Eingetroffenes Verhalten.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>Attribute Akzeptanz Test</figcaption>
+</figure>
+
+<h4>Akzeptanz Tests</h4>
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>AT1</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Scannen eines Produktes.</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>Erfüllt oder nicht erfüllt.</td>
+            </tr>
+            <tr>
+                <td>Geprüfte Use cases</td>
+                <td>UC1</td>
+            </tr>
+            <tr>
+                <td>Aktivität</td>
+                <td>Aktivität, welche ausgeführt werden soll.</td>
+            </tr>
+            <tr>
+                <td>Soll Verhalten</td>
+                <td>Erwartetes Verhalten.</td>
+            </tr>
+            <tr>
+                <td>Ist Verhalten</td>
+                <td>Eingetroffenes Verhalten.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>AT1: Scannen eines Produktes</figcaption>
+</figure>
+
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>AT2</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Bezahlen</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>Erfüllt oder nicht erfüllt.</td>
+            </tr>
+            <tr>
+                <td>Geprüfte Use cases</td>
+                <td>UC2</td>
+            </tr>
+            <tr>
+                <td>Aktivität</td>
+                <td>Aktivität, welche ausgeführt werden soll.</td>
+            </tr>
+            <tr>
+                <td>Soll Verhalten</td>
+                <td>Erwartetes Verhalten.</td>
+            </tr>
+            <tr>
+                <td>Ist Verhalten</td>
+                <td>Eingetroffenes Verhalten.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>AT2: Bezahlen</figcaption>
+</figure>
+
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="80%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Attribut</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>Identifier</td>
+                <td>AT3</td>
+            </tr><tr>
+                <td>Name</td>
+                <td>Zahlung entgegennehmen.</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>Erfüllt oder nicht erfüllt.</td>
+            </tr>
+            <tr>
+                <td>Geprüfte Use cases</td>
+                <td>UC3</td>
+            </tr>
+            <tr>
+                <td>Aktivität</td>
+                <td>Aktivität, welche ausgeführt werden soll.</td>
+            </tr>
+            <tr>
+                <td>Soll Verhalten</td>
+                <td>Erwartetes Verhalten.</td>
+            </tr>
+            <tr>
+                <td>Ist Verhalten</td>
+                <td>Eingetroffenes Verhalten.</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>AT3: Zahlung entgegennehmen</figcaption>
+</figure>
+
+<h3>Übersicht Abnahme Akzeptanz Tests</h3>
+<figure class="table">
+    <table class="inline" width="100%">
+        <colgroup>
+            <col width="10%">
+            <col width="80%">
+            <col width="10%">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Identifier</th>
+                <th>Name</th>
+                <th style="text-align: right;">Erfüllt</th>
+            </tr>
+            <tr>
+                <td>AT1</td>
+                <td>Scannen eines Produkts</td>
+                <td style="text-align: right;">✓</td>
+            </tr>
+           <tr>
+               <td>AT2</td>
+               <td>Bezahlen</td>
+               <td style="text-align: right;">✓</td>
+           </tr>
+           <tr>
+               <td>AT3</td>
+               <td>Zahlung entgegennehmen</td>
+               <td style="text-align: right;">✓</td>
+           </tr>
+        </tbody>
+    </table>
+    <figcaption>Übersicht Akzeptanz Test</figcaption>
+</figure>
+</div>
+
+<div class="chapter">
 <h2>Design</h2>
 
 <h3>Bluetooth Payment</h3>
