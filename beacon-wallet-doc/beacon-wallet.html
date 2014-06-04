@@ -878,6 +878,33 @@ Die Anforderungen unseres System schränken sich auf folgende Liste ein:
 <li>Die Authentifizierung des Kunden muss sicher gestellt werden.</li>
 <li>Die Bezahlung muss ohne Internetverbindung auf dem iPhone des Kunden möglich sein.</li>
 <li>Die Authorisierung einer Bezahlung darf nur einmal verwendet werden können.</li>
+<li>Die Kommunikation soll über Bluetooth Low Energy erfolgen.</li>
+<li>Es soll keine visuelle oder mündliche Kommunikation zwischen dem Kunden und dem iPad der Kasse nötig sein (z.B. kein Pairing)</li>
+</ul>
+
+<p>
+Bluetooth Low Energy besitzt zwar eine Möglichkeit zur sicheren Kommunikation
+und Core Bluetooth unterstützt diese auch - jedoch ist dafür ein Pairing der zwei 
+involvierten Geräte nötig. Dabei wird auf beiden Geräten eine Nummer angezeigt,
+diese muss verglichen und auf beiden Geräten bestätigt werden. Dieser Prozess mag 
+für viele Anwendungen gut funktionieren, stellt aber in unserem Anwendungsfall 
+keine gute Lösung dar, da die Person hinter der Kasse die Nummer mündlich mit 
+dem Kunden austauschen müsste.
+</p>
+
+<p>
+Das folgende Protokoll soll diese Anforderungen implementieren. Das Protokoll ist
+auch im darauf folgenden Sequenzdiagramm visualisiert.
+</p>
+
+<ul>
+<li>Nachdem die Kasse sämtliche Produkte des Kunden gescannt hat, fordert sie die Rechnung auf dem Server an.</li>
+<li>Der Server erstellt eine signierte Rechnung und sendet diese an die Kasse zurück.</li>
+<li>Die Kasse baut eine Bluetooth-Verbindung zum iPhone auf, welches sich in der unmittelbaren Nähe befindet.</li>
+<li>Die signierte Rechnung wird an das iPhone gesendet und dort verifiziert.</li>
+<li>Der Kunde bestätigt die Bezahlung auf dem iPhone mit seinem PIN-Code und verschlüsselt die Bezahlung für den Server.</li>
+<li>Die verschlüsselte Bezahlung wird wie iPad an den Server übermittelt und dort verifiziert.</li>
+<li>Der Server sendet eine Quittung der erfolgreichen Bezahlung über das iPad an das iPhone.</li>
 </ul>
 
 <figure class="inline">
