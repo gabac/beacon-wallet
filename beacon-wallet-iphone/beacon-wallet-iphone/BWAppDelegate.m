@@ -11,12 +11,56 @@
 #import "BWWelcomeViewController.h"
 #import "BWPaymentViewController.h"
 
+#import <CoreBluetooth/CoreBluetooth.h>
+
+#define BEACON_WALLET_SERVICE_UUID           @"39E38DED-20BB-4DCB-A956-FFF718411DB7"
+#define BEACON_WALLET_CHARACTERISTIC_UUID    @"4196BFDC-2A60-47D4-AAA9-A56E8622186C"
+
+@interface BWAppDelegate () <CBPeripheralManagerDelegate>
+@property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
+@property (strong, nonatomic) CBMutableCharacteristic   *characteristic;
+@end
+
 @implementation BWAppDelegate
+
+
+/** Required protocol method.  A full app should take care of all the possible states,
+ *  but we're just waiting for  to know when the CBPeripheralManager is ready
+ */
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    // Opt out from any other state
+    if (peripheral.state != CBPeripheralManagerStatePoweredOn) {
+        return;
+    }
+    
+    // We're in CBPeripheralManagerStatePoweredOn state...
+    NSLog(@"self.peripheralManager powered on.");
+    
+    // ... so build our service.
+    
+    // Start with the CBMutableCharacteristic
+    self.characteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+    
+    // Then the service
+    CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
+    
+    // Add the characteristic to the service
+    service.characteristics = @[self.characteristic];
+    
+    // And add it to the peripheral manager
+    [self.peripheralManager addService:service];
+    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID]] }];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    
+    _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+    
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
