@@ -13,6 +13,6 @@ return array(
         ),
     ),
     'encryption' => array(
-        'private_key' => __DIR__ . '/private_key.pem',
+        'private_key' => __DIR__ . '/private_key.pem.dist',
     ),
 );
