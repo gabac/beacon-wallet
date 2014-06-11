@@ -40,7 +40,7 @@
     // ... so build our service.
     
     // Start with the CBMutableCharacteristic
-    self.characteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+    self.characteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
     
     // Then the service
     CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
@@ -51,6 +51,24 @@
     // And add it to the peripheral manager
     [self.peripheralManager addService:service];
     [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID]] }];
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
+    
+    NSLog(@"didReceiveReadRequest");
+    
+    NSString *hello = @"Hello";
+    NSData* data = [hello dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (request.offset > data.length) {
+        [self.peripheralManager respondToRequest:request
+                                   withResult:CBATTErrorInvalidOffset];
+        return;
+    }
+    
+    request.value = [data subdataWithRange:NSMakeRange(request.offset, data.length - request.offset)];
+    
+    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
