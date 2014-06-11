@@ -168,8 +168,8 @@
         // And check if it's the right one
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID]]) {
             
-            // If it is, subscribe to it
-            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            // If it is, read it
+            [peripheral readValueForCharacteristic:characteristic];
         }
     }
     
