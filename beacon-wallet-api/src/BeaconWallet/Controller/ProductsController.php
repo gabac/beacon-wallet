@@ -31,4 +31,23 @@ class ProductsController
             'products' => $products
         ));
     }
+
+    public function getProduct($id, Request $request)
+    {
+        $product = $this->products->getProduct($id);
+
+        $updated = new \DateTime($product['updated']);
+
+        $response = new JsonResponse();
+        $response->setLastModified($updated);
+        $response->setPublic();
+
+        if ($response->isNotModified($request)) {
+            return $response;
+        }
+
+        $response->setData($product);
+
+        return $response;
+    }
 }
