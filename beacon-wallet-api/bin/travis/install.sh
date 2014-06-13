@@ -9,5 +9,5 @@ cd `dirname $0`/../..
 php composer.phar install --prefer-source
 cp config.php.dist config.php
 mysql -uroot -e 'create database beacon_wallet;'
-mysql -uroot --database=beacon_wallet < sql/install.sql
-mysql -uroot --database=beacon_wallet < sql/test.sql
+mysql -uroot --default-character-set=utf8 --database=beacon_wallet < sql/install.sql
+mysql -uroot --default-character-set=utf8 --database=beacon_wallet < sql/test.sql
