@@ -38,6 +38,7 @@
 		02FCF8D618E0B57A00E3C663 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FCF8BE18E0B57A00E3C663 /* UIKit.framework */; };
 		02FCF8DE18E0B57A00E3C663 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02FCF8DC18E0B57A00E3C663 /* InfoPlist.strings */; };
 		02FCF8E018E0B57A00E3C663 /* beacon_wallet_iphoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FCF8DF18E0B57A00E3C663 /* beacon_wallet_iphoneTests.m */; };
+		1FE6FA8B194B5CC700C81A11 /* test_cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 1FE6FA8A194B5CC700C81A11 /* test_cert.der */; };
 		2BF8DF461BD947469EA37C64 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43435144A74A4ECDA5D316F7 /* libPods.a */; };
 		90F5C9CB0122498881CD480A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43435144A74A4ECDA5D316F7 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		02FCF8DB18E0B57A00E3C663 /* beacon-wallet-iphoneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "beacon-wallet-iphoneTests-Info.plist"; sourceTree = "<group>"; };
 		02FCF8DD18E0B57A00E3C663 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		02FCF8DF18E0B57A00E3C663 /* beacon_wallet_iphoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = beacon_wallet_iphoneTests.m; sourceTree = "<group>"; };
+		1FE6FA8A194B5CC700C81A11 /* test_cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_cert.der; sourceTree = "<group>"; };
 		43435144A74A4ECDA5D316F7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DA1AE1FB5224967AC8ED6D5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				02FCF8C218E0B57A00E3C663 /* beacon-wallet-iphone-Info.plist */,
+				1FE6FA8A194B5CC700C81A11 /* test_cert.der */,
 				02FCF8C318E0B57A00E3C663 /* InfoPlist.strings */,
 				02FCF8C618E0B57A00E3C663 /* main.m */,
 				02FCF8C818E0B57A00E3C663 /* beacon-wallet-iphone-Prefix.pch */,
@@ -344,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02B3904A193CA2F20034A137 /* BWPaymentViewController.xib in Resources */,
+				1FE6FA8B194B5CC700C81A11 /* test_cert.der in Resources */,
 				02FCF8C518E0B57A00E3C663 /* InfoPlist.strings in Resources */,
 				0200FA6A192110A200929264 /* BWLoginViewViewController.xib in Resources */,
 				02E4BCE5193C70EC00441D1E /* BWWelcomeViewController.xib in Resources */,

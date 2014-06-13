@@ -12,6 +12,7 @@
 #import "BWPaymentViewController.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
 #define BEACON_WALLET_CART_CHARACTERISTIC_UUID    @"18DBF890-DADD-454C-9161-7620EDFD3009"
@@ -285,7 +286,7 @@
 # pragma mark helper methods for data
 
 - (NSData *)getCart {
-    return [@"cart" dataUsingEncoding:NSUTF8StringEncoding];
+    return [self encrypt:@"cart"];
 }
 
 - (NSData *)getPaymentNotification {
@@ -295,5 +296,43 @@
 - (NSData *)getPayment {
     return [@"payment" dataUsingEncoding:NSUTF8StringEncoding];
 }
+
+# pragma mark security helper methods
+
+- (NSData *)encrypt: (NSString *) plainText {
+    
+    // load certificate
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test_cert" ofType:@"der"];
+    NSData* certificateData = [NSData dataWithContentsOfFile:filePath];
+    
+    SecCertificateRef certificateFromFile = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData);
+    
+    SecPolicyRef secPolicy = SecPolicyCreateBasicX509();
+    
+    SecTrustRef trust;
+    SecTrustCreateWithCertificates( certificateFromFile, secPolicy, &trust);
+    SecTrustResultType resultType;
+    SecTrustEvaluate(trust, &resultType);
+    SecKeyRef publicKey = SecTrustCopyPublicKey(trust);
+    
+    // encrypt data
+    NSData* plainTextData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+    
+    const size_t CIPHER_BUFFER_SIZE = 256;
+    uint8_t cipherBuffer[CIPHER_BUFFER_SIZE];
+    size_t cipherBufferSize = CIPHER_BUFFER_SIZE;
+    
+    OSStatus status = SecKeyEncrypt(publicKey, kSecPaddingPKCS1, [plainTextData bytes], [plainTextData length], &cipherBuffer[0], &cipherBufferSize);
+    NSData* encrypted = [NSData dataWithBytes:cipherBuffer length:cipherBufferSize];
+    
+    // clean up
+    CFRelease(publicKey);
+    CFRelease(trust);
+    CFRelease(secPolicy);
+    CFRelease(certificateFromFile);
+    
+    return encrypted;
+}
+
 
 @end
