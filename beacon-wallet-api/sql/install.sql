@@ -23,7 +23,7 @@ CREATE TABLE `products_info` (
   PRIMARY KEY (`id`),
   KEY `product` (`product`),
   CONSTRAINT `products_info_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `barcodes` (
   `barcode` varchar(255) NOT NULL,
