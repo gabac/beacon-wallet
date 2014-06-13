@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSMutableData         *data;
 @property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *paymentCharacteristic;
+@property (strong, nonatomic) CBCharacteristic      *receiptCharacteristic;
 
 @end
 
@@ -150,7 +151,7 @@
     
     // Loop through the newly filled peripheral.services array, just in case there's more than one.
     for (CBService *service in peripheral.services) {
-        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]] forService:service];
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] forService:service];
     }
 }
 
@@ -180,6 +181,8 @@
         } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
             self.paymentCharacteristic = characteristic;
+        } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
+            self.receiptCharacteristic = characteristic;
         }
     }
     
@@ -211,11 +214,24 @@
                                          type:CBCharacteristicWriteWithResponse];
 
     } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
+        
         NSString *payment = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         
         // Log it
         // this method gets called for notify and the read request, filter it somehow
         NSLog(@"Received payment: %@", payment);
+        
+        if([payment isEqual:@"payment notification"]) {
+            NSLog(@"Received payment notification");
+        } else {
+            //do the payment
+            //send the receipt
+            NSData *receipt = [self getReceipt];
+            
+            [self.discoveredPeripheral writeValue:receipt
+                                forCharacteristic:self.receiptCharacteristic
+                                             type:CBCharacteristicWriteWithResponse];
+        }
     }
 
 }
@@ -290,6 +306,22 @@
                             // And we're done.
                             return;
                         }
+                    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
+                        if (characteristic.isNotifying) {
+                            // It is notifying, so unsubscribe
+                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            
+                            // And we're done.
+                            return;
+                        }
+                    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
+                        if (characteristic.isNotifying) {
+                            // It is notifying, so unsubscribe
+                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            
+                            // And we're done.
+                            return;
+                        }
                     }
                 }
             }
@@ -304,6 +336,10 @@
 
 - (NSData *) getInvoice {
     return [@"invoice" dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSData *) getReceipt {
+    return [@"receipt" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void)didReceiveMemoryWarning

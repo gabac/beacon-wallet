@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CBMutableCharacteristic   *cartCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *invoiceCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *paymentCharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *receiptCharacteristic;
 @end
 
 @implementation BWAppDelegate
@@ -199,17 +200,31 @@
     // ... so build our service.
     
     // Start with the CBMutableCharacteristic
-    self.cartCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
+    self.cartCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]
+                                                                 properties:CBCharacteristicPropertyRead
+                                                                      value:nil
+                                                                permissions:CBAttributePermissionsReadable];
     
-    self.invoiceCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable];
+    self.invoiceCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]
+                                                                    properties:CBCharacteristicPropertyWrite
+                                                                         value:nil
+                                                                   permissions:CBAttributePermissionsWriteable];
     
-    self.paymentCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID] properties:(CBCharacteristicPropertyNotify | CBCharacteristicPropertyRead) value:nil permissions:CBAttributePermissionsReadable];
+    self.paymentCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]
+                                                                    properties:(CBCharacteristicPropertyNotify | CBCharacteristicPropertyRead)
+                                                                         value:nil
+                                                                   permissions:CBAttributePermissionsReadable];
+    
+    self.receiptCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]
+                                                                    properties:CBCharacteristicPropertyWrite
+                                                                         value:nil
+                                                                   permissions:CBAttributePermissionsWriteable];
     
     // Then the service
     CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
     
     // Add the characteristic to the service
-    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic, self.paymentCharacteristic];
+    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic, self.paymentCharacteristic, self.receiptCharacteristic];
     
     // And add it to the peripheral manager
     [self.peripheralManager addService:service];
@@ -251,13 +266,19 @@
     
     if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
         
-        NSString* invoice = [NSString stringWithUTF8String:[request.value bytes] ];
+        NSString* invoice = [NSString stringWithUTF8String:[request.value bytes]];
         NSLog(@"invoice write request: %@", invoice);
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         
         //enter payment and send notification
         [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
+    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
+        
+        NSString* receipt = [NSString stringWithUTF8String:[request.value bytes]];
+        NSLog(@"receipt write request: %@", receipt);
+        
+        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
     }
 }
 
