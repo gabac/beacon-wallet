@@ -10,4 +10,6 @@ brew update
 brew install mysql
 mysql.server start
 
-echo 'date.timezone = "Europe/Zurich"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+php -i
+sudo cp /etc/php.ini.default /etc/php.ini
+echo 'date.timezone = "Europe/Zurich"' >> /etc/php.ini
