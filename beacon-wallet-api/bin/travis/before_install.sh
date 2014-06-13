@@ -13,4 +13,4 @@ mysql.server start
 php -i
 sudo cp /etc/php.ini.default /etc/php.ini
 sudo chmod u+w /etc/php.ini
-echo 'date.timezone = "Europe/Zurich"' >> /etc/php.ini
+sudo echo 'date.timezone = "Europe/Zurich"' >> /etc/php.ini
