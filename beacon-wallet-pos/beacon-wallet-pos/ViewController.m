@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AFNetworking.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
@@ -201,10 +202,20 @@
     
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
         
-        NSString *cart = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        NSData *cart = characteristic.value;
+        NSString* cartBase64 = [cart base64EncodedStringWithOptions:0];
         
         // Log it
         NSLog(@"Received cart: %@", cart);
+        
+        // send to server
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"cart": cartBase64};
+        [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
         
         //send invoice
         NSData *invoice = [self getInvoice];
