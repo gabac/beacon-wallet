@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <CommonCrypto/CommonDigest.h>
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -65,7 +66,6 @@
     CFRelease(trust);
     CFRelease(secPolicy);
     CFRelease(certificateFromFile);
-    
     
     return YES;
 }
