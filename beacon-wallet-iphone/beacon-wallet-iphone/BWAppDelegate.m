@@ -23,6 +23,7 @@
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *cartCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *invoiceCharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *paymentCharacteristic;
 @end
 
 @implementation BWAppDelegate
@@ -202,11 +203,13 @@
     
     self.invoiceCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable];
     
+    self.paymentCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID] properties:(CBCharacteristicPropertyNotify | CBCharacteristicPropertyRead) value:nil permissions:CBAttributePermissionsReadable];
+    
     // Then the service
     CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
     
     // Add the characteristic to the service
-    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic];
+    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic, self.paymentCharacteristic];
     
     // And add it to the peripheral manager
     [self.peripheralManager addService:service];
@@ -226,6 +229,17 @@
         }
         
         request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
+    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
+        NSLog(@"respond to payment read request");
+        NSData* payment = [self getPayment];
+        
+        if (request.offset > payment.length) {
+            [self.peripheralManager respondToRequest:request
+                                          withResult:CBATTErrorInvalidOffset];
+            return;
+        }
+        
+        request.value = [payment subdataWithRange:NSMakeRange(request.offset, payment.length - request.offset)];
     }
     
     [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
@@ -239,15 +253,26 @@
         
         NSString* invoice = [NSString stringWithUTF8String:[request.value bytes] ];
         NSLog(@"invoice write request: %@", invoice);
+        
+        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        
+        //enter payment and send notification
+        [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
     }
-    
-    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
 }
 
 # pragma mark helper methods for data
 
 - (NSData *)getCart {
     return [@"cart" dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSData *)getPaymentNotification {
+    return [@"payment notification" dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSData *)getPayment {
+    return [@"payment" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end
