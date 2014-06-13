@@ -9,8 +9,11 @@
 #import "ViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define BEACON_WALLET_SERVICE_UUID           @"39E38DED-20BB-4DCB-A956-FFF718411DB7"
-#define BEACON_WALLET_CHARACTERISTIC_UUID    @"4196BFDC-2A60-47D4-AAA9-A56E8622186C"
+#define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
+#define BEACON_WALLET_CART_CHARACTERISTIC_UUID    @"18DBF890-DADD-454C-9161-7620EDFD3009"
+#define BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID    @"A4D26C6B-3D39-49DD-9D7A-B38A20019D67"
+#define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
+#define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
 
 @interface ViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
@@ -19,6 +22,7 @@
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *data;
+@property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 
 @end
 
@@ -145,7 +149,7 @@
     
     // Loop through the newly filled peripheral.services array, just in case there's more than one.
     for (CBService *service in peripheral.services) {
-        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID]] forService:service];
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]] forService:service];
     }
 }
 
@@ -166,10 +170,12 @@
     for (CBCharacteristic *characteristic in service.characteristics) {
         
         // And check if it's the right one
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID]]) {
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
             
             // If it is, read it
             [peripheral readValueForCharacteristic:characteristic];
+        } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
+            self.invoiceCharacteristic = characteristic;
         }
     }
     
@@ -186,23 +192,22 @@
         return;
     }
     
-    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    
-    // Have we got everything we need?
-    if ([stringFromData isEqualToString:@"EOM"]) {
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
         
-        // Cancel our subscription to the characteristic
-        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+        NSString *cart = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         
-        // and disconnect from the peripehral
-        [self.centralManager cancelPeripheralConnection:peripheral];
+        // Log it
+        NSLog(@"Received cart: %@", cart);
+        
+        //send invoice
+        NSData *invoice = [self getInvoice];
+        
+        [self.discoveredPeripheral writeValue:invoice
+                            forCharacteristic:self.invoiceCharacteristic
+                                         type:CBCharacteristicWriteWithResponse];
+
     }
-    
-    // Otherwise, just add the data on to what we already have
-    [self.data appendData:characteristic.value];
-    
-    // Log it
-    NSLog(@"Received: %@", stringFromData);
+
 }
 
 
@@ -215,7 +220,7 @@
     }
     
     // Exit if it's not the characteristic
-    if (![characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID]]) {
+    if (![characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
         return;
     }
     
@@ -260,7 +265,15 @@
         for (CBService *service in self.discoveredPeripheral.services) {
             if (service.characteristics != nil) {
                 for (CBCharacteristic *characteristic in service.characteristics) {
-                    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID]]) {
+                    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
+                        if (characteristic.isNotifying) {
+                            // It is notifying, so unsubscribe
+                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
+                            
+                            // And we're done.
+                            return;
+                        }
+                    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
                         if (characteristic.isNotifying) {
                             // It is notifying, so unsubscribe
                             [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
@@ -276,6 +289,12 @@
     
     // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
     [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
+}
+
+#pragma mark helper methods for data
+
+- (NSData *) getInvoice {
+    return [@"invoice" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void)didReceiveMemoryWarning

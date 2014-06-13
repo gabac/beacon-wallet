@@ -13,63 +13,19 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define BEACON_WALLET_SERVICE_UUID           @"39E38DED-20BB-4DCB-A956-FFF718411DB7"
-#define BEACON_WALLET_CHARACTERISTIC_UUID    @"4196BFDC-2A60-47D4-AAA9-A56E8622186C"
+#define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
+#define BEACON_WALLET_CART_CHARACTERISTIC_UUID    @"18DBF890-DADD-454C-9161-7620EDFD3009"
+#define BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID    @"A4D26C6B-3D39-49DD-9D7A-B38A20019D67"
+#define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
+#define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
 
 @interface BWAppDelegate () <CBPeripheralManagerDelegate>
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
-@property (strong, nonatomic) CBMutableCharacteristic   *characteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *cartCharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *invoiceCharacteristic;
 @end
 
 @implementation BWAppDelegate
-
-
-/** Required protocol method.  A full app should take care of all the possible states,
- *  but we're just waiting for  to know when the CBPeripheralManager is ready
- */
-- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
-{
-    // Opt out from any other state
-    if (peripheral.state != CBPeripheralManagerStatePoweredOn) {
-        return;
-    }
-    
-    // We're in CBPeripheralManagerStatePoweredOn state...
-    NSLog(@"self.peripheralManager powered on.");
-    
-    // ... so build our service.
-    
-    // Start with the CBMutableCharacteristic
-    self.characteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
-    
-    // Then the service
-    CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
-    
-    // Add the characteristic to the service
-    service.characteristics = @[self.characteristic];
-    
-    // And add it to the peripheral manager
-    [self.peripheralManager addService:service];
-    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID]] }];
-}
-
-- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
-    
-    NSLog(@"didReceiveReadRequest");
-    
-    NSString *hello = @"Hello";
-    NSData* data = [hello dataUsingEncoding:NSUTF8StringEncoding];
-    
-    if (request.offset > data.length) {
-        [self.peripheralManager respondToRequest:request
-                                   withResult:CBATTErrorInvalidOffset];
-        return;
-    }
-    
-    request.value = [data subdataWithRange:NSMakeRange(request.offset, data.length - request.offset)];
-    
-    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -223,6 +179,75 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark CBPeripheralManagerDelegate methods
+/** Required protocol method.  A full app should take care of all the possible states,
+ *  but we're just waiting for  to know when the CBPeripheralManager is ready
+ */
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    // Opt out from any other state
+    if (peripheral.state != CBPeripheralManagerStatePoweredOn) {
+        return;
+    }
+    
+    // We're in CBPeripheralManagerStatePoweredOn state...
+    NSLog(@"self.peripheralManager powered on.");
+    
+    // ... so build our service.
+    
+    // Start with the CBMutableCharacteristic
+    self.cartCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
+    
+    self.invoiceCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable];
+    
+    // Then the service
+    CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
+    
+    // Add the characteristic to the service
+    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic];
+    
+    // And add it to the peripheral manager
+    [self.peripheralManager addService:service];
+    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID]] }];
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
+    
+    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
+        NSLog(@"respond to cart read request");
+        NSData* cart = [self getCart];
+        
+        if (request.offset > cart.length) {
+            [self.peripheralManager respondToRequest:request
+                                          withResult:CBATTErrorInvalidOffset];
+            return;
+        }
+        
+        request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
+    }
+    
+    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
+    
+    CBATTRequest *request = [requests objectAtIndex:0];
+    
+    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
+        
+        NSString* invoice = [NSString stringWithUTF8String:[request.value bytes] ];
+        NSLog(@"invoice write request: %@", invoice);
+    }
+    
+    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+}
+
+# pragma mark helper methods for data
+
+- (NSData *)getCart {
+    return [@"cart" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end
