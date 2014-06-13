@@ -219,12 +219,11 @@
         
         // Log it
         // this method gets called for notify and the read request, filter it somehow
-        NSLog(@"Received payment: %@", payment);
-        
         if([payment isEqual:@"payment notification"]) {
             NSLog(@"Received payment notification");
         } else {
             //do the payment
+            NSLog(@"Received payment: %@", payment);
             //send the receipt
             NSData *receipt = [self getReceipt];
             
