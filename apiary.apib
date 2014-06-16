@@ -1,0 +1,227 @@
+FORMAT: 1A
+HOST: http://www.google.com
+
+# Beacon Wallet API
+The client requests are authenticated through the basic authentication scheme
+http://tools.ietf.org/html/rfc1945#section-11.1. Username is the Supercard number
+and password is the pin code.
+
+# Group iPhone API
+API calls for the iPhone App.
+
+## Account [/accounts/{card}]
+
+| Field        | Type   | Description                             |
+|:-------------|:-------|:----------------------------------------|
+| card         | string | Supercard number                   |
+| cc_nr        | string | Credit card number  |
+| cc_date      | string | Expiry date of credit card  |
+| cc_ccv       | string | CCV code of creditcard                  |
+
++ Parameters
+    + card (string, `2501032235098`) ... Supercard number
+
+### Get account data by Supercard number [GET]
++ Request (application/json)
+    + Headers
+
+            Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    + Body
+
+            {}
++ Response 200 (application/json)
+    + Body
+
+            {
+                "card": "2501032235098",
+                "cc_nr":"510143256345234",
+                "cc_date":"08-15",
+                "cc_ccv":"521"
+            }
+
+### Update an account, add credit card details [PUT]
++ Response 200 (application/json)
+    + Body
+
+            {}
+
+## Transactions [/accounts/{card}/transactions]
+
++ Parameters
+    + card (string, `2501032235098`) ... Supercard number
+
+### Get all transactions [GET]
+
++ Response 200 (application/json)
+
+
+## Product Collection [/products]
+
+### Get all products [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+                "products": [
+                    {
+                        "id": 34234
+                    },
+                    {
+                        "id": 53285
+                    }
+                ]
+            }
+
+## Product [/products/{id}]
+
++ Parameters
+    + id (number) ... Product ID
+
+### Get a specific product [GET]
+
++ Request
+
+    + Headers
+    
+            If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": "37",
+                "name": "Barilla Spaghetti No.5",
+                "price": "2.10",
+                "updated": "2014-06-13 00:57:48",
+                "info": [
+                    {
+                        "name": "Herkunft",
+                        "value": "Produktionsland Italien"
+                    },
+                    {
+                        "name": "Zusammensetzung",
+                        "value": "Hartweizengriess, Wasser."
+                    },
+                    {
+                        "name": "Verwendung",
+                        "value": "Italienische Teigwaren (Spaghetti) aus Hartweizengriess, Kochzeit 8 Minuten. Zubereitung: Pro 100g Teigwaren 1 Liter Kochwasser verwenden. Salz in kochendes Wasser geben (10g\/l), Pasta hinzugeben, gelegentlich umr\u00fchren. Beim Abgiessen Wasser nicht vollst\u00e4ndig abgiessen."
+                    }
+                ]
+                "barcodes": [
+                    "8076800195057"
+                ]
+            }
+
++ Response 304
+
+## Branch Collection [/branches]
+
+### Get all branches [GET]
++ Response 200 (application/json)
+
+## Branch [/branches/{id}]
+
+### Get branch specific data [GET]
+
++ Request
+
+    + Headers
+    
+            If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+
++ Response 200 (application/json)
+
+    + Body
+
+            {}
+
++ Response 304
+
+# Group iPad API
+Some ideas for the ipad app
+
+## Register point of sale [/pos]
+
+### Create a new POS [POST]
+
++ Request (application/json)
+
+        {
+            "branch": 23432
+        }
+
++ Response 200 (application/json)
+
+## Transaction [/transactions]
+
+To create a new transaction the cart is sent to the server.
+
+The request is actually encrypted JSON in Base64 and the response
+also includes a signature in Base64. We only display the pure JSON 
+values for better understanding here.
+
++ Model (application/json)
+
+        {
+            "card": "2501032235098",
+            "branch": 23432,
+            "products": [
+                {"id": 123, "quantity": 2},
+                {"id": 456, "quantity": 1}
+            ]
+        }
+
+### Create a new transaction [POST]
+
++ Request (application/x-www-form-urlencoded; charset=utf-8)
+
+        cart=Y2FydA%3D%3D
+
++ Response 200 (application/json)
+
+        {
+            "id": 123,
+            "status": "pending",
+            "card": "2501032235098",
+            "branch": 23432,
+            "amount": 123.35,
+            "products": [
+                {"id": 123, "quantity": 2, "amount": 50},
+                {"id": 456, "quantity": 1, "amount": 23.35}
+            ]
+        }
+
+## Payment [/transactions/{id}/payment]
+
+A transaction gets payed by sending the card and the PIN to the server.
+
+The request is actually encrypted JSON in Base64 and the response
+also includes a signature in Base64. We only display the pure JSON 
+values for better understanding here.
+
+### Confirm payment [POST]
+
++ Request (application/json)
+
+        {
+            "card": "2501032235098",
+            "pin": "1234",
+            "amount": 123.35
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 123,
+            "status": "complete",
+            "card": "2501032235098",
+            "branch": 23432,
+            "amount": 123.35,
+            "products": [
+                {"id": 123, "quantity": 2, "amount": 50},
+                {"id": 456, "quantity": 1, "amount": 23.35}
+            ]
+        }
+
