@@ -23,6 +23,7 @@
 		0200FA7419213FCC00929264 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7319213FCC00929264 /* CoreBluetooth.framework */; };
 		0200FA7619213FD200929264 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7519213FD200929264 /* CoreLocation.framework */; };
 		0200FA7819213FE200929264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0200FA7719213FE200929264 /* CoreGraphics.framework */; };
+		02731B8B194EF72200F4F55B /* BWProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 02731B8A194EF72200F4F55B /* BWProduct.m */; };
 		02B39049193CA2F20034A137 /* BWPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B39047193CA2F20034A137 /* BWPaymentViewController.m */; };
 		02B3904A193CA2F20034A137 /* BWPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B39048193CA2F20034A137 /* BWPaymentViewController.xib */; };
 		02E4BCE4193C70EC00441D1E /* BWWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E4BCE2193C70EC00441D1E /* BWWelcomeViewController.m */; };
@@ -78,6 +79,8 @@
 		0200FA7319213FCC00929264 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0200FA7519213FD200929264 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0200FA7719213FE200929264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		02731B89194EF72200F4F55B /* BWProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWProduct.h; sourceTree = "<group>"; };
+		02731B8A194EF72200F4F55B /* BWProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWProduct.m; sourceTree = "<group>"; };
 		02B39046193CA2F20034A137 /* BWPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWPaymentViewController.h; sourceTree = "<group>"; };
 		02B39047193CA2F20034A137 /* BWPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWPaymentViewController.m; sourceTree = "<group>"; };
 		02B39048193CA2F20034A137 /* BWPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWPaymentViewController.xib; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				0200F9B41920B6DC00929264 /* BWAccount.m */,
 				0200FA601920F80500929264 /* BWReceiptDataItem.h */,
 				0200FA611920F80500929264 /* BWReceiptDataItem.m */,
+				02731B89194EF72200F4F55B /* BWProduct.h */,
+				02731B8A194EF72200F4F55B /* BWProduct.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02731B8B194EF72200F4F55B /* BWProduct.m in Sources */,
 				02E4BCE4193C70EC00441D1E /* BWWelcomeViewController.m in Sources */,
 				0200F9B51920B6DC00929264 /* BWAccount.m in Sources */,
 				0200FA621920F80500929264 /* BWReceiptDataItem.m in Sources */,

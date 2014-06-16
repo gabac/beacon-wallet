@@ -7,6 +7,7 @@
 //
 
 #import "BWReceiptTableViewController.h"
+#import "BWProduct.h"
 
 @interface BWReceiptTableViewController ()
 
@@ -51,6 +52,14 @@
     self.receiptDataItems = [[self.receiptDataItems reverseObjectEnumerator] allObjects];
     
     NSLog(@"%lu", [self.receiptDataItems count]);
+    
+    NSString* docFileProd = [docDir stringByAppendingPathComponent: @"Products"];
+    
+    NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileProd];
+    
+    [products enumerateObjectsUsingBlock:^(BWProduct *obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"product name: %@", obj.name);
+    }];
     
     [self.tableView reloadData];
 

@@ -26,6 +26,9 @@
 @property (strong, nonatomic) CBMutableCharacteristic   *invoiceCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *paymentCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *receiptCharacteristic;
+@property (strong, nonatomic) NSArray                   *products;
+@property (strong, nonatomic) BWIPhoneClient            *iPhoneAPI;
+
 @end
 
 @implementation BWAppDelegate
@@ -35,7 +38,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    self.iPhoneAPI = [BWIPhoneClient sharedClient];
     
+    //check if we have products already
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Products"];
+    
+    self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    if(!self.products) {
+        [self.iPhoneAPI getAllProducts:nil];
+    }
+    
+    
+    //Bluetooth stuff
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     
     
