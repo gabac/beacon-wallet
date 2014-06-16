@@ -8,6 +8,7 @@
 
 #import "BWReceiptTableViewController.h"
 #import "BWProduct.h"
+#import "BWProductTableViewController.h"
 
 @interface BWReceiptTableViewController ()
 
@@ -103,6 +104,26 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    BWProductTableViewController *productTableViewController = [[BWProductTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    //set product
+    BWReceiptDataItem *dataItem = [self.receiptDataItems objectAtIndex:indexPath.row];
+    BWProduct *product = [self getProductForBarcode:dataItem.barcode];
+    
+    if(product) {
+        productTableViewController.product = product;
+        [self.navigationController pushViewController:productTableViewController animated:YES];
+    } else {
+        //could do it with willSelectRow
+        return;
+    }
+    
+    
 }
 
 /*

@@ -13,8 +13,7 @@
 @property NSNumber      *productId;
 @property NSString      *name;
 @property NSNumber      *price;
-@property NSString      *updated;
-@property NSDictionary  *info;
+@property NSArray  *info;
 @property NSArray       *barcodes;
 
 @end

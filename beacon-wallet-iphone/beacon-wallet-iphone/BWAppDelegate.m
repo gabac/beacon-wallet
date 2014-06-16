@@ -73,10 +73,12 @@
     self.scanViewController = [[BWScanViewController alloc] initWithNibName:nil bundle:nil];
     self.receiptTableViewController = [[BWReceiptTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
+    UINavigationController *receiptNavigationController = [[UINavigationController alloc] initWithRootViewController:self.receiptTableViewController];
+    
     self.window.tintColor = [UIColor colorWithRed:(245/255.0) green:(156/255.0) blue:0 alpha:1];
     
     self.tabBarViewController = [[BWTabBarViewController alloc] init];
-    self.tabBarViewController.viewControllers = @[self.accountTableViewController, self.scanViewController, self.receiptTableViewController];
+    self.tabBarViewController.viewControllers = @[self.accountTableViewController, self.scanViewController, receiptNavigationController];
     
     self.window.rootViewController = self.tabBarViewController;
     

@@ -19,7 +19,6 @@
     self.productId = [decoder decodeObjectForKey:@"productId"];
     self.name = [decoder decodeObjectForKey:@"name"];
     self.price = [decoder decodeObjectForKey:@"price"];
-    self.updated = [decoder decodeObjectForKey:@"updated"];
     self.info = [decoder decodeObjectForKey:@"info"];
     self.barcodes = [decoder decodeObjectForKey:@"barcodes"];
     
@@ -30,7 +29,7 @@
     [encoder encodeObject:self.productId forKey:@"productId"];
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.price forKey:@"price"];
-    [encoder encodeObject:self.updated forKey:@"updated"];
+    [encoder encodeObject:self.info forKey:@"info"];
     [encoder encodeObject:self.barcodes forKey:@"barcodes"];
 }
 

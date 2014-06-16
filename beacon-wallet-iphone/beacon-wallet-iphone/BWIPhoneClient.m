@@ -114,7 +114,6 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
         product.productId = [responseObject objectForKey:@"id"];
         product.name = [responseObject objectForKey:@"name"];
         product.price = [responseObject objectForKey:@"price"];
-        product.updated = [responseObject objectForKey:@"updated"];
         product.info = [responseObject objectForKey:@"info"];
         product.barcodes = [responseObject objectForKey:@"barcodes"];
         
