@@ -22,13 +22,13 @@ CREATE TABLE `products_info` (
   `value` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `product` (`product`),
-  CONSTRAINT `products_info_ibfk_1` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_products_info_products` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `barcodes` (
   `barcode` varchar(255) NOT NULL,
-  `products_id` int(11) NOT NULL,
+  `product` int(11) NOT NULL,
   PRIMARY KEY (`barcode`),
-  KEY `fk_barcodes_products_idx` (`products_id`),
-  CONSTRAINT `fk_barcodes_products` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `product` (`product`),
+  CONSTRAINT `fk_barcodes_products` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

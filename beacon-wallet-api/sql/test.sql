@@ -1892,6 +1892,6 @@ VALUES
     (4291, 573, 'Zusammensetzung', 'Aqua, Calcium Carbonate, Glycerin, Magnesium Aluminum Silicate, Alcohol, Calendula Officinalis Extract, Commiphora Myrrha Extract, Foeniculum Vulgare Oil, Xanthan Gum, Ammonium Glycyrrhizate, Limonene'),
     (4292, 573, 'Verwendung', 'Natürliche Kariesprophylaxe ohne Menthol');
 
-INSERT INTO `barcodes` (`barcode`, `products_id`)
+INSERT INTO `barcodes` (`barcode`, `product`)
 VALUES
     ('8076800195057', 37);

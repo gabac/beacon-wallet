@@ -22,15 +22,24 @@ class Products
 
     public function getProduct($id)
     {
+        // product
         $sql = 'SELECT p.id, p.name, p.price, p.updated FROM `products` p WHERE p.id = ?';
 
         $product = $this->database->fetchAssoc($sql, array($id));
 
+        // info
         $sql = 'SELECT i.name, i.value FROM `products_info` i WHERE i.product = ?';
 
         $info = $this->database->fetchAll($sql, array($id));
 
         $product['info'] = $info;
+
+        // barcodes
+        $sql = 'SELECT b.barcode FROM `barcodes` b WHERE b.product = ?';
+
+        $barcodes = $this->database->fetchArray($sql, array($id), 0);
+
+        $product['barcodes'] = $barcodes;
 
         return $product;
     }
