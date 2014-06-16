@@ -309,7 +309,33 @@
 # pragma mark helper methods for data
 
 - (NSData *)getCart {
-    return [self encrypt:@"cart"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
+    
+    NSArray *receiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    NSMutableDictionary *cart = [[NSMutableDictionary alloc] init];
+    //todo get number
+    [cart setObject:@"2501032235098" forKey:@"card"];
+    [cart setObject:@"23432" forKey:@"branch"];
+    
+    NSMutableArray *productsWithQty = [[NSMutableArray alloc] init];
+    
+    [receiptDataItems enumerateObjectsUsingBlock:^(BWReceiptDataItem *obj, NSUInteger idx, BOOL *stop) {
+        NSMutableDictionary *productDict = [[NSMutableDictionary alloc] init];
+        [productDict setObject:@"1" forKey:@"id"];
+        [productDict setObject:@"1" forKey:@"quantity"];
+        
+        [productsWithQty addObject:productDict];
+    }];
+    
+    [cart setObject:productsWithQty forKey:@"products"];
+    
+    NSLog(@"json %@", [NSJSONSerialization dataWithJSONObject:cart options:0 error:nil]);
+    
+    return [self encrypt:[NSJSONSerialization dataWithJSONObject:cart options:0 error:nil]];
 }
 
 - (NSData *)getPaymentNotification {
@@ -322,7 +348,7 @@
 
 # pragma mark security helper methods
 
-- (NSData *)encrypt: (NSString *) plainText {
+- (NSData *)encrypt: (NSData *) plainTextData {
     
     // load certificate
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test_cert" ofType:@"der"];
@@ -339,7 +365,6 @@
     SecKeyRef publicKey = SecTrustCopyPublicKey(trust);
     
     // encrypt data
-    NSData* plainTextData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
     
     const size_t CIPHER_BUFFER_SIZE = 256;
     uint8_t cipherBuffer[CIPHER_BUFFER_SIZE];

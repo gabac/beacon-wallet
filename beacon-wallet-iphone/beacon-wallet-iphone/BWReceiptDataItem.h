@@ -11,5 +11,6 @@
 @interface BWReceiptDataItem : NSObject<NSCoding>
 
 @property NSString *barcode;
+@property NSString *productId;
 
 @end
