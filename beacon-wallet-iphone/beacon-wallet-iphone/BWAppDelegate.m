@@ -154,7 +154,7 @@
                 if(beacon.proximity == CLProximityImmediate) {
                     NSLog(@"start the payment process");
                     
-                    [self startPaymentProcess];
+                    [self startPaymentProcessWithAmount:@"123.40"];
                     
                     //stop ranging
                     [self.locationManager stopRangingBeaconsInRegion:self.cashierBeaconRegion];
@@ -170,8 +170,9 @@
     NSLog(@"%@", [error description]);
 }
 
-- (void) startPaymentProcess {
+- (void) startPaymentProcessWithAmount:(NSString *)amount {
     BWPaymentViewController *paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
+    paymentViewController.totalAmount.text = amount;
     
     [self.accountTableViewController presentViewController:paymentViewController animated:YES completion:nil];
 }
@@ -288,6 +289,9 @@
         
         NSString* invoice = [NSString stringWithUTF8String:[request.value bytes]];
         NSLog(@"invoice write request: %@", invoice);
+        
+        //display invoice screen
+        [self startPaymentProcessWithAmount:invoice];
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         

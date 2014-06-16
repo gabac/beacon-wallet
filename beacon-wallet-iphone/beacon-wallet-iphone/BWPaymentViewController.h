@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BWPaymentViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *totalAmount;
 
 @end

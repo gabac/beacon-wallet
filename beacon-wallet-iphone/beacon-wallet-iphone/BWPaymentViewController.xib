@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BWPaymentViewController">
             <connections>
+                <outlet property="totalAmount" destination="jbI-36-AZC" id="5e6-PA-JJ8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,14 +17,12 @@
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQA-pj-ewT">
                     <rect key="frame" x="126" y="20" width="68" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2E-T0-KqN">
                     <rect key="frame" x="145" y="518" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Pay">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -31,13 +30,40 @@
                         <action selector="pressedPay:" destination="-1" eventType="touchUpInside" id="yLR-xc-uED"/>
                     </connections>
                 </button>
+                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmB-KO-gN1">
+                    <rect key="frame" x="139" y="208" width="37" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbI-36-AZC">
+                    <rect key="frame" x="136" y="237" width="24" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="NNQ-Ex-7oM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rC-3L-YhJ">
+                    <rect key="frame" x="168" y="237" width="35" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="3rC-3L-YhJ" firstAttribute="baseline" secondItem="jbI-36-AZC" secondAttribute="baseline" id="08E-Fi-H9f"/>
                 <constraint firstItem="yQA-pj-ewT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="48E-EA-XjC"/>
+                <constraint firstItem="3rC-3L-YhJ" firstAttribute="leading" secondItem="jbI-36-AZC" secondAttribute="trailing" constant="8" symbolic="YES" id="Boa-cx-6CJ"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="237" id="D8j-ft-zbM"/>
+                <constraint firstItem="3rC-3L-YhJ" firstAttribute="top" secondItem="WmB-KO-gN1" secondAttribute="bottom" constant="8" symbolic="YES" id="J1k-VM-2R3"/>
                 <constraint firstAttribute="bottom" secondItem="R2E-T0-KqN" secondAttribute="bottom" constant="20" symbolic="YES" id="mXh-xe-A0p"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="136" id="n86-Pg-hjU"/>
                 <constraint firstItem="yQA-pj-ewT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vFH-Jf-OcH"/>
                 <constraint firstItem="R2E-T0-KqN" firstAttribute="centerX" secondItem="yQA-pj-ewT" secondAttribute="centerX" id="vTa-ir-Yv1"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="WmB-KO-gN1" secondAttribute="bottom" constant="8" symbolic="YES" id="vtM-4Q-Of9"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
