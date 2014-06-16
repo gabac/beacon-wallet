@@ -213,17 +213,16 @@
         NSDictionary *parameters = @{@"cart": cartBase64};
         [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
+            
+            //send invoice
+            [self.discoveredPeripheral writeValue:operation.responseData
+                                forCharacteristic:self.invoiceCharacteristic
+                                             type:CBCharacteristicWriteWithResponse];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         }];
         
-        //send invoice
-        NSData *invoice = [self getInvoice];
-        
-        [self.discoveredPeripheral writeValue:invoice
-                            forCharacteristic:self.invoiceCharacteristic
-                                         type:CBCharacteristicWriteWithResponse];
-
     } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
         
         NSString *payment = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
