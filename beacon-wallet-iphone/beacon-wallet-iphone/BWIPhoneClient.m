@@ -63,16 +63,14 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
 - (void) getAllProducts:(void (^)(NSError *error))block {
     [self GET:@"products" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSMutableArray *products = nil;
-        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docDir = [paths objectAtIndex: 0];
         NSString* docFile = [docDir stringByAppendingPathComponent: @"Products"];
         
-        products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+        self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
         
-        if (!products) {
-            products = [[NSMutableArray alloc] init];
+        if (!self.products) {
+            self.products = [[NSMutableArray alloc] init];
         }
         
         [[responseObject objectForKey:@"products"] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -81,8 +79,18 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
             [self getProductWithId:[obj objectForKey:@"id"] andBlock:^(BWProduct *product, NSError *error) {
                 if (product) {
                     //add product to "db"
-                    [products addObject:product];
-                    [NSKeyedArchiver archiveRootObject:products toFile:docFile];
+                    
+                    [self.products enumerateObjectsUsingBlock:^(BWProduct *obj, NSUInteger idx, BOOL *stop) {
+                        if([obj.productId isEqual:product.productId]) {
+                            [self.products removeObject:obj];
+                            *stop = YES;
+                        }
+                    }];
+                    
+
+                    [self.products addObject:product];
+                    
+                    [NSKeyedArchiver archiveRootObject:self.products toFile:docFile];
                 }
             }];
         }];
@@ -98,8 +106,9 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
 }
 
 - (void) getProductWithId:(NSNumber *)productId andBlock:(void (^)(BWProduct *product, NSError *error))block {
-    NSLog(@"url to call %@", [NSString stringWithFormat:@"products/%@", productId]);
     [self GET:[NSString stringWithFormat:@"products/%@", productId] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"productid %@", [responseObject objectForKey:@"id"]);
         
         BWProduct *product = [[BWProduct alloc] init];
         product.productId = [responseObject objectForKey:@"id"];

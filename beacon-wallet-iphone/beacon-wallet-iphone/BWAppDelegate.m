@@ -47,10 +47,10 @@
     
     self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
     
-    if(!self.products) {
+//    if(!self.products) {
+    if(true) {
         [self.iPhoneAPI getAllProducts:nil];
     }
-    
     
     //Bluetooth stuff
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];

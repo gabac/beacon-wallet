@@ -13,6 +13,8 @@
 
 @interface BWIPhoneClient : AFHTTPSessionManager
 
+@property NSMutableArray *products;
+
 + (BWIPhoneClient *)sharedClient;
 
 - (void)getAccountDetails:(void (^)(BWAccount *account, NSError *error))block;
