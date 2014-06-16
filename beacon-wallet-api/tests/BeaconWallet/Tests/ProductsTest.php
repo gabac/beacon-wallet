@@ -10,7 +10,7 @@ class ProductsTest extends ApiTest
         $crawler = $client->request('GET', '/products');
 
         $this->assertTrue($client->getResponse()->isOk());
-        $this->assertEquals(file_get_contents(__DIR__ . '/fixtures/getProducts.json'), $client->getResponse()->getContent());
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/getProducts.json', $client->getResponse()->getContent());
     }
 
     public function testGetProduct()
@@ -20,7 +20,7 @@ class ProductsTest extends ApiTest
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertEquals('Thu, 12 Jun 2014 22:57:48 GMT', $client->getResponse()->headers->get('Last-Modified'));
-        $this->assertEquals(file_get_contents(__DIR__ . '/fixtures/getProduct.json'), $client->getResponse()->getContent());
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/getProduct.json', $client->getResponse()->getContent());
     }
 
     public function testGetProductNotModified()

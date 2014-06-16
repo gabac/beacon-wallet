@@ -12,6 +12,6 @@ class TransactionsTest extends ApiTest
         $crawler = $client->request('POST', '/transactions', array(), array(), array(), $encrypted);
 
         $this->assertTrue($client->getResponse()->isOk());
-        $this->assertEquals(file_get_contents(__DIR__ . '/fixtures/createTransaction.json'), $client->getResponse()->getContent());
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/createTransaction.json', $client->getResponse()->getContent());
     }
 }
