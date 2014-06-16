@@ -46,7 +46,15 @@ class ProductsController
             return $response;
         }
 
-        $response->setData($product);
+        $data = array(
+            'id' => (int) $product['id'],
+            'name' => $product['name'],
+            'price' => (float) $product['price'],
+            'info' => $product['info'],
+            'barcodes' => $product['barcodes'],
+        );
+
+        $response->setData($data);
 
         return $response;
     }
