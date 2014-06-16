@@ -21,6 +21,7 @@
     self.price = [decoder decodeObjectForKey:@"price"];
     self.updated = [decoder decodeObjectForKey:@"updated"];
     self.info = [decoder decodeObjectForKey:@"info"];
+    self.barcodes = [decoder decodeObjectForKey:@"barcodes"];
     
     return self;
 }
@@ -30,7 +31,7 @@
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.price forKey:@"price"];
     [encoder encodeObject:self.updated forKey:@"updated"];
-    [encoder encodeObject:self.info forKey:@"info"];
+    [encoder encodeObject:self.barcodes forKey:@"barcodes"];
 }
 
 @end

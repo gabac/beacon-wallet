@@ -15,5 +15,6 @@
 @property NSNumber      *price;
 @property NSString      *updated;
 @property NSDictionary  *info;
+@property NSArray       *barcodes;
 
 @end
