@@ -12,6 +12,7 @@
 @interface BWReceiptTableViewController ()
 
 @property NSArray *receiptDataItems;
+@property NSArray *products;
 
 @end
 
@@ -55,10 +56,10 @@
     
     NSString* docFileProd = [docDir stringByAppendingPathComponent: @"Products"];
     
-    NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileProd];
+    self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileProd];
     
-    [products enumerateObjectsUsingBlock:^(BWProduct *obj, NSUInteger idx, BOOL *stop) {
-        NSLog(@"product name: %@", obj.name);
+    [self.products enumerateObjectsUsingBlock:^(BWProduct *obj, NSUInteger idx, BOOL *stop) {
+        NSLog(@"barcode: %@", obj.barcodes);
     }];
     
     [self.tableView reloadData];
@@ -93,9 +94,13 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     BWReceiptDataItem *dataItem = [self.receiptDataItems objectAtIndex:indexPath.row];
+    BWProduct *product = [self getProductForBarcode:dataItem.barcode];
     
-    
-    cell.textLabel.text = dataItem.barcode;
+    if(product) {
+        cell.textLabel.text = product.name;
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"No product found for: %@", dataItem.barcode];
+    }
     
     return cell;
 }
@@ -148,5 +153,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BWProduct *)getProductForBarcode:(NSString *)barcode {
+
+    for(int i = 0; i < [self.products count]; i++) {
+        BWProduct *product = [self.products objectAtIndex:i];
+    
+        for(int j = 0; j < [product.barcodes count]; j++) {
+            if ([product.barcodes[j] isEqualToString:barcode]) {
+                return product;
+            }
+        }
+    }
+    
+    return nil;
+}
 
 @end
