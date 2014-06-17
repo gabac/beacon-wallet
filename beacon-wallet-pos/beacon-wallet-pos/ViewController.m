@@ -260,12 +260,23 @@
                 // Log it
                 NSLog(@"Received payment: %@", self.payment);
                 
-                //send the receipt
-                NSData *receipt = [self getReceipt];
+                NSString* paymentBase64 = [self.payment base64EncodedStringWithOptions:0];
                 
-                [self.discoveredPeripheral writeValue:receipt
-                                    forCharacteristic:self.receiptCharacteristic
-                                                 type:CBCharacteristicWriteWithResponse];
+                // send to server
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                NSDictionary *parameters = @{@"payment": paymentBase64};
+                [manager POST:@"http://beaconwallet.apiary-mock.com/transactions/payment" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    
+                    NSLog(@"JSON: %@", responseObject);
+                    
+                    //send the receipt
+                    [self.discoveredPeripheral writeValue:operation.responseData
+                                        forCharacteristic:self.receiptCharacteristic
+                                                     type:CBCharacteristicWriteWithResponse];    
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
                 
                 // Cancel our subscription to the characteristic
                 [peripheral setNotifyValue:NO forCharacteristic:characteristic];
@@ -273,6 +284,7 @@
             
             // Otherwise, just add the data on to what we already have
             [self.payment appendData:characteristic.value];
+
         }
     }
 
