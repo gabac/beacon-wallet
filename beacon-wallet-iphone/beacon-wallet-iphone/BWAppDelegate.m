@@ -364,7 +364,7 @@ PaymentProcess paymentProcess;
             NSLog(@"Received invoice %@", invoice);
             
             //display invoice screen
-            [self startPaymentProcessWithAmount: invoice];
+            [self startPaymentProcessWithAmount: @"12.30"];
             
             return;
         }
