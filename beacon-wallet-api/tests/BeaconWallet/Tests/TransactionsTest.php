@@ -17,7 +17,7 @@ class TransactionsTest extends ApiTest
         // pay transaction
         $encrypted = file_get_contents(__DIR__ . '/fixtures/payTransaction.txt');
 
-        $crawler = $client->request('POST', '/transactions/1/payment', array('payment' => $encrypted));
+        $crawler = $client->request('POST', '/transactions/payment', array('payment' => $encrypted));
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/payTransaction.json', $client->getResponse()->getContent());

@@ -14,7 +14,7 @@ class ControllerProvider implements \Silex\ControllerProviderInterface
         $controllers->get('/products/{id}', 'controller.products:getProduct')->bind('product');
         $controllers->post('/transactions', 'controller.transactions:createTransaction');
         $controllers->get('/transactions', 'controller.transactions:getTransactions')->bind('transactions');
-        $controllers->post('/transactions/{id}/payment', 'controller.transactions:payTransaction');
+        $controllers->post('/transactions/payment', 'controller.transactions:payTransaction');
 
         return $controllers;
     }

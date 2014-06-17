@@ -85,7 +85,7 @@ class TransactionsController
         return json_encode($data);
     }
 
-    public function payTransaction($id, Request $request)
+    public function payTransaction(Request $request)
     {
         // encrypt payment
         $encrypted = $request->get('payment');
@@ -94,6 +94,7 @@ class TransactionsController
 
         $data = json_decode($decrypted);
 
+        $id = isset($data->id) ? $data->id : null;
         $card = isset($data->card) ? $data->card : null;
         $pin = isset($data->pin) ? $data->pin : null;
 
@@ -101,7 +102,7 @@ class TransactionsController
             throw new AccessDeniedHttpException('Invalid card and pin');
         }
 
-        $this->transactions->payTransaction($id);
+        $this->transactions->payTransaction($id, $card);
 
         // prepare transaction response
         $json = $this->getTransactionJson($id);

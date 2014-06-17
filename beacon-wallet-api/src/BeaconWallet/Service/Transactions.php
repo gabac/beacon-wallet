@@ -68,13 +68,14 @@ class Transactions
         return $transactionId;
     }
 
-    public function payTransaction($id)
+    public function payTransaction($id, $card)
     {
-        $sql = 'UPDATE `transactions` SET `status` = ? WHERE `id` = ?';
+        $sql = 'UPDATE `transactions` SET `status` = ? WHERE `id` = ? AND `card` = ?';
 
         $result = $this->database->executeUpdate($sql, array(
             self::STATUS_COMPLETE,
             $id,
+            $card,
         ));
     }
 }
