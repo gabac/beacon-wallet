@@ -4,6 +4,7 @@ namespace BeaconWallet\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,11 +26,24 @@ class AccountsController
 
     public function getAccount($card, Request $request)
     {
+        $card = $request->getUser();
+        $pin = $request->getPassword();
+
+        if (!$this->accounts->verifyPin($card, $pin)) {
+            throw new AccessDeniedHttpException('Invalid card and pin');
+        }
+
         $account = $this->accounts->getAccount($card);
 
         if ($account) {
 
-            return new JsonResponse($account);
+            $data = array(
+                'card' => $account['card'],
+                'cc_nr' => $account['cc_nr'],
+                'cc_date' => $account['cc_date'],
+            );
+
+            return new JsonResponse($data);
 
         } else {
 
