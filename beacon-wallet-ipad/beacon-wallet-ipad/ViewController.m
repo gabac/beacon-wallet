@@ -335,8 +335,7 @@
     
     // Notification has started
     if (characteristic.isNotifying) {
-        NSLog(@"payment notification received");
-        [self.discoveredPeripheral readValueForCharacteristic:self.paymentCharacteristic];
+        NSLog(@"payment is notifying");
     } else {
         // Notification has stopped
         // so disconnect from the peripheral
