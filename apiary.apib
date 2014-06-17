@@ -216,7 +216,7 @@ JSON of the cart and the invoice for better understanding.
             "signature": "LAIFtnO8J0qYY3C0lBZG9REtTPi+1"
         }
 
-## Payment [/transactions/{id}/payment]
+## Payment [/transactions/payment]
 
 A transaction gets payed by sending the card and the PIN to the server.
 
@@ -229,6 +229,7 @@ JSON values for better understanding here.
 
 ```
 {
+    "id": 123,
     "card": "2501032235098",
     "pin": "1234"
 }
