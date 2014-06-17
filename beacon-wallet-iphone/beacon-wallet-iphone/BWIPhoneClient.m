@@ -44,6 +44,10 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
 }
 
 - (void)getAccountDetails:(NSString *)cardnumber andPin:(NSString *)pin andBlock:(void (^)(BWAccount *account, NSError *error))block {
+   
+    [self.requestSerializer setAuthorizationHeaderFieldWithUsername:cardnumber password:pin];
+    
+    
     [self GET:[NSString stringWithFormat:@"accounts/%@", cardnumber] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         BWAccount *account = [[BWAccount alloc] init];
