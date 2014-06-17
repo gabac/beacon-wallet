@@ -203,7 +203,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
+        NSLog(@"Error in didUpdateValueForCharacteristic: %@ %@", characteristic.UUID, [error localizedDescription]);
     }
     
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
@@ -230,6 +230,7 @@
                                                  type:CBCharacteristicWriteWithResponse];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error Response: %@", operation.responseString);
                 NSLog(@"Error: %@", error);
             }];
             
