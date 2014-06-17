@@ -12,7 +12,6 @@ abstract class ApiTest extends WebTestCase
         $app = new Application();
 
         $app['debug'] = false;
-        $app['exception_handler']->disable();
 
         return $app;
     }

@@ -16,18 +16,15 @@ class AccountsTest extends ApiTest
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/getAccount.json', $client->getResponse()->getContent());
     }
 
-    /**
-     * @expectedException Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
-     */
     public function testGetAccountUnauthenticated()
     {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/accounts/2501032235098');
+
+        $this->assertTrue($client->getResponse()->isForbidden());
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/errorInvalidCardPin.json', $client->getResponse()->getContent());
     }
 
-    /**
-     * @expectedException Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
-     */
     public function testGetAccountInvalidAuthentication()
     {
         $client = $this->createClient();
@@ -35,5 +32,8 @@ class AccountsTest extends ApiTest
             'PHP_AUTH_USER' => '2501032235098',
             'PHP_AUTH_PW'   => '9999',
         ));
+
+        $this->assertTrue($client->getResponse()->isForbidden());
+        $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/errorInvalidCardPin.json', $client->getResponse()->getContent());
     }
 }

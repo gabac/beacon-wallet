@@ -15,6 +15,15 @@ class Application extends \Silex\Application
 
         $app['debug'] = $app['config']['debug'];
 
+        // Exception handler
+        $app->error(function (\Exception $e, $code) use ($app) {
+            if ($app['debug']) {
+                return;
+            }
+            $result = array('errors' => array(array('message' => $e->getMessage())));
+            return $app->json($result, $code);
+        });
+
         // silex providers
         $app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
