@@ -132,6 +132,9 @@ API calls for the iPhone App.
 
 ## Branch [/branches/{id}]
 
++ Parameters
+    + id (number) ... Branch ID
+
 ### Get branch specific data [GET]
 
 + Request
@@ -220,6 +223,9 @@ A transaction gets payed by sending the card and the PIN to the server.
 The request is actually encrypted JSON in Base64 and the response
 also includes a signature in Base64. We only display the pure JSON 
 values for better understanding here.
+
++ Parameters
+    + id (number) ... Transaction ID
 
 ### Confirm payment [POST]
 
