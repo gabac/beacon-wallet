@@ -167,20 +167,38 @@ Some ideas for the ipad app
 
 To create a new transaction the cart is sent to the server.
 
-The request is actually encrypted JSON in Base64 and the response
-also includes a signature in Base64. We only display the pure JSON 
-values for better understanding here.
+The request is an encrypted JSON string in Base64 and the response
+also includes a signature in Base64. The following code shows the pure 
+JSON of the cart and the invoice for better understanding.
 
-+ Model (application/json)
+### Cart
 
-        {
-            "card": "2501032235098",
-            "branch": 23432,
-            "products": [
-                {"id": 123, "quantity": 2},
-                {"id": 456, "quantity": 1}
-            ]
-        }
+```
+{
+    "card": "2501032235098",
+    "branch": 23432,
+    "products": [
+        {"id": 123, "quantity": 2},
+        {"id": 456, "quantity": 1}
+    ]
+}
+```
+
+### Invoice
+
+```
+{
+    "id": 123,
+    "status": "pending",
+    "card": "2501032235098",
+    "branch": 23432,
+    "amount": 123.35,
+    "products": [
+        {"id": 123, "quantity": 2, "amount": 50},
+        {"id": 456, "quantity": 1, "amount": 23.35}
+    ]
+}
+```
 
 ### Create a new transaction [POST]
 
@@ -191,15 +209,8 @@ values for better understanding here.
 + Response 200 (application/json)
 
         {
-            "id": 123,
-            "status": "pending",
-            "card": "2501032235098",
-            "branch": 23432,
-            "amount": 123.35,
-            "products": [
-                {"id": 123, "quantity": 2, "amount": 50},
-                {"id": 456, "quantity": 1, "amount": 23.35}
-            ]
+            "transaction": "{\"id\": 123,\"status\": \"pending\",\"card\": \"2501032235098\",\"branch\": 23432,\"amount\": 123.35,\"products\": [{\"id\": 123, \"quantity\": 2, \"amount\": 50},{\"id\": 456, \"quantity\": 1, \"amount\": 23.35}]}",
+            "signature": "LAIFtnO8J0qYY3C0lBZG9REtTPi+1"
         }
 
 ## Payment [/transactions/{id}/payment]
