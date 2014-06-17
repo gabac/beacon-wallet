@@ -125,46 +125,9 @@ API calls for the iPhone App.
 
 + Response 304
 
-## Branch Collection [/branches]
-
-### Get all branches [GET]
-+ Response 200 (application/json)
-
-## Branch [/branches/{id}]
-
-+ Parameters
-    + id (number) ... Branch ID
-
-### Get branch specific data [GET]
-
-+ Request
-
-    + Headers
-    
-            If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {}
-
-+ Response 304
-
 # Group iPad API
-Some ideas for the ipad app
 
-## Register point of sale [/pos]
-
-### Create a new POS [POST]
-
-+ Request (application/json)
-
-        {
-            "branch": 23432
-        }
-
-+ Response 200 (application/json)
+API resources used by the POS iPad.
 
 ## Transaction [/transactions]
 
