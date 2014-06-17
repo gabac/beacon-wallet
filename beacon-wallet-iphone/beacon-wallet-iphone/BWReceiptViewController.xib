@@ -45,15 +45,31 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="547-BF-hVr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="9Cd-hn-Uci"/>
+                <constraint firstAttribute="bottom" secondItem="Id3-VM-6KH" secondAttribute="bottom" constant="20" symbolic="YES" id="AIY-gb-DGk"/>
                 <constraint firstItem="547-BF-hVr" firstAttribute="centerX" secondItem="i4b-hc-QFI" secondAttribute="centerX" id="B1q-lE-FCd"/>
                 <constraint firstItem="Id3-VM-6KH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="217" id="HuL-y8-bJe"/>
                 <constraint firstAttribute="bottom" secondItem="Id3-VM-6KH" secondAttribute="bottom" constant="20" symbolic="YES" id="ams-KU-O70"/>
                 <constraint firstItem="i4b-hc-QFI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="234" id="crY-M2-Lsx"/>
+                <constraint firstItem="Id3-VM-6KH" firstAttribute="centerX" secondItem="i4b-hc-QFI" secondAttribute="centerX" id="y9h-bN-1uR"/>
                 <constraint firstItem="i4b-hc-QFI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yKM-sB-NGL"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="AbstractSizeClassScreen[default]"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="AbstractSizeClassScreen[heightClass=regular-widthClass=compact]"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="AIY-gb-DGk"/>
+                    <exclude reference="y9h-bN-1uR"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="AIY-gb-DGk"/>
+                    <exclude reference="HuL-y8-bJe"/>
+                    <exclude reference="ams-KU-O70"/>
+                    <include reference="y9h-bN-1uR"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
