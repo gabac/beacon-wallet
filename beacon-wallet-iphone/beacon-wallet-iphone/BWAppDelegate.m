@@ -9,6 +9,7 @@
 #import "BWAppDelegate.h"
 #import "BWIPhoneClient.h"
 #import "BWWelcomeViewController.h"
+#import "BWReceiptViewController.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -116,6 +117,35 @@ PaymentProcess paymentProcess;
     
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark CoreLocation
+
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     NSLog(@"we entered coop");
     UILocalNotification *notice = [[UILocalNotification alloc] init];
@@ -134,7 +164,7 @@ PaymentProcess paymentProcess;
 - (void) startRagingForCashierBeacon {
     NSUUID *cashierUUID = [[NSUUID alloc] initWithUUIDString:@"11111111-1111-1111-1111-111111111111"];
     self.cashierBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:cashierUUID
-                                                           identifier:@"ch.beacon-wallet"];
+                                                                  identifier:@"ch.beacon-wallet"];
     
     self.cashierBeaconRegion.notifyEntryStateOnDisplay = YES;
     [self.locationManager startRangingBeaconsInRegion:self.cashierBeaconRegion];
@@ -181,44 +211,6 @@ PaymentProcess paymentProcess;
 
 - (void) locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
     NSLog(@"%@", [error description]);
-}
-
-- (void) startPaymentProcessWithAmount:(NSString *)amount {
-    //we need it later
-    self.totalAmount = amount;
-    
-    self.paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
-    self.paymentViewController.totalAmount.text = amount;
-    self.paymentViewController.delegate = self;
-    
-    [self.accountTableViewController presentViewController:self.paymentViewController animated:YES completion:nil];
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 #pragma mark CBPeripheralManagerDelegate methods
@@ -424,6 +416,26 @@ PaymentProcess paymentProcess;
 - (void)didConfirmPayment {
     //enter payment and send notification
     [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
+}
+
+#pragma mark Helper methods for views
+
+- (void) startPaymentProcessWithAmount:(NSString *)amount {
+    //we need it later
+    self.totalAmount = amount;
+    
+    self.paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
+    self.paymentViewController.totalAmount.text = amount;
+    self.paymentViewController.delegate = self;
+    
+    [self.accountTableViewController presentViewController:self.paymentViewController animated:YES completion:nil];
+}
+
+- (void) showReceiptView {
+    BWReceiptViewController *receiptViewController = [[BWReceiptViewController alloc] initWithNibName:@"BWReceiptViewController" bundle:[NSBundle mainBundle]];
+    
+    [self.tabBarViewController presentViewController:receiptViewController animated:YES completion:nil];
+    
 }
 
 
