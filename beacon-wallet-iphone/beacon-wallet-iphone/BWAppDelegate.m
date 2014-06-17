@@ -440,8 +440,9 @@ PaymentProcess paymentProcess;
     
     NSMutableDictionary *payment = [[NSMutableDictionary alloc] init];
     //todo get number
+    [payment setObject:@"25" forKey:@"id"]; // transaction id
     [payment setObject:@"2501032235098" forKey:@"card"];
-    [payment setObject:@"123" forKey:@"pin"];
+    [payment setObject:@"1234" forKey:@"pin"];
     [payment setObject:self.totalAmount forKey:@"amount"];
 //     return [@"payment notification2" dataUsingEncoding:NSUTF8StringEncoding];
     
