@@ -17,13 +17,16 @@
     }
     
     self.barcode = [decoder decodeObjectForKey:@"barcode"];
-    self.productId = [decoder decodeObjectForKey:@"productId"];
+    self.qty = [decoder decodeObjectForKey:@"qty"];
+    self.product = [decoder decodeObjectForKey:@"product"];
     
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:self.productId forKey:@"productId"];
+    [encoder encodeObject:self.barcode forKey:@"barcode"];
+    [encoder encodeObject:self.qty forKey:@"qty"];
+    [encoder encodeObject:self.product forKey:@"product"];
 }
 
 @end

@@ -325,8 +325,14 @@
     
     [receiptDataItems enumerateObjectsUsingBlock:^(BWReceiptDataItem *obj, NSUInteger idx, BOOL *stop) {
         NSMutableDictionary *productDict = [[NSMutableDictionary alloc] init];
-        [productDict setObject:@"1" forKey:@"id"];
-        [productDict setObject:@"1" forKey:@"quantity"];
+        
+        if (obj.product) {
+            [productDict setObject:obj.product.productId forKey:@"id"];
+        } else {
+            [productDict setObject:@"1" forKey:@"id"];
+        }
+        
+        [productDict setObject:obj.qty forKey:@"quantity"];
         
         [productsWithQty addObject:productDict];
     }];

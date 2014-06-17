@@ -95,10 +95,9 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     BWReceiptDataItem *dataItem = [self.receiptDataItems objectAtIndex:indexPath.row];
-    BWProduct *product = [self getProductForBarcode:dataItem.barcode];
     
-    if(product) {
-        cell.textLabel.text = product.name;
+    if(dataItem.product) {
+        cell.textLabel.text = dataItem.product.name;
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"No product found for: %@", dataItem.barcode];
     }
@@ -113,10 +112,9 @@
     
     //set product
     BWReceiptDataItem *dataItem = [self.receiptDataItems objectAtIndex:indexPath.row];
-    BWProduct *product = [self getProductForBarcode:dataItem.barcode];
     
-    if(product) {
-        productTableViewController.product = product;
+    if(dataItem.product) {
+        productTableViewController.product = dataItem.product;
         [self.navigationController pushViewController:productTableViewController animated:YES];
     } else {
         //could do it with willSelectRow
@@ -174,20 +172,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (BWProduct *)getProductForBarcode:(NSString *)barcode {
-
-    for(int i = 0; i < [self.products count]; i++) {
-        BWProduct *product = [self.products objectAtIndex:i];
-    
-        for(int j = 0; j < [product.barcodes count]; j++) {
-            if ([product.barcodes[j] isEqualToString:barcode]) {
-                return product;
-            }
-        }
-    }
-    
-    return nil;
-}
 
 @end

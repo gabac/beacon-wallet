@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) ScanditSDKBarcodePicker *scanditSDKBarcodePicker;
 @property NSMutableArray *receiptDataItems;
+@property NSArray *products;
 
 @end
 
@@ -44,6 +45,10 @@
     
     //add old data
     NSMutableArray *storedReceiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    NSString* docFileProd = [docDir stringByAppendingPathComponent: @"Products"];
+    
+    self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileProd];
     
     if(storedReceiptDataItems) {
         [self.receiptDataItems addObjectsFromArray:storedReceiptDataItems];
@@ -86,6 +91,9 @@
     
     BWReceiptDataItem *dataItem = [[BWReceiptDataItem alloc] init];
     dataItem.barcode = barcode;
+    dataItem.qty = @1;
+    dataItem.product = [self getProductForBarcode:barcode];
+    
     [self.receiptDataItems addObject:dataItem];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -105,6 +113,21 @@
                     didManualSearch:(NSString *)input {
     // add your own code to handle user input in the search bar
     // (only required if you use the search bar provided by the Scandit SDK
+}
+
+- (BWProduct *)getProductForBarcode:(NSString *)barcode {
+
+    for(int i = 0; i < [self.products count]; i++) {
+        BWProduct *product = [self.products objectAtIndex:i];
+        
+        for(int j = 0; j < [product.barcodes count]; j++) {
+            if ([product.barcodes[j] isEqualToString:barcode]) {
+                return product;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 @end

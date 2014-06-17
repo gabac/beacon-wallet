@@ -33,4 +33,9 @@
     [encoder encodeObject:self.barcodes forKey:@"barcodes"];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"productid: %@, name: %@, barcodes: %@", self.productId, self.name, self.barcodes];
+}
+
 @end

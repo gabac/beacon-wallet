@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BWProduct.h"
 
 @interface BWReceiptDataItem : NSObject<NSCoding>
 
 @property NSString *barcode;
-@property NSString *productId;
+@property NSNumber *qty;
+@property BWProduct *product;
 
 @end
