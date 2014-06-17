@@ -18,7 +18,7 @@
 
 @interface ViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
-@property (strong, nonatomic) IBOutlet UIProgressView *progress;
+@property (strong, nonatomic) IBOutlet UILabel *instructions;
 
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
@@ -85,8 +85,6 @@
     
     NSLog(@"Discovered %@ at %@, %f", peripheral.name, RSSI, progress);
     
-    self.progress.progress = progress;
-    
     // Reject any where the value is above reasonable range
     if (RSSI.integerValue > -15) {
         return;
@@ -94,6 +92,9 @@
     
     // Reject if the signal strength is too low to be close enough
     if (RSSI.integerValue < -distance) {
+        
+        self.view.backgroundColor = UIColor.whiteColor;
+        
         return;
     }
     
@@ -236,6 +237,10 @@
             
             // Cancel our subscription to the characteristic
             [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+            
+            self.instructions.text = @"Please confirm the payment on your iPhone";
+            
+            return;
         }
         
         // Otherwise, just add the data on to what we already have
@@ -280,6 +285,10 @@
                 
                 // Cancel our subscription to the characteristic
                 [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+                
+                self.instructions.text = @"Payment complete, thanks and good bye";
+                
+                return;
             }
             
             // Otherwise, just add the data on to what we already have

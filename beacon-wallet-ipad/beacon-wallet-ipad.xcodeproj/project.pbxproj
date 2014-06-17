@@ -24,6 +24,7 @@
 		1F3DB9D81950D0CD0035F09D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3DB9D41950D0CD0035F09D /* Main_iPhone.storyboard */; };
 		1F3DB9D91950D0CD0035F09D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3DB9D51950D0CD0035F09D /* Main_iPad.storyboard */; };
 		1F3DB9DA1950D0CD0035F09D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3DB9D71950D0CD0035F09D /* ViewController.m */; };
+		1F3DB9DE1950D5320035F09D /* coop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3DB9DD1950D5320035F09D /* coop.png */; };
 		9784FAD02CD54353B81A0479 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D97686AC8B4FCDB3031364 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		1F3DB9D51950D0CD0035F09D /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		1F3DB9D61950D0CD0035F09D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1F3DB9D71950D0CD0035F09D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1F3DB9DD1950D5320035F09D /* coop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coop.png; sourceTree = "<group>"; };
 		3BBA10C19F284E1FB70DE9BE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		40D97686AC8B4FCDB3031364 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 		02FCF8FC18E0B63B00E3C663 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F3DB9DD1950D5320035F09D /* coop.png */,
 				02FCF8FD18E0B63B00E3C663 /* beacon-wallet-ipad-Info.plist */,
 				02FCF8FE18E0B63B00E3C663 /* InfoPlist.strings */,
 				02FCF90118E0B63B00E3C663 /* main.m */,
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02FCF90018E0B63B00E3C663 /* InfoPlist.strings in Resources */,
+				1F3DB9DE1950D5320035F09D /* coop.png in Resources */,
 				1F3DB9D91950D0CD0035F09D /* Main_iPad.storyboard in Resources */,
 				02FCF90818E0B63B00E3C663 /* Images.xcassets in Resources */,
 				1F3DB9D81950D0CD0035F09D /* Main_iPhone.storyboard in Resources */,
