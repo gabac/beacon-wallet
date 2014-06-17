@@ -112,6 +112,7 @@ PaymentProcess paymentProcess;
         [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
     } else {
         self.accountTableViewController.account = account;
+        [self.accountTableViewController.tableView reloadData];
     }
     
     return YES;
@@ -284,7 +285,7 @@ PaymentProcess paymentProcess;
                                           withResult:CBATTErrorInvalidOffset];
             return;
         }
-        
+        NSLog(@"cart which gets sent: %@", [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)]);
         request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessPayment) {
@@ -328,6 +329,8 @@ PaymentProcess paymentProcess;
         NSLog(@"receipt write request: %@", receipt);
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        
+        [self showReceiptView];
     }
 }
 
@@ -380,7 +383,7 @@ PaymentProcess paymentProcess;
     [payment setObject:@"2501032235098" forKey:@"card"];
     [payment setObject:@"123" forKey:@"pin"];
     [payment setObject:self.totalAmount forKey:@"amount"];
-    
+//     return [@"payment notification2" dataUsingEncoding:NSUTF8StringEncoding];
     return [self encrypt:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil]];
 }
 
@@ -424,6 +427,8 @@ PaymentProcess paymentProcess;
 
 - (void)didConfirmPayment {
     //enter payment and send notification
+    NSLog(@"payment notification");
+    
     [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
 }
 

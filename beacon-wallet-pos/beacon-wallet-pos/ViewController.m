@@ -197,7 +197,6 @@
 {
     if (error) {
         NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
-        return;
     }
     
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
@@ -231,6 +230,7 @@
         // this method gets called for notify and the read request, filter it somehow
         if([payment isEqual:@"payment notification"]) {
             NSLog(@"Received payment notification");
+            [self.discoveredPeripheral readValueForCharacteristic:self.paymentCharacteristic];
         } else {
             //do the payment
             NSLog(@"Received payment: %@", payment);
