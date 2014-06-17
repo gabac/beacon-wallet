@@ -414,6 +414,7 @@
 				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -428,6 +429,7 @@
 				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
