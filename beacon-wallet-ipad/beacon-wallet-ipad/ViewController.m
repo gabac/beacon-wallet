@@ -16,6 +16,8 @@
 #define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
 #define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
 
+#define NOTIFY_MTU      10
+
 @interface ViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *instructions;
@@ -28,6 +30,10 @@
 @property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *paymentCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *receiptCharacteristic;
+
+@property NSInteger                                     sendDataIndex;
+@property NSData                                        *dataToSend;
+@property CBCharacteristic                              *characteristicToSendTo;
 
 @end
 
@@ -224,10 +230,17 @@
             [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 
-                //send invoice
-                [self.discoveredPeripheral writeValue:operation.responseData
-                                    forCharacteristic:self.invoiceCharacteristic
-                                                 type:CBCharacteristicWriteWithResponse];
+                // Get the data
+                self.dataToSend = operation.responseData;
+                
+                // Reset the index
+                self.sendDataIndex = 0;
+                
+                //set the characteristic
+                self.characteristicToSendTo = self.invoiceCharacteristic;
+                
+                // Start sending
+                [self sendData];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error Response: %@", operation.responseString);
@@ -399,6 +412,77 @@
     
     // If we've got this far, we're connected, but we're not subscribed, so we just disconnect
     [self.centralManager cancelPeripheralConnection:self.discoveredPeripheral];
+}
+
+
+- (void)sendData
+{
+    // First up, check if we're meant to be sending an EOM
+    static BOOL sendingEOM = NO;
+    
+    if (sendingEOM) {
+        
+        // send it
+        [self.discoveredPeripheral writeValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.characteristicToSendTo type:CBCharacteristicWriteWithResponse];
+    
+        NSLog(@"Sent: EOM");
+        
+        // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
+        return;
+    }
+    
+    // We're not sending an EOM, so we're sending data
+    
+    // Is there any left to send?
+    
+    if (self.sendDataIndex >= self.dataToSend.length) {
+        
+        // No data left.  Do nothing
+        return;
+    }
+    
+    // There's data left, so send until the callback fails, or we're done.
+    
+    while (YES) {
+        
+        // Make the next chunk
+        
+        // Work out how big it should be
+        NSInteger amountToSend = self.dataToSend.length - self.sendDataIndex;
+        
+        // Can't be longer than 20 bytes
+        if (amountToSend > NOTIFY_MTU) amountToSend = NOTIFY_MTU;
+        
+        // Copy out the data we want
+        NSData *chunk = [NSData dataWithBytes:self.dataToSend.bytes+self.sendDataIndex length:amountToSend];
+        
+        // Send it
+        [self.discoveredPeripheral writeValue:chunk forCharacteristic:self.characteristicToSendTo type:CBCharacteristicWriteWithResponse];
+        
+        NSLog(@"Sent: %@", chunk);
+        
+        // It did send, so update our index
+        self.sendDataIndex += amountToSend;
+        
+        // Was it the last one?
+        if (self.sendDataIndex >= self.dataToSend.length) {
+            
+            // It was - send an EOM
+            
+            // Set this so if the send fails, we'll send it next time
+            sendingEOM = YES;
+            
+            // Send it
+            [self.discoveredPeripheral writeValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.characteristicToSendTo type:CBCharacteristicWriteWithResponse];
+            
+            // It sent, we're all done
+            sendingEOM = NO;
+            
+            NSLog(@"Sent: EOM");
+            
+            return;
+        }
+    }
 }
 
 #pragma mark helper methods for data

@@ -47,6 +47,8 @@ PaymentProcess;
 @property NSData                                        *dataToSend;
 @property CBMutableCharacteristic                       *characteristicToSendTo;
 
+@property (strong, nonatomic) NSMutableData             *invoice;
+
 @end
 
 @implementation BWAppDelegate
@@ -121,6 +123,8 @@ PaymentProcess paymentProcess;
         self.accountTableViewController.account = account;
         [self.accountTableViewController.tableView reloadData];
     }
+    
+    self.invoice = [[NSMutableData alloc] init];
     
     return YES;
 }
@@ -302,6 +306,9 @@ PaymentProcess paymentProcess;
         // Start sending
         [self sendData];
         
+        // reset invoice
+        [self.invoice setLength:0];
+        
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessPayment) {
         
         NSLog(@"respond to payment read request");
@@ -338,17 +345,33 @@ PaymentProcess paymentProcess;
     
     CBATTRequest *request = [requests objectAtIndex:0];
     
+    NSLog(@"write request: %@ %@", request.characteristic.UUID, [NSString stringWithUTF8String:[request.value bytes]]);
+    
     if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessInvoice) {
-        
-        paymentProcess = PaymentProcessPayment;
-        
-        NSString* invoice = [NSString stringWithUTF8String:[request.value bytes]];
-        NSLog(@"invoice write request: %@", invoice);
-        
-        //display invoice screen
-        [self startPaymentProcessWithAmount:invoice];
+
+        NSData* data = request.value;
+        NSString* message = [NSString stringWithUTF8String:[data bytes]];
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        
+        // finished with invoice write?
+        if ([message isEqualToString:@"EOM"]) {
+            
+            paymentProcess = PaymentProcessPayment;
+            
+            NSString* invoice = [NSString stringWithUTF8String:self.invoice.bytes];
+            
+            NSLog(@"Received invoice %@", invoice);
+            
+            //display invoice screen
+            [self startPaymentProcessWithAmount: invoice];
+            
+            return;
+        }
+        
+        // else append if
+        [self.invoice appendData:data];
+        
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessReceipt) {
         
         paymentProcess = PaymentProcessAcceptConnections;
