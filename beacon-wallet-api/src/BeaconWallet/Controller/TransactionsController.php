@@ -4,6 +4,7 @@ namespace BeaconWallet\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,8 @@ class TransactionsController
 {
     protected $transactions;
 
+    protected $accounts;
+
     protected $crypt;
 
     /**
@@ -19,9 +22,10 @@ class TransactionsController
      */
     protected $url;
 
-    public function __construct($transactions, $crypt, $url)
+    public function __construct($transactions, $accounts, $crypt, $url)
     {
         $this->transactions = $transactions;
+        $this->accounts = $accounts;
         $this->crypt = $crypt;
         $this->url = $url;
     }
@@ -43,6 +47,19 @@ class TransactionsController
         $transactionId = $this->transactions->createTransaction($card, $branch, $products);
 
         // prepare transaction response
+        $json = $this->getTransactionJson($transactionId);
+
+        // sign response
+        $signature = $this->crypt->sign($json);
+
+        return new JsonResponse(array(
+            'transaction' => $json,
+            'signature' => $signature,
+        ));
+    }
+
+    protected function getTransactionJson($transactionId)
+    {
         $transaction = $this->transactions->getTransaction($transactionId);
 
         $data = array(
@@ -65,11 +82,33 @@ class TransactionsController
             $data['amount'] += (float) $product['amount'];
         }
 
-        $json = json_encode($data);
+        return json_encode($data);
+    }
+
+    public function payTransaction($id, Request $request)
+    {
+        // encrypt payment
+        $encrypted = $request->get('payment');
+
+        $decrypted = $this->crypt->decrypt($encrypted);
+
+        $data = json_decode($decrypted);
+
+        $card = isset($data->card) ? $data->card : null;
+        $pin = isset($data->pin) ? $data->pin : null;
+
+        if (!$this->accounts->verifyPin($card, $pin)) {
+            throw new AccessDeniedHttpException('Invalid card and pin');
+        }
+
+        $this->transactions->payTransaction($id);
+
+        // prepare transaction response
+        $json = $this->getTransactionJson($id);
 
         // sign response
         $signature = $this->crypt->sign($json);
-
+        
         return new JsonResponse(array(
             'transaction' => $json,
             'signature' => $signature,

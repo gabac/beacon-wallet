@@ -53,6 +53,7 @@ class ServiceProvider implements \Silex\ServiceProviderInterface
         $app['controller.transactions'] = $app->share(function() use ($app) {
             return new \BeaconWallet\Controller\TransactionsController(
                 $app['service.transactions'],
+                $app['service.accounts'],
                 $app['service.crypt'],
                 $app['url_generator']
             );

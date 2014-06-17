@@ -6,6 +6,8 @@ class Transactions
 {
     const STATUS_PENDING = 'pending';
 
+    const STATUS_COMPLETE = 'complete';
+
     protected $database;
 
     public function __construct($database)
@@ -64,5 +66,15 @@ class Transactions
         });
 
         return $transactionId;
+    }
+
+    public function payTransaction($id)
+    {
+        $sql = 'UPDATE `transactions` SET `status` = ? WHERE `id` = ?';
+
+        $result = $this->database->executeUpdate($sql, array(
+            self::STATUS_COMPLETE,
+            $id,
+        ));
     }
 }

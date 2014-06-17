@@ -19,4 +19,21 @@ class Accounts
 
         return $account;
     }
+
+    public function verifyPin($card, $pin)
+    {
+        $sql = 'SELECT a.card, a.pin FROM `accounts` a WHERE a.card = ?';
+
+        $account = $this->database->fetchAssoc($sql, array($card));
+
+        if ($account == null) {
+            return false;
+        }
+
+        if ($account['pin'] !== $pin) {
+            return false;
+        }
+
+        return true;
+    }
 }
