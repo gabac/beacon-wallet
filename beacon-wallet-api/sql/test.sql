@@ -1895,3 +1895,9 @@ VALUES
 INSERT INTO `barcodes` (`barcode`, `product`)
 VALUES
     ('8076800195057', 37);
+
+INSERT INTO `branches` (`id`, `name`, `city`)
+VALUES
+    (1, 'Baden Bahnhof', 'Baden'),
+    (2, 'City Baden Food', 'Baden'),
+    (3, 'Zürich Europaallee Passage', 'Zürich');

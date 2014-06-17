@@ -9,7 +9,7 @@ class TransactionsTest extends ApiTest
         $encrypted = file_get_contents(__DIR__ . '/fixtures/createTransaction.txt');
 
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/transactions', array(), array(), array(), $encrypted);
+        $crawler = $client->request('POST', '/transactions', array('cart' => $encrypted));
 
         $this->assertTrue($client->getResponse()->isOk());
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/fixtures/createTransaction.json', $client->getResponse()->getContent());

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TransactionsController
 {
+    protected $transactions;
+
     protected $crypt;
 
     /**
@@ -17,24 +19,55 @@ class TransactionsController
      */
     protected $url;
 
-    public function __construct($crypt, $url)
+    public function __construct($transactions, $crypt, $url)
     {
+        $this->transactions = $transactions;
         $this->crypt = $crypt;
         $this->url = $url;
     }
 
     public function createTransaction(Request $request)
     {
-        $encrypted = $request->getContent();
+        // encrypt cart
+        $encrypted = $request->get('cart');
 
         $decrypted = $this->crypt->decrypt($encrypted);
 
         $data = json_decode($decrypted);
 
-        // TODO process transaction
+        $card = isset($data->card) ? $data->card : null;
+        $branch = isset($data->branch) ? $data->branch : null;
+        $products = isset($data->products) && is_array($data->products) ? $data->products : array();
+
+        // create transaction
+        $transactionId = $this->transactions->createTransaction($card, $branch, $products);
+
+        // prepare transaction response
+        $transaction = $this->transactions->getTransaction($transactionId);
+
+        $data = array(
+            'id' => (int) $transaction['id'],
+            'status' => $transaction['status'],
+            'card' => $transaction['card'],
+            'branch' => (int) $transaction['branch'],
+            'amount' => 0.0,
+            'products' => array(),
+        );
+
+        foreach ($transaction['products'] as $product) {
+
+            $data['products'][] = array(
+                'id' => (int) $product['product'],
+                'quantity' => (int) $product['quantity'],
+                'amount' => (float) $product['amount'],
+            );
+
+            $data['amount'] += (float) $product['amount'];
+        }
 
         $json = json_encode($data);
 
+        // sign response
         $signature = $this->crypt->sign($json);
 
         return new JsonResponse(array(

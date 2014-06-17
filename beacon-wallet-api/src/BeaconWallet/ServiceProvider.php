@@ -18,6 +18,12 @@ class ServiceProvider implements \Silex\ServiceProviderInterface
             );
         });
 
+        $app['service.transactions'] = $app->share(function() use ($app) {
+            return new \BeaconWallet\Service\Transactions(
+                $app['db']
+            );
+        });
+
         $app['service.crypt'] = $app->share(function() use ($app) {
             return new \BeaconWallet\Service\Crypt(
                 $app['config']['encryption']['private_key']
@@ -46,6 +52,7 @@ class ServiceProvider implements \Silex\ServiceProviderInterface
 
         $app['controller.transactions'] = $app->share(function() use ($app) {
             return new \BeaconWallet\Controller\TransactionsController(
+                $app['service.transactions'],
                 $app['service.crypt'],
                 $app['url_generator']
             );
