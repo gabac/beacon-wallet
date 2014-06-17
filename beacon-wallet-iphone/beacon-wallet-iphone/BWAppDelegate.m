@@ -289,17 +289,6 @@ PaymentProcess paymentProcess;
         
         paymentProcess = PaymentProcessInvoice;
         
-//        NSData* cart = [self getCart];
-//        
-//        if (request.offset > cart.length) {
-//            [self.peripheralManager respondToRequest:request
-//                                          withResult:CBATTErrorInvalidOffset];
-//            return;
-//        }
-//
-//        request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
-//        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
-        
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         // Get the data
         self.dataToSend = [self getCart];
@@ -318,16 +307,30 @@ PaymentProcess paymentProcess;
         NSLog(@"respond to payment read request");
         paymentProcess = PaymentProcessReceipt;
         
-        NSData* payment = [self getPayment];
-        
-        if (request.offset > payment.length) {
-            [self.peripheralManager respondToRequest:request
-                                          withResult:CBATTErrorInvalidOffset];
-            return;
-        }
-        
-        request.value = [payment subdataWithRange:NSMakeRange(request.offset, payment.length - request.offset)];
+//        NSData* payment = [self getPayment];
+//        
+//        if (request.offset > payment.length) {
+//            [self.peripheralManager respondToRequest:request
+//                                          withResult:CBATTErrorInvalidOffset];
+//            return;
+//        }
+//        
+//        request.value = [payment subdataWithRange:NSMakeRange(request.offset, payment.length - request.offset)];
+//        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        
+        // Get the data
+        self.dataToSend = [self getPayment];
+        
+        // Reset the index
+        self.sendDataIndex = 0;
+        
+        //set the characteristic
+        self.characteristicToSendTo = self.paymentCharacteristic;
+        
+        // Start sending
+        [self sendData];
+
     }
 }
 

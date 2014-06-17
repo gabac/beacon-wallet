@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *cart;
+@property (strong, nonatomic) NSMutableData         *payment;
 @property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *paymentCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *receiptCharacteristic;
@@ -39,6 +40,7 @@
     
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     self.cart = [[NSMutableData alloc] init];
+    self.payment = [[NSMutableData alloc] init];
 }
 
 /** centralManagerDidUpdateState is a required protocol method.
@@ -131,6 +133,7 @@
     
     // Clear the data that we may already have
     [self.cart setLength:0];
+    [self.payment setLength:0];
     
     // Make sure we get the discovery callbacks
     peripheral.delegate = self;
@@ -207,7 +210,7 @@
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
         
         NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-         NSLog(@" cart: %@", stringFromData);
+        NSLog(@" cart: %@", stringFromData);
         // Have we got everything we need?
         if ([stringFromData isEqualToString:@"EOM"]) {
             
@@ -249,13 +252,27 @@
             [self.discoveredPeripheral readValueForCharacteristic:self.paymentCharacteristic];
         } else {
             //do the payment
-            NSLog(@"Received payment: %@", payment);
-            //send the receipt
-            NSData *receipt = [self getReceipt];
+            NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+            NSLog(@" payment: %@", stringFromData);
+            // Have we got everything we need?
+            if ([stringFromData isEqualToString:@"EOM"]) {
+                
+                // Log it
+                NSLog(@"Received payment: %@", self.payment);
+                
+                //send the receipt
+                NSData *receipt = [self getReceipt];
+                
+                [self.discoveredPeripheral writeValue:receipt
+                                    forCharacteristic:self.receiptCharacteristic
+                                                 type:CBCharacteristicWriteWithResponse];
+                
+                // Cancel our subscription to the characteristic
+                [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+            }
             
-            [self.discoveredPeripheral writeValue:receipt
-                                forCharacteristic:self.receiptCharacteristic
-                                             type:CBCharacteristicWriteWithResponse];
+            // Otherwise, just add the data on to what we already have
+            [self.payment appendData:characteristic.value];
         }
     }
 
