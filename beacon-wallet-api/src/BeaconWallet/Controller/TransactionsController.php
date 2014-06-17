@@ -40,11 +40,10 @@ class TransactionsController
         $data = json_decode($decrypted);
 
         $card = isset($data->card) ? $data->card : null;
-        $branch = isset($data->branch) ? $data->branch : null;
         $products = isset($data->products) && is_array($data->products) ? $data->products : array();
 
         // create transaction
-        $transactionId = $this->transactions->createTransaction($card, $branch, $products);
+        $transactionId = $this->transactions->createTransaction($card, $products);
 
         // prepare transaction response
         $json = $this->getTransactionJson($transactionId);
@@ -66,7 +65,6 @@ class TransactionsController
             'id' => (int) $transaction['id'],
             'status' => $transaction['status'],
             'card' => $transaction['card'],
-            'branch' => (int) $transaction['branch'],
             'amount' => 0.0,
             'products' => array(),
         );

@@ -33,23 +33,13 @@ CREATE TABLE `barcodes` (
   CONSTRAINT `fk_barcodes_products` FOREIGN KEY (`product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `branches` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `city` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `transactions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `status` varchar(255) NOT NULL DEFAULT '',
   `card` varchar(255) NOT NULL,
-  `branch` int(11) unsigned NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `card` (`card`),
-  KEY `branch` (`branch`),
-  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`branch`) REFERENCES `branches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`card`) REFERENCES `accounts` (`card`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -18,7 +18,7 @@ class Transactions
     public function getTransaction($id)
     {
         // transaction
-        $sql = 'SELECT t.id, t.status, t.card, t.branch FROM `transactions` t WHERE t.id = ?';
+        $sql = 'SELECT t.id, t.status, t.card FROM `transactions` t WHERE t.id = ?';
 
         $transaction = $this->database->fetchAssoc($sql, array($id));
 
@@ -32,18 +32,17 @@ class Transactions
         return $transaction;
     }
 
-    public function createTransaction($card, $branch, $products = array())
+    public function createTransaction($card, $products = array())
     {
         $transactionId = null;
 
-        $this->database->transactional(function($database) use ($card, $branch, $products, &$transactionId) {
+        $this->database->transactional(function($database) use ($card, $products, &$transactionId) {
 
-            $sql = 'INSERT INTO `transactions` (`status`, `card`, `branch`, `created`) VALUES (?, ?, ?, NOW())';
+            $sql = 'INSERT INTO `transactions` (`status`, `card`, `created`) VALUES (?, ?, NOW())';
 
             $result = $database->executeUpdate($sql, array(
                 self::STATUS_PENDING,
                 $card,
-                $branch,
             ));
 
             $transactionId = $database->lastInsertId();
