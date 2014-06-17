@@ -427,7 +427,7 @@ PaymentProcess paymentProcess;
     
     [cart setObject:productsWithQty forKey:@"products"];
     
-    NSLog(@"json %@", [NSJSONSerialization dataWithJSONObject:cart options:0 error:nil]);
+    NSLog(@"json %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:cart options:0 error:nil] encoding:NSUTF8StringEncoding]);
     
     return [self encrypt:[NSJSONSerialization dataWithJSONObject:cart options:0 error:nil]];
 }
@@ -444,6 +444,9 @@ PaymentProcess paymentProcess;
     [payment setObject:@"123" forKey:@"pin"];
     [payment setObject:self.totalAmount forKey:@"amount"];
 //     return [@"payment notification2" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@"json %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil] encoding:NSUTF8StringEncoding]);
+    
     return [self encrypt:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil]];
 }
 
