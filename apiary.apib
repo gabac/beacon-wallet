@@ -36,15 +36,30 @@ API calls for the iPhone App.
             {
                 "card": "2501032235098",
                 "cc_nr":"510143256345234",
+                "cc_date":"08-15"
+            }
+
+### Update an account, add credit card details [PUT]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "pin":"1234",
+                "cc_nr":"510143256345234",
                 "cc_date":"08-15",
                 "cc_ccv":"521"
             }
 
-### Update an account, add credit card details [PUT]
 + Response 200 (application/json)
     + Body
 
-            {}
+            {
+                "card": "2501032235098",
+                "cc_nr":"510143256345234",
+                "cc_date":"08-15"
+            }
 
 ## Transactions [/accounts/{card}/transactions]
 
