@@ -29,6 +29,14 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)didPressDone:(id)sender {
+    
+    //delete cart
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
+    
+    [NSKeyedArchiver archiveRootObject:nil toFile:docFile];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
