@@ -17,7 +17,7 @@
 
 + (BWIPhoneClient *)sharedClient;
 
-- (void)getAccountDetails:(NSString *)cardnumber andBlock:(void (^)(BWAccount *account, NSError *error))block;
+- (void)getAccountDetails:(NSString *)cardnumber andPin:(NSString *)pin andBlock:(void (^)(BWAccount *account, NSError *error))block;
 - (void) getAllProducts:(void (^)(NSError *error))block;
 - (void) getProductWithId:(NSNumber *)productId andBlock:(void (^)(BWProduct *product, NSError *error))block;
 

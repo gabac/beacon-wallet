@@ -18,6 +18,7 @@
     
     self.card = [decoder decodeObjectForKey:@"card"];
     self.creditcard = [decoder decodeObjectForKey:@"creditcard"];
+    self.pin = [decoder decodeObjectForKey:@"pin"];
     
     return self;
 }
@@ -25,6 +26,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.card forKey:@"card"];
     [encoder encodeObject:self.creditcard forKey:@"creditcard"];
+    [encoder encodeObject:self.pin forKey:@"pin"];
 }
 
 @end

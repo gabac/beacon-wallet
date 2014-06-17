@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) NSString *card;
 @property (strong, nonatomic) NSString *creditcard;
+@property (strong, nonatomic) NSString *pin;
 
 @end
