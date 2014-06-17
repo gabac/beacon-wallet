@@ -292,6 +292,7 @@
                                                      type:CBCharacteristicWriteWithResponse];
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error Response: %@", operation.responseString);
                     NSLog(@"Error: %@", error);
                 }];
                 
