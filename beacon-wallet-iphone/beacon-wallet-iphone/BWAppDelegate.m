@@ -19,6 +19,15 @@
 #define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
 #define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
 
+typedef enum
+{
+    PaymentProcessAcceptConnections,
+    PaymentProcessInvoice,
+    PaymentProcessPayment,
+    PaymentProcessReceipt
+}
+PaymentProcess;
+
 @interface BWAppDelegate () <CBPeripheralManagerDelegate>
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *cartCharacteristic;
@@ -27,10 +36,14 @@
 @property (strong, nonatomic) CBMutableCharacteristic   *receiptCharacteristic;
 @property (strong, nonatomic) NSArray                   *products;
 @property (strong, nonatomic) BWIPhoneClient            *iPhoneAPI;
+@property BWPaymentViewController                       *paymentViewController;
+@property NSString                                      *totalAmount;
 
 @end
 
 @implementation BWAppDelegate
+
+PaymentProcess paymentProcess;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,6 +51,7 @@
     // Override point for customization after application launch.
     
     self.iPhoneAPI = [BWIPhoneClient sharedClient];
+    paymentProcess = PaymentProcessAcceptConnections;
     
     //check if we have products already
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -170,11 +184,14 @@
 }
 
 - (void) startPaymentProcessWithAmount:(NSString *)amount {
-    BWPaymentViewController *paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
-    paymentViewController.totalAmount.text = amount;
-    paymentViewController.delegate = self;
+    //we need it later
+    self.totalAmount = amount;
     
-    [self.accountTableViewController presentViewController:paymentViewController animated:YES completion:nil];
+    self.paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
+    self.paymentViewController.totalAmount.text = amount;
+    self.paymentViewController.delegate = self;
+    
+    [self.accountTableViewController presentViewController:self.paymentViewController animated:YES completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -254,8 +271,11 @@
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
     
-    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
+    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessAcceptConnections) {
         NSLog(@"respond to cart read request");
+        
+        paymentProcess = PaymentProcessInvoice;
+        
         NSData* cart = [self getCart];
         
         if (request.offset > cart.length) {
@@ -265,8 +285,12 @@
         }
         
         request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
-    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
+        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessPayment) {
+        
         NSLog(@"respond to payment read request");
+        paymentProcess = PaymentProcessReceipt;
+        
         NSData* payment = [self getPayment];
         
         if (request.offset > payment.length) {
@@ -276,16 +300,17 @@
         }
         
         request.value = [payment subdataWithRange:NSMakeRange(request.offset, payment.length - request.offset)];
+        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
     }
-    
-    [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
     
     CBATTRequest *request = [requests objectAtIndex:0];
     
-    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
+    if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessInvoice) {
+        
+        paymentProcess = PaymentProcessPayment;
         
         NSString* invoice = [NSString stringWithUTF8String:[request.value bytes]];
         NSLog(@"invoice write request: %@", invoice);
@@ -294,7 +319,9 @@
         [self startPaymentProcessWithAmount:invoice];
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
-    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
+    } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessReceipt) {
+        
+        paymentProcess = PaymentProcessAcceptConnections;
         
         NSString* receipt = [NSString stringWithUTF8String:[request.value bytes]];
         NSLog(@"receipt write request: %@", receipt);
@@ -346,7 +373,14 @@
 }
 
 - (NSData *)getPayment {
-    return [@"payment" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableDictionary *payment = [[NSMutableDictionary alloc] init];
+    //todo get number
+    [payment setObject:@"2501032235098" forKey:@"card"];
+    [payment setObject:@"123" forKey:@"pin"];
+    [payment setObject:self.totalAmount forKey:@"amount"];
+    
+    return [self encrypt:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil]];
 }
 
 # pragma mark security helper methods
