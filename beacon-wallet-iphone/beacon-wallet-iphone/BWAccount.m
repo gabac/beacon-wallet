@@ -10,4 +10,21 @@
 
 @implementation BWAccount
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.card = [decoder decodeObjectForKey:@"card"];
+    self.creditcard = [decoder decodeObjectForKey:@"creditcard"];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.card forKey:@"card"];
+    [encoder encodeObject:self.creditcard forKey:@"creditcard"];
+}
+
 @end

@@ -43,12 +43,19 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
     return _sharedClient;
 }
 
-- (void) getAccountDetails:(void (^)(BWAccount *account, NSError *error))block {
-    [self GET:@"accounts/2501032235098" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+- (void)getAccountDetails:(NSString *)cardnumber andBlock:(void (^)(BWAccount *account, NSError *error))block {
+    [self GET:[NSString stringWithFormat:@"accounts/%@", cardnumber] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         BWAccount *account = [[BWAccount alloc] init];
         
         account.card = [responseObject objectForKey: @"card"];
+        account.creditcard = [responseObject objectForKey: @"cc_nr"];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docDir = [paths objectAtIndex: 0];
+        NSString* docFile = [docDir stringByAppendingPathComponent: @"Account"];
+        
+        [NSKeyedArchiver archiveRootObject:account toFile:docFile];
         
         if(block) {
             block(account, nil);

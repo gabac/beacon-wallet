@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BWAccount : NSObject
+@interface BWAccount : NSObject<NSCoding>
 
 @property (strong, nonatomic) NSString *card;
+@property (strong, nonatomic) NSString *creditcard;
 
 @end

@@ -46,23 +46,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 2;
+    if(self.account) {
+        return 2;
+    }
+    return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if(section == 0)
-		return @"User";
-	else
-		return @"Supercard";
+	return @"Supercard";
     
 }
 
@@ -73,9 +71,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
-   
-    cell.textLabel.text = @"Test";
-    cell.detailTextLabel.text =@"test2";
+    if(indexPath.row == 0) {
+        cell.textLabel.text = @"Supercard";
+        cell.detailTextLabel.text = self.account.card;
+    } else {
+        cell.textLabel.text = @"Creditcard";
+        cell.detailTextLabel.text = self.account.creditcard;
+    }
     
     return cell;
 }

@@ -100,9 +100,18 @@ PaymentProcess paymentProcess;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if(false) {
+    //check if the user has already an account
+   NSString* docFileAccount = [docDir stringByAppendingPathComponent: @"Account"];
+    
+    BWAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileAccount];
+    
+    if(!account) {
         self.loginViewController = [[BWLoginViewViewController alloc] initWithNibName:@"BWLoginViewViewController" bundle:[NSBundle mainBundle]];
+        self.loginViewController.accountTableViewController = self.accountTableViewController;
+        
         [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
+    } else {
+        self.accountTableViewController.account = account;
     }
     
     return YES;

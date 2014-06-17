@@ -7,10 +7,9 @@
 //
 
 #import "BWLoginViewViewController.h"
+#import "BWIPhoneClient.h"
 
 @interface BWLoginViewViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *supercardNumber;
-@property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
@@ -31,7 +30,17 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)pressedLoginButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.password resignFirstResponder];
+    
+    BWIPhoneClient *iPhoneAPI = [BWIPhoneClient sharedClient];
+    
+    [iPhoneAPI getAccountDetails:self.cardnumber.text andBlock:^(BWAccount *account, NSError *error) {
+        self.accountTableViewController.account = account;
+        [self.accountTableViewController.tableView reloadData];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+- (IBAction)didEndOnExit:(id)sender {
 }
 
 - (void)didReceiveMemoryWarning

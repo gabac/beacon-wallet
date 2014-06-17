@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BWAccount.h"
 
 @interface BWAccountTableViewController : UITableViewController
+
+@property BWAccount *account;
 
 @end
