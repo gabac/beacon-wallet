@@ -11,6 +11,8 @@ API calls for the iPhone App.
 
 ## Account [/accounts/{card}]
 
+Each account is identified by a Supercard number.
+
 | Field        | Type   | Description                             |
 |:-------------|:-------|:----------------------------------------|
 | card         | string | Supercard number                   |
@@ -22,6 +24,7 @@ API calls for the iPhone App.
     + card (string, `2501032235098`) ... Supercard number
 
 ### Get account data by Supercard number [GET]
+
 + Request (application/json)
     + Headers
 
@@ -63,6 +66,8 @@ API calls for the iPhone App.
 
 ## Transactions [/accounts/{card}/transactions]
 
+Transactions of a user.
+
 + Parameters
     + card (string, `2501032235098`) ... Supercard number
 
@@ -78,6 +83,10 @@ API calls for the iPhone App.
 
 
 ## Product Collection [/products]
+
+List of all product IDs. This resource is used in combination
+with the product detail request to get all information about 
+products.
 
 ### Get all products [GET]
 + Response 200 (application/json)
@@ -95,6 +104,9 @@ API calls for the iPhone App.
             }
 
 ## Product [/products/{id}]
+
+Get full product data. Use the `If-Modified-Since` header 
+to avoid unnecessary data being sent over the network.
 
 + Parameters
     + id (number) ... Product ID
