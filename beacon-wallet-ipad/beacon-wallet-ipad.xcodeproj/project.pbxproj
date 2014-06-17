@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		023EE1BB193C8F0200935BD8 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		023EE1BD193C8F3500935BD8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		02FCF8F218E0B63B00E3C663 /* B. Wallet POS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "B. Wallet POS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-ipad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8F518E0B63B00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8F718E0B63B00E3C663 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		02FCF8F918E0B63B00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -107,7 +107,7 @@
 		02FCF8F318E0B63B00E3C663 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02FCF8F218E0B63B00E3C663 /* B. Wallet POS.app */,
+				02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */,
 				02FCF90D18E0B63B00E3C663 /* beacon-wallet-ipadTests.xctest */,
 			);
 			name = Products;
@@ -191,7 +191,7 @@
 			);
 			name = "beacon-wallet-ipad";
 			productName = "beacon-wallet-ipad";
-			productReference = 02FCF8F218E0B63B00E3C663 /* B. Wallet POS.app */;
+			productReference = 02FCF8F218E0B63B00E3C663 /* beacon-wallet-ipad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		02FCF90C18E0B63B00E3C663 /* beacon-wallet-ipadTests */ = {
@@ -431,7 +431,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
-				PRODUCT_NAME = "B. Wallet POS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -446,7 +446,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "beacon-wallet-ipad/beacon-wallet-ipad-Prefix.pch";
 				INFOPLIST_FILE = "beacon-wallet-ipad/beacon-wallet-ipad-Info.plist";
-				PRODUCT_NAME = "B. Wallet POS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

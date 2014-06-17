@@ -95,7 +95,7 @@
 		02E4BCE1193C70EC00441D1E /* BWWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWWelcomeViewController.h; sourceTree = "<group>"; };
 		02E4BCE2193C70EC00441D1E /* BWWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWWelcomeViewController.m; sourceTree = "<group>"; };
 		02E4BCE3193C70EC00441D1E /* BWWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BWWelcomeViewController.xib; sourceTree = "<group>"; };
-		02FCF8B718E0B57A00E3C663 /* Beacon Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beacon Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beacon-wallet-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02FCF8BA18E0B57A00E3C663 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		02FCF8BE18E0B57A00E3C663 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		02FCF8C218E0B57A00E3C663 /* beacon-wallet-iphone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "beacon-wallet-iphone-Info.plist"; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		02FCF8B818E0B57A00E3C663 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02FCF8B718E0B57A00E3C663 /* Beacon Wallet.app */,
+				02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */,
 				02FCF8D218E0B57A00E3C663 /* beacon-wallet-iphoneTests.xctest */,
 			);
 			name = Products;
@@ -295,7 +295,7 @@
 			);
 			name = "beacon-wallet-iphone";
 			productName = "beacon-wallet-iphone";
-			productReference = 02FCF8B718E0B57A00E3C663 /* Beacon Wallet.app */;
+			productReference = 02FCF8B718E0B57A00E3C663 /* beacon-wallet-iphone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		02FCF8D118E0B57A00E3C663 /* beacon-wallet-iphoneTests */ = {
@@ -599,7 +599,7 @@
 					"$(PROJECT_DIR)/ScanditSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "Beacon Wallet";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -621,7 +621,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ScanditSDK",
 				);
-				PRODUCT_NAME = "Beacon Wallet";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
