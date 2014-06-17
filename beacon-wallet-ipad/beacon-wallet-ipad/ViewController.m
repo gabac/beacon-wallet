@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *cart;
 @property (strong, nonatomic) NSMutableData         *payment;
+@property (strong, nonatomic) CBCharacteristic      *cartCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *paymentCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *receiptCharacteristic;
@@ -180,10 +181,7 @@
         
         // And check if it's the right one
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
-            
-            // If it is, read it
-            [peripheral readValueForCharacteristic:characteristic];
-            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            self.cartCharacteristic = characteristic;
         } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
         } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
@@ -306,6 +304,13 @@
 {
     if (error) {
         NSLog(@"Error changing notification state: %@", error.localizedDescription);
+    }
+    
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
+        if (characteristic.isNotifying) {
+            NSLog(@"cart is notifying");
+            [peripheral readValueForCharacteristic:self.cartCharacteristic];
+        }
     }
     
     // Exit if it's not the characteristic
