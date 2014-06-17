@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BWPaymentViewControllerDelegate;
+
 @interface BWPaymentViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *totalAmount;
+@property (assign) NSObject <BWPaymentViewControllerDelegate> *delegate;
+
+@end
+
+@protocol BWPaymentViewControllerDelegate <NSObject>
+
+- (void)didConfirmPayment;
 
 @end

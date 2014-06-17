@@ -24,6 +24,9 @@
 }
 
 - (IBAction)pressedPay:(id)sender {
+    
+    [self.delegate didConfirmPayment];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

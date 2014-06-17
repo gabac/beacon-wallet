@@ -9,7 +9,6 @@
 #import "BWAppDelegate.h"
 #import "BWIPhoneClient.h"
 #import "BWWelcomeViewController.h"
-#import "BWPaymentViewController.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -173,6 +172,7 @@
 - (void) startPaymentProcessWithAmount:(NSString *)amount {
     BWPaymentViewController *paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
     paymentViewController.totalAmount.text = amount;
+    paymentViewController.delegate = self;
     
     [self.accountTableViewController presentViewController:paymentViewController animated:YES completion:nil];
 }
@@ -294,9 +294,6 @@
         [self startPaymentProcessWithAmount:invoice];
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
-        
-        //enter payment and send notification
-        [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
         
         NSString* receipt = [NSString stringWithUTF8String:[request.value bytes]];
@@ -386,6 +383,13 @@
     CFRelease(certificateFromFile);
     
     return encrypted;
+}
+
+#pragma mark PaymentviewController delegate methods 
+
+- (void)didConfirmPayment {
+    //enter payment and send notification
+    [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
 }
 
 
