@@ -12,6 +12,7 @@
 
 #define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
 #define BEACON_WALLET_CART_CHARACTERISTIC_UUID    @"18DBF890-DADD-454C-9161-7620EDFD3009"
+#define BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID    @"F810FE46-3E85-4693-AE48-0B562FEC9AEC"
 #define BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID    @"A4D26C6B-3D39-49DD-9D7A-B38A20019D67"
 #define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
 #define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
@@ -22,7 +23,7 @@
 
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
-@property (strong, nonatomic) NSMutableData         *data;
+@property (strong, nonatomic) NSMutableData         *cart;
 @property (strong, nonatomic) CBCharacteristic      *invoiceCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *paymentCharacteristic;
 @property (strong, nonatomic) CBCharacteristic      *receiptCharacteristic;
@@ -37,6 +38,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    self.cart = [[NSMutableData alloc] init];
 }
 
 /** centralManagerDidUpdateState is a required protocol method.
@@ -128,7 +130,7 @@
     NSLog(@"Scanning stopped");
     
     // Clear the data that we may already have
-    [self.data setLength:0];
+    [self.cart setLength:0];
     
     // Make sure we get the discovery callbacks
     peripheral.delegate = self;
@@ -152,7 +154,7 @@
     
     // Loop through the newly filled peripheral.services array, just in case there's more than one.
     for (CBService *service in peripheral.services) {
-        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] forService:service];
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID], [CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] forService:service];
     }
 }
 
@@ -177,6 +179,9 @@
             
             // If it is, read it
             [peripheral readValueForCharacteristic:characteristic];
+            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+        } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
+            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
         } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID]]) {
             self.invoiceCharacteristic = characteristic;
         } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
@@ -199,29 +204,40 @@
         NSLog(@"Error discovering characteristics: %@", [error localizedDescription]);
     }
     
-    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]]) {
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]]) {
         
-        NSData *cart = characteristic.value;
-        NSString* cartBase64 = [cart base64EncodedStringWithOptions:0];
-        
-        // Log it
-        NSLog(@"Received cart: %@", cart);
-        
-        // send to server
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSDictionary *parameters = @{@"cart": cartBase64};
-        [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
+        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+         NSLog(@" cart: %@", stringFromData);
+        // Have we got everything we need?
+        if ([stringFromData isEqualToString:@"EOM"]) {
             
-            //send invoice
-            [self.discoveredPeripheral writeValue:operation.responseData
-                                forCharacteristic:self.invoiceCharacteristic
-                                             type:CBCharacteristicWriteWithResponse];
+            // Log it
+            NSLog(@"Received cart: %@", self.cart);
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
+            NSString* cartBase64 = [self.cart base64EncodedStringWithOptions:0];
+            
+            // send to server
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSDictionary *parameters = @{@"cart": cartBase64};
+            [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"JSON: %@", responseObject);
+                
+                //send invoice
+                [self.discoveredPeripheral writeValue:operation.responseData
+                                    forCharacteristic:self.invoiceCharacteristic
+                                                 type:CBCharacteristicWriteWithResponse];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+            
+            // Cancel our subscription to the characteristic
+            [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+        }
         
+        // Otherwise, just add the data on to what we already have
+        [self.cart appendData:characteristic.value];
+
     } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
         
         NSString *payment = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];

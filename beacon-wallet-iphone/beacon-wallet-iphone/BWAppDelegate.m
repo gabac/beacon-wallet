@@ -16,9 +16,12 @@
 
 #define BEACON_WALLET_SERVICE_UUID           @"91514033-965D-45B0-8414-48E793DC6AEE"
 #define BEACON_WALLET_CART_CHARACTERISTIC_UUID    @"18DBF890-DADD-454C-9161-7620EDFD3009"
+#define BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID    @"F810FE46-3E85-4693-AE48-0B562FEC9AEC"
 #define BEACON_WALLET_INVOICE_CHARACTERISTIC_UUID    @"A4D26C6B-3D39-49DD-9D7A-B38A20019D67"
 #define BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID    @"FE9A5292-7CFF-45B6-812C-7B37F439FE3B"
 #define BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID    @"DB0EB363-6D35-4C5D-92C7-E5F710899F7F"
+
+#define NOTIFY_MTU      10
 
 typedef enum
 {
@@ -32,6 +35,7 @@ PaymentProcess;
 @interface BWAppDelegate () <CBPeripheralManagerDelegate>
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *cartCharacteristic;
+@property (strong, nonatomic) CBMutableCharacteristic   *cartNotifyCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *invoiceCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *paymentCharacteristic;
 @property (strong, nonatomic) CBMutableCharacteristic   *receiptCharacteristic;
@@ -39,6 +43,9 @@ PaymentProcess;
 @property (strong, nonatomic) BWIPhoneClient            *iPhoneAPI;
 @property BWPaymentViewController                       *paymentViewController;
 @property NSString                                      *totalAmount;
+@property NSInteger                                     sendDataIndex;
+@property NSData                                        *dataToSend;
+@property CBMutableCharacteristic                       *characteristicToSendTo;
 
 @end
 
@@ -241,7 +248,11 @@ PaymentProcess paymentProcess;
     
     // Start with the CBMutableCharacteristic
     self.cartCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CART_CHARACTERISTIC_UUID]
-                                                                 properties:CBCharacteristicPropertyRead
+                                                                 properties:(CBCharacteristicPropertyRead)
+                                                                      value:nil
+                                                                permissions:CBAttributePermissionsReadable];
+    self.cartNotifyCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_CART_NOTIFY_CHARACTERISTIC_UUID]
+                                                                 properties:(CBCharacteristicPropertyNotify)
                                                                       value:nil
                                                                 permissions:CBAttributePermissionsReadable];
     
@@ -264,7 +275,7 @@ PaymentProcess paymentProcess;
     CBMutableService *service = [[CBMutableService alloc] initWithType:[CBUUID UUIDWithString:BEACON_WALLET_SERVICE_UUID] primary:YES];
     
     // Add the characteristic to the service
-    service.characteristics = @[self.cartCharacteristic, self.invoiceCharacteristic, self.paymentCharacteristic, self.receiptCharacteristic];
+    service.characteristics = @[self.cartCharacteristic, self.cartNotifyCharacteristic, self.invoiceCharacteristic, self.paymentCharacteristic, self.receiptCharacteristic];
     
     // And add it to the peripheral manager
     [self.peripheralManager addService:service];
@@ -278,16 +289,30 @@ PaymentProcess paymentProcess;
         
         paymentProcess = PaymentProcessInvoice;
         
-        NSData* cart = [self getCart];
+//        NSData* cart = [self getCart];
+//        
+//        if (request.offset > cart.length) {
+//            [self.peripheralManager respondToRequest:request
+//                                          withResult:CBATTErrorInvalidOffset];
+//            return;
+//        }
+//
+//        request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
+//        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         
-        if (request.offset > cart.length) {
-            [self.peripheralManager respondToRequest:request
-                                          withResult:CBATTErrorInvalidOffset];
-            return;
-        }
-        NSLog(@"cart which gets sent: %@", [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)]);
-        request.value = [cart subdataWithRange:NSMakeRange(request.offset, cart.length - request.offset)];
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        // Get the data
+        self.dataToSend = [self getCart];
+        
+        // Reset the index
+        self.sendDataIndex = 0;
+        
+        //set the characteristic
+        self.characteristicToSendTo = self.cartNotifyCharacteristic;
+        
+        // Start sending
+        [self sendData];
+        
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessPayment) {
         
         NSLog(@"respond to payment read request");
@@ -334,7 +359,16 @@ PaymentProcess paymentProcess;
     }
 }
 
-# pragma mark helper methods for data
+/** This callback comes in when the PeripheralManager is ready to send the next chunk of data.
+ *  This is to ensure that packets will arrive in the order they are sent
+ */
+- (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral
+{
+    // Start sending again
+    [self sendData];
+}
+
+# pragma mark helper methods for data & sending data
 
 - (NSData *)getCart {
     
@@ -385,6 +419,92 @@ PaymentProcess paymentProcess;
     [payment setObject:self.totalAmount forKey:@"amount"];
 //     return [@"payment notification2" dataUsingEncoding:NSUTF8StringEncoding];
     return [self encrypt:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil]];
+}
+
+- (void)sendData
+{
+    // First up, check if we're meant to be sending an EOM
+    static BOOL sendingEOM = NO;
+    
+    if (sendingEOM) {
+        
+        // send it
+        BOOL didSend = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.characteristicToSendTo onSubscribedCentrals:nil];
+        
+        // Did it send?
+        if (didSend) {
+            
+            // It did, so mark it as sent
+            sendingEOM = NO;
+            
+            NSLog(@"Sent: EOM");
+        }
+        
+        // It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
+        return;
+    }
+    
+    // We're not sending an EOM, so we're sending data
+    
+    // Is there any left to send?
+    
+    if (self.sendDataIndex >= self.dataToSend.length) {
+        
+        // No data left.  Do nothing
+        return;
+    }
+    
+    // There's data left, so send until the callback fails, or we're done.
+    
+    BOOL didSend = YES;
+    
+    while (didSend) {
+        
+        // Make the next chunk
+        
+        // Work out how big it should be
+        NSInteger amountToSend = self.dataToSend.length - self.sendDataIndex;
+        
+        // Can't be longer than 20 bytes
+        if (amountToSend > NOTIFY_MTU) amountToSend = NOTIFY_MTU;
+        
+        // Copy out the data we want
+        NSData *chunk = [NSData dataWithBytes:self.dataToSend.bytes+self.sendDataIndex length:amountToSend];
+        
+        // Send it
+        didSend = [self.peripheralManager updateValue:chunk forCharacteristic:self.characteristicToSendTo onSubscribedCentrals:nil];
+        
+        // If it didn't work, drop out and wait for the callback
+        if (!didSend) {
+            return;
+        }
+        
+        NSLog(@"Sent: %@", chunk);
+        
+        // It did send, so update our index
+        self.sendDataIndex += amountToSend;
+        
+        // Was it the last one?
+        if (self.sendDataIndex >= self.dataToSend.length) {
+            
+            // It was - send an EOM
+            
+            // Set this so if the send fails, we'll send it next time
+            sendingEOM = YES;
+            
+            // Send it
+            BOOL eomSent = [self.peripheralManager updateValue:[@"EOM" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:self.characteristicToSendTo onSubscribedCentrals:nil];
+            
+            if (eomSent) {
+                // It sent, we're all done
+                sendingEOM = NO;
+                
+                NSLog(@"Sent: EOM");
+            }
+            
+            return;
+        }
+    }
 }
 
 # pragma mark security helper methods
