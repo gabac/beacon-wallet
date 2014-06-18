@@ -114,24 +114,4 @@ class TransactionsController
         ));
     }
 
-    public function getTransactions(Request $request)
-    {
-        $transaction = array(
-            'id' => 42,
-        );
-        $json = json_encode($transaction);
-
-        $encrypted = 'Wezl9GKjvdoGrbVjV20iMApNoQpckL7DDkB1eQOkhrTIjCAV7cMvtWMa+VWUKgiVPr0tsl+dOvg413NEIWFuwuaMjLQJ8u+ZuBKVGRvic/MV0bLDefNAk03wbFEtHtRdqxLeVV0igbELc7rzkXPF6E/QYKZf/AGz+Nh5gkyVznNBaZ+0MwEifABwQRauSNmJb6ZG3Ze8jidgjSyyn/Jbzxllr58rhkbKnutuDnDpCGytPz87ZtoaEiyPBzOAb8OlxYKh5zNhI8jIc7V2lGk1/4ZnsTId15YdCfbu6eLvEK6fOXzPTLgzOPXm4dRu952vgbAfvVj5XKUC23nHcxojhg==';
-
-        // prepare and return response
-        $data = array(
-            'transaction' => $json,
-            'signature' => $this->crypt->sign($json),
-            'decrypted' => $this->crypt->decrypt($encrypted),
-        );
-
-        return new JsonResponse(array(
-            'transactions' => $data
-        ));
-    }
 }

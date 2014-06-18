@@ -13,7 +13,6 @@ class ControllerProvider implements \Silex\ControllerProviderInterface
         $controllers->get('/products', 'controller.products:getProducts')->bind('products');
         $controllers->get('/products/{id}', 'controller.products:getProduct')->bind('product');
         $controllers->post('/transactions', 'controller.transactions:createTransaction');
-        $controllers->get('/transactions', 'controller.transactions:getTransactions')->bind('transactions');
         $controllers->post('/transactions/payment', 'controller.transactions:payTransaction');
 
         return $controllers;
