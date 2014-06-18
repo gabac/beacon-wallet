@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * REST resource with links to other resources.
+ */
 class HomeController
 {
     /**
@@ -22,6 +25,7 @@ class HomeController
 
     public function indexAction(Request $request)
     {
+        // build JSON response
         $data = array(
             'links' => array(
                 'home' => $this->url->generate('home', array(), true),

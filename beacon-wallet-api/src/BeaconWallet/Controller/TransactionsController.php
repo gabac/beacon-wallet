@@ -9,12 +9,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * REST resource for transactions.
+ */
 class TransactionsController
 {
+    /**
+     * @var \BeaconWallet\Service\Transactions
+     */
     protected $transactions;
 
+    /**
+     * @var \BeaconWallet\Service\Accounts
+     */
     protected $accounts;
 
+    /**
+     * @var \BeaconWallet\Service\Crypt
+     */
     protected $crypt;
 
     /**
@@ -30,11 +42,14 @@ class TransactionsController
         $this->url = $url;
     }
 
+    /**
+     * Creates a new transaction.
+     */
     public function createTransaction(Request $request)
     {
-        // encrypt cart
         $encrypted = $request->get('cart');
 
+        // decrypt cart
         $decrypted = $this->crypt->decrypt($encrypted);
 
         $data = json_decode($decrypted);
