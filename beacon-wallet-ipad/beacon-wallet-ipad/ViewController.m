@@ -109,6 +109,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(76/255.0) green:(217/255.0) blue:(100/255.0) alpha:1.0];
     
+    self.instructions.text = @"Sending cart to server, please wait...";
+    
     // Ok, it's in range - have we already seen it?
     if (self.discoveredPeripheral != peripheral) {
         
@@ -232,6 +234,8 @@
             [manager POST:@"http://beacon-wallet.lightningapp.ch/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 
+                // send the invoice
+                
                 // Get the data
                 self.dataToSend = operation.responseData;
                 
@@ -270,6 +274,9 @@
             NSLog(@"Received payment notification");
             [self.discoveredPeripheral readValueForCharacteristic:self.paymentCharacteristic];
         } else {
+            
+            self.instructions.text = @"Sending payment to server, please wait...";
+            
             //do the payment
             NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
             NSLog(@" payment: %@", stringFromData);
@@ -353,6 +360,10 @@
 {
     NSLog(@"Peripheral Disconnected");
     self.discoveredPeripheral = nil;
+    
+    self.view.backgroundColor = UIColor.whiteColor;
+    
+    self.instructions.text = @"Please open the Beacon Wallet app and hold your iPhone next to the iPad";
     
     // We're disconnected, so start scanning again
     [self scan];
