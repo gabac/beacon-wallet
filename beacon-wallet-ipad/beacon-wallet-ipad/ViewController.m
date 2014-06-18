@@ -102,6 +102,8 @@
         
         self.view.backgroundColor = UIColor.whiteColor;
         
+        self.instructions.text = @"Please open the Beacon Wallet app and hold your iPhone next to the iPad";
+        
         return;
     }
     
