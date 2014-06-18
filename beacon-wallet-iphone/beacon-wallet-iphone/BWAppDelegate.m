@@ -586,7 +586,7 @@ PaymentProcess paymentProcess;
     self.totalAmount = amount;
     
     self.paymentViewController = [[BWPaymentViewController alloc] initWithNibName:@"BWPaymentViewController" bundle:[NSBundle mainBundle]];
-    self.paymentViewController.totalAmount.text = amount;
+    self.paymentViewController.totalAmountNumber = amount;
     self.paymentViewController.delegate = self;
     
     [self.tabBarViewController presentViewController:self.paymentViewController animated:YES completion:nil];
