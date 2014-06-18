@@ -12,7 +12,7 @@
 
 @interface BWReceiptTableViewController ()
 
-@property NSArray *receiptDataItems;
+@property NSMutableArray *receiptDataItems;
 @property NSArray *products;
 
 @end
@@ -124,27 +124,37 @@
     
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [self.receiptDataItems removeObjectAtIndex:indexPath.row];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docDir = [paths objectAtIndex: 0];
+        NSString* docFile = [docDir stringByAppendingPathComponent: @"Storage"];
+        
+        [NSKeyedArchiver archiveRootObject:self.receiptDataItems toFile:docFile];
+        
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
