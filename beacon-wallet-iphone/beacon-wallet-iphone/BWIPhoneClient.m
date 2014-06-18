@@ -10,7 +10,7 @@
 
 static NSString * const kBWAPIBaseDebugURLString = @"http://localhost:8000/";
 static NSString * const kBWAPIBaseApiaryURLString = @"http://beaconwallet.apiary-mock.com/";
-static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
+static NSString * const kBWAPIBaseReleaseURLString = @"http://beacon-wallet.lightningapp.ch";
 
 #if DEBUG
     static NSString * const kEnv = @"development";
@@ -29,7 +29,7 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
         NSString *url;
         
         //setting the url according to the environment
-        if([kEnv isEqualToString:@"development"]) {
+        if([kEnv isEqualToString:@"production"]) {
             url = kBWAPIBaseApiaryURLString;
         } else {
             url = kBWAPIBaseReleaseURLString;
@@ -54,7 +54,7 @@ static NSString * const kBWAPIBaseReleaseURLString = @"http://localhost:8000/";
         
         account.card = [responseObject objectForKey: @"card"];
         account.creditcard = [responseObject objectForKey: @"cc_nr"];
-        account.pin = [responseObject objectForKey: @"pin"];
+        account.pin = pin;
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docDir = [paths objectAtIndex: 0];

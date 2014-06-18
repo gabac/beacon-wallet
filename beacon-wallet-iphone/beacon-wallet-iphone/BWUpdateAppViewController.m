@@ -7,6 +7,7 @@
 //
 
 #import "BWUpdateAppViewController.h"
+#import "BWIPhoneClient.h"
 
 @interface BWUpdateAppViewController ()
 
@@ -27,10 +28,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-- (IBAction)donePressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
     
+    BWIPhoneClient *iPhoneAPI = [BWIPhoneClient sharedClient];
+    
+    //get products
+    [iPhoneAPI getAllProducts:^(NSError *error) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

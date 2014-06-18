@@ -37,7 +37,9 @@
     [iPhoneAPI getAccountDetails:self.cardnumber.text andPin:self.password.text andBlock:^(BWAccount *account, NSError *error) {
         self.accountTableViewController.account = account;
         [self.accountTableViewController.tableView reloadData];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate didLogin];
+        }];
     }];
 }
 - (IBAction)didEndOnExit:(id)sender {

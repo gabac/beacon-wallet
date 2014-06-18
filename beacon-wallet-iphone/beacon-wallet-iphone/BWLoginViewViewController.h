@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "BWAccountTableViewController.h"
 
+@protocol BWLoginViewViewControllerDelegate;
+
 @interface BWLoginViewViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *cardnumber;
 @property BWAccountTableViewController *accountTableViewController;
+@property (assign) NSObject <BWLoginViewViewControllerDelegate> *delegate;
+
+@end
+
+@protocol BWLoginViewViewControllerDelegate <NSObject>
+
+- (void)didLogin;
 
 @end

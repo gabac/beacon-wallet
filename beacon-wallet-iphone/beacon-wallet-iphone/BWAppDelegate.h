@@ -15,7 +15,7 @@
 #import "BWLoginViewViewController.h"
 #import "BWPaymentViewController.h"
 
-@interface BWAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate, BWPaymentViewControllerDelegate>
+@interface BWAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate, BWPaymentViewControllerDelegate, BWLoginViewViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

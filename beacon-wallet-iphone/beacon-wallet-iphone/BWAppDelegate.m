@@ -10,6 +10,7 @@
 #import "BWIPhoneClient.h"
 #import "BWWelcomeViewController.h"
 #import "BWReceiptViewController.h"
+#import "BWUpdateAppViewController.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -63,9 +64,6 @@ PaymentProcess paymentProcess;
     self.iPhoneAPI = [BWIPhoneClient sharedClient];
     paymentProcess = PaymentProcessAcceptConnections;
     
-    //get products
-    [self.iPhoneAPI getAllProducts:nil];
-    
     //Bluetooth stuff
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     
@@ -110,6 +108,7 @@ PaymentProcess paymentProcess;
     if(!account) {
         self.loginViewController = [[BWLoginViewViewController alloc] initWithNibName:@"BWLoginViewViewController" bundle:[NSBundle mainBundle]];
         self.loginViewController.accountTableViewController = self.accountTableViewController;
+        self.loginViewController.delegate = self;
         
         [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
     } else {
@@ -571,6 +570,15 @@ PaymentProcess paymentProcess;
     [self.peripheralManager updateValue:[self getPaymentNotification] forCharacteristic:self.paymentCharacteristic onSubscribedCentrals:nil];
 }
 
+#pragma mark LoginViewController delegate methods
+
+- (void)didLogin {
+    //get product data
+    BWUpdateAppViewController *updateAppViewController = [[BWUpdateAppViewController alloc] initWithNibName:@"BWUpdateAppViewController" bundle:[NSBundle mainBundle]];
+    
+   [self.accountTableViewController presentViewController:updateAppViewController animated:YES completion:nil];
+}
+
 #pragma mark Helper methods for views
 
 - (void) startPaymentProcessWithAmount:(NSString *)amount {
@@ -581,7 +589,7 @@ PaymentProcess paymentProcess;
     self.paymentViewController.totalAmount.text = amount;
     self.paymentViewController.delegate = self;
     
-    [self.accountTableViewController presentViewController:self.paymentViewController animated:YES completion:nil];
+    [self.tabBarViewController presentViewController:self.paymentViewController animated:YES completion:nil];
 }
 
 - (void) showReceiptView {
