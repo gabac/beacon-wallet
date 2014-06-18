@@ -358,7 +358,7 @@
         // Notification has stopped
         // so disconnect from the peripheral
         NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
-        [self.centralManager cancelPeripheralConnection:peripheral];
+        //[self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
 
@@ -411,14 +411,6 @@
                             return;
                         }
                     } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_PAYMENT_CHARACTERISTIC_UUID]]) {
-                        if (characteristic.isNotifying) {
-                            // It is notifying, so unsubscribe
-                            [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
-                            
-                            // And we're done.
-                            return;
-                        }
-                    } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]]) {
                         if (characteristic.isNotifying) {
                             // It is notifying, so unsubscribe
                             [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
