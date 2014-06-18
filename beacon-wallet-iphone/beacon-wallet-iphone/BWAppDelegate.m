@@ -354,8 +354,10 @@ PaymentProcess paymentProcess;
             
             NSLog(@"Received invoice %@", transaction);
             
-            //display invoice screen
-            [self startPaymentProcessWithAmount: [transaction valueForKey:@"amount"]];
+            NSNumber *amount = [transaction objectForKey:@"amount"];
+            
+            // display invoice screen
+            [self startPaymentProcessWithAmount: amount.stringValue];
             
             return;
         }
