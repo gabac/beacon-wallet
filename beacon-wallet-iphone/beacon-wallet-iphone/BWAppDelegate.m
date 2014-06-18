@@ -49,7 +49,7 @@ PaymentProcess;
 @property CBMutableCharacteristic                       *characteristicToSendTo;
 @property (strong, nonatomic) NSMutableData             *invoice;
 @property BWAccount                                     *account;
-
+@property NSString                                      *transactionId;
 @end
 
 @implementation BWAppDelegate
@@ -342,13 +342,14 @@ PaymentProcess paymentProcess;
         if ([message isEqualToString:@"EOM"]) {
             
             paymentProcess = PaymentProcessPayment;
+            NSDictionary *invoice = [NSJSONSerialization JSONObjectWithData:self.invoice options:0 error:nil];
+            NSDictionary *transaction = [invoice valueForKey:@"transaction"];
+            self.transactionId = [transaction valueForKey:@"id"];
             
-            NSString* invoice = [NSString stringWithUTF8String:self.invoice.bytes];
-            
-            NSLog(@"Received invoice %@", invoice);
+            NSLog(@"Received invoice %@", transaction);
             
             //display invoice screen
-            [self startPaymentProcessWithAmount: @"12.30"];
+            [self startPaymentProcessWithAmount: [transaction valueForKey:@"amount"]];
             
             return;
         }
@@ -429,7 +430,7 @@ PaymentProcess paymentProcess;
     NSMutableDictionary *payment = [[NSMutableDictionary alloc] init];
     //todo
     //where to get transactionid?
-    [payment setObject:@"25" forKey:@"id"]; // transaction id
+    [payment setObject:self.transactionId forKey:@"id"]; // transaction id
     [payment setObject:self.account.card forKey:@"card"];
     [payment setObject:self.account.pin forKey:@"pin"];
     [payment setObject:self.totalAmount forKey:@"amount"];
