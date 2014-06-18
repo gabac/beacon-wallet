@@ -46,8 +46,8 @@ PaymentProcess;
 @property NSInteger                                     sendDataIndex;
 @property NSData                                        *dataToSend;
 @property CBMutableCharacteristic                       *characteristicToSendTo;
-
 @property (strong, nonatomic) NSMutableData             *invoice;
+@property BWAccount                                     *account;
 
 @end
 
@@ -63,17 +63,8 @@ PaymentProcess paymentProcess;
     self.iPhoneAPI = [BWIPhoneClient sharedClient];
     paymentProcess = PaymentProcessAcceptConnections;
     
-    //check if we have products already
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = [paths objectAtIndex: 0];
-    NSString* docFile = [docDir stringByAppendingPathComponent: @"Products"];
-    
-    self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
-    
-//    if(!self.products) {
-    if(true) {
-        [self.iPhoneAPI getAllProducts:nil];
-    }
+    //get products
+    [self.iPhoneAPI getAllProducts:nil];
     
     //Bluetooth stuff
     _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
@@ -110,7 +101,9 @@ PaymentProcess paymentProcess;
     [self.window makeKeyAndVisible];
     
     //check if the user has already an account
-   NSString* docFileAccount = [docDir stringByAppendingPathComponent: @"Account"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFileAccount = [docDir stringByAppendingPathComponent: @"Account"];
     
     BWAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileAccount];
     
@@ -120,6 +113,8 @@ PaymentProcess paymentProcess;
         
         [self.accountTableViewController presentViewController:self.loginViewController animated:NO completion:nil];
     } else {
+        self.account = account;
+        
         self.accountTableViewController.account = account;
         [self.accountTableViewController.tableView reloadData];
     }
@@ -314,16 +309,6 @@ PaymentProcess paymentProcess;
         NSLog(@"respond to payment read request");
         paymentProcess = PaymentProcessReceipt;
         
-//        NSData* payment = [self getPayment];
-//        
-//        if (request.offset > payment.length) {
-//            [self.peripheralManager respondToRequest:request
-//                                          withResult:CBATTErrorInvalidOffset];
-//            return;
-//        }
-//        
-//        request.value = [payment subdataWithRange:NSMakeRange(request.offset, payment.length - request.offset)];
-//        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         
         // Get the data
@@ -404,10 +389,14 @@ PaymentProcess paymentProcess;
     
     NSArray *receiptDataItems = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
     
+    if(!self.account) {
+        NSString* docFileAccount = [docDir stringByAppendingPathComponent: @"Account"];
+        self.account = [NSKeyedUnarchiver unarchiveObjectWithFile:docFileAccount];
+    }
+    
     NSMutableDictionary *cart = [[NSMutableDictionary alloc] init];
     //todo get number
-    [cart setObject:@"2501032235098" forKey:@"card"];
-    [cart setObject:@"23432" forKey:@"branch"];
+    [cart setObject:self.account.card forKey:@"card"];
     
     NSMutableArray *productsWithQty = [[NSMutableArray alloc] init];
     
@@ -439,12 +428,12 @@ PaymentProcess paymentProcess;
 - (NSData *)getPayment {
     
     NSMutableDictionary *payment = [[NSMutableDictionary alloc] init];
-    //todo get number
+    //todo
+    //where to get transactionid?
     [payment setObject:@"25" forKey:@"id"]; // transaction id
-    [payment setObject:@"2501032235098" forKey:@"card"];
-    [payment setObject:@"1234" forKey:@"pin"];
+    [payment setObject:self.account.card forKey:@"card"];
+    [payment setObject:self.account.pin forKey:@"pin"];
     [payment setObject:self.totalAmount forKey:@"amount"];
-//     return [@"payment notification2" dataUsingEncoding:NSUTF8StringEncoding];
     
     NSLog(@"json %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:payment options:0 error:nil] encoding:NSUTF8StringEncoding]);
     
