@@ -32,8 +32,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id3-VM-6KH">
-                    <rect key="frame" x="217" y="430" width="37" height="30"/>
+                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id3-VM-6KH">
+                    <rect key="frame" x="222" y="382" width="37" height="30"/>
                     <state key="normal" title="Done">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -45,12 +45,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="547-BF-hVr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="9Cd-hn-Uci"/>
-                <constraint firstAttribute="bottom" secondItem="Id3-VM-6KH" secondAttribute="bottom" constant="20" symbolic="YES" id="AIY-gb-DGk"/>
                 <constraint firstItem="547-BF-hVr" firstAttribute="centerX" secondItem="i4b-hc-QFI" secondAttribute="centerX" id="B1q-lE-FCd"/>
-                <constraint firstItem="Id3-VM-6KH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="217" id="HuL-y8-bJe"/>
-                <constraint firstAttribute="bottom" secondItem="Id3-VM-6KH" secondAttribute="bottom" constant="20" symbolic="YES" id="ams-KU-O70"/>
                 <constraint firstItem="i4b-hc-QFI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="234" id="crY-M2-Lsx"/>
-                <constraint firstItem="Id3-VM-6KH" firstAttribute="centerX" secondItem="i4b-hc-QFI" secondAttribute="centerX" id="y9h-bN-1uR"/>
+                <constraint firstItem="Id3-VM-6KH" firstAttribute="centerX" secondItem="i4b-hc-QFI" secondAttribute="centerX" id="gbu-4w-AJ6"/>
+                <constraint firstAttribute="bottom" secondItem="Id3-VM-6KH" secondAttribute="bottom" constant="68" id="sKS-ht-AW5"/>
                 <constraint firstItem="i4b-hc-QFI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yKM-sB-NGL"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
