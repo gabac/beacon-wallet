@@ -329,7 +329,6 @@
 				ORGANIZATIONNAME = Bahnhofstrasse24;
 				TargetAttributes = {
 					02FCF8B618E0B57A00E3C663 = {
-						DevelopmentTeam = 954FHG3G94;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
