@@ -2,6 +2,9 @@
 
 namespace BeaconWallet;
 
+/**
+ * Setup of dependencies.
+ */
 class ServiceProvider implements \Silex\ServiceProviderInterface
 {
     public function register(\Silex\Application $app)

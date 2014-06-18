@@ -2,6 +2,9 @@
 
 namespace BeaconWallet\Service;
 
+/**
+ * Storage access for transactions.
+ */
 class Transactions
 {
     const STATUS_PENDING = 'pending';
@@ -27,6 +30,7 @@ class Transactions
 
         $products = $this->database->fetchAll($sql, array($id));
 
+        // add products to transaction
         $transaction['products'] = $products;
 
         return $transaction;
@@ -34,26 +38,32 @@ class Transactions
 
     public function createTransaction($card, $products = array())
     {
+        // variable for closure
         $transactionId = null;
 
+        // start database transaction
         $this->database->transactional(function($database) use ($card, $products, &$transactionId) {
 
             $sql = 'INSERT INTO `transactions` (`status`, `card`, `created`) VALUES (?, ?, NOW())';
 
+            // create transaction with status pending
             $result = $database->executeUpdate($sql, array(
                 self::STATUS_PENDING,
                 $card,
             ));
 
+            // get transaction ID
             $transactionId = $database->lastInsertId();
 
             $sql = 'INSERT INTO `transactions_products` (`transaction`, `product`, `quantity`, `amount`) VALUES (?, ?, ?, (SELECT p.price * ? FROM `products` p WHERE p.id = ?))';
 
+            // look products
             foreach ($products as $product) {
 
                 $id = isset($product->id) ? $product->id : null;
                 $quantity = isset($product->quantity) ? $product->quantity : 1;
 
+                // add products to database
                 $result = $database->executeUpdate($sql, array(
                     $transactionId,
                     $id,
@@ -64,6 +74,7 @@ class Transactions
             }
         });
 
+        // finally return the transaction ID from closure
         return $transactionId;
     }
 
@@ -71,6 +82,7 @@ class Transactions
     {
         $sql = 'UPDATE `transactions` SET `status` = ? WHERE `id` = ? AND `card` = ?';
 
+        // set status of transaction to complete
         $result = $this->database->executeUpdate($sql, array(
             self::STATUS_COMPLETE,
             $id,

@@ -2,8 +2,14 @@
 
 namespace BeaconWallet\Service;
 
+/**
+ * Helper class for cryptography.
+ */
 class Crypt
 {
+    /**
+     * @var string path to private key
+     */
     protected $privateKey;
 
     public function __construct($privateKey)
@@ -11,6 +17,11 @@ class Crypt
         $this->privateKey = $privateKey;
     }
 
+    /**
+     * Internal helper to load the private key file.
+     *
+     * @throws \Exception if private key failed to load
+     */
     private function loadPrivateKey()
     {
         $privateKey = openssl_pkey_get_private('file://' . $this->privateKey);
@@ -20,6 +31,9 @@ class Crypt
         return $privateKey;
     }
 
+    /**
+     * Create a signature for the passed data.
+     */
     public function sign($data)
     {
         $privateKey = $this->loadPrivateKey();
@@ -31,6 +45,9 @@ class Crypt
         return base64_encode($signature);
     }
 
+    /**
+     * Decrypt encrypted data.
+     */
     public function decrypt($encrypted)
     {
         $privateKey = $this->loadPrivateKey();

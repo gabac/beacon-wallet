@@ -2,6 +2,9 @@
 
 namespace BeaconWallet\Service;
 
+/**
+ * Storage access for accounts.
+ */
 class Products
 {
     protected $database;
@@ -15,6 +18,7 @@ class Products
     {
         $sql = 'SELECT p.id FROM `products` p';
 
+        // execute query
         $products = $this->database->fetchAll($sql);
 
         return $products;
@@ -32,6 +36,7 @@ class Products
 
         $info = $this->database->fetchAll($sql, array($id));
 
+        // add info to product
         $product['info'] = $info;
 
         // barcodes
@@ -39,6 +44,7 @@ class Products
 
         $barcodes = $this->database->fetchArray($sql, array($id), 0);
 
+        // add barcodes to product
         $product['barcodes'] = $barcodes;
 
         return $product;
@@ -48,13 +54,16 @@ class Products
     {
         $sql = 'INSERT INTO `products` (`name`, `price`, `updated`) VALUES (?, ?, NOW())';
 
+        // add product
         $result = $this->database->executeUpdate($sql, array(
             $name,
             $price,
         ));
 
+        // get product ID
         $id = $this->database->lastInsertId();
 
+        // add product info
         $sql = 'INSERT INTO `products_info` (`product`, `name`, `value`) VALUES (?, ?, ?)';
 
         foreach ($info as $name => $value) {

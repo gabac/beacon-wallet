@@ -2,6 +2,9 @@
 
 namespace BeaconWallet;
 
+/**
+ * Main Silex application.
+ */
 class Application extends \Silex\Application
 {
     public function __construct()

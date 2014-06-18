@@ -2,6 +2,9 @@
 
 namespace BeaconWallet;
 
+/**
+ * Mapping of URLs to controllers (router).
+ */
 class ControllerProvider implements \Silex\ControllerProviderInterface
 {
     public function connect(\Silex\Application $app)

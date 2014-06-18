@@ -2,6 +2,9 @@
 
 namespace BeaconWallet\Service;
 
+/**
+ * Storage access for accounts.
+ */
 class Accounts
 {
     protected $database;
