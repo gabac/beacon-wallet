@@ -34,6 +34,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if([self.totalAmountNumber intValue] <= 0) {
+        self.totalAmountNumber = @"0.0";
+    }
     self.totalAmount.text = self.totalAmountNumber;
 }
 

@@ -342,8 +342,11 @@ PaymentProcess paymentProcess;
         if ([message isEqualToString:@"EOM"]) {
             
             paymentProcess = PaymentProcessPayment;
+            
             NSDictionary *invoice = [NSJSONSerialization JSONObjectWithData:self.invoice options:0 error:nil];
-            NSDictionary *transaction = [invoice valueForKey:@"transaction"];
+            NSString *transactionString =[invoice valueForKey:@"transaction"];
+            NSDictionary *transaction = [NSJSONSerialization JSONObjectWithData:[transactionString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+            
             self.transactionId = [transaction valueForKey:@"id"];
             
             NSLog(@"Received invoice %@", transaction);
