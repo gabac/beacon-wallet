@@ -50,6 +50,9 @@ class Products
         return $product;
     }
 
+    /**
+     * @return int the product ID
+     */
     public function addProduct($name, $price, $info = array())
     {
         $sql = 'INSERT INTO `products` (`name`, `price`, `updated`) VALUES (?, ?, NOW())';

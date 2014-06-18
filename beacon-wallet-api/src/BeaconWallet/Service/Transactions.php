@@ -36,6 +36,9 @@ class Transactions
         return $transaction;
     }
 
+    /**
+     * @return int transaction ID
+     */
     public function createTransaction($card, $products = array())
     {
         // variable for closure

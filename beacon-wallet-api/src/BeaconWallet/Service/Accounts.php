@@ -23,6 +23,9 @@ class Accounts
         return $account;
     }
 
+    /**
+     * @return boolean true for a valid pin, false otherwise
+     */
     public function verifyPin($card, $pin)
     {
         $sql = 'SELECT a.card, a.pin FROM `accounts` a WHERE a.card = ?';
