@@ -24,6 +24,8 @@
     self.peripheralManager.delegate = self;
     [self.peripheralManager startAdvertising:peripheralDictionary];
     
+    application.idleTimerDisabled = YES;
+    
     return YES;
 }
 
