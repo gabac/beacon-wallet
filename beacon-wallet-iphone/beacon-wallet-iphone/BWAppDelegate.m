@@ -48,6 +48,7 @@ PaymentProcess;
 @property NSData                                        *dataToSend;
 @property CBMutableCharacteristic                       *characteristicToSendTo;
 @property (strong, nonatomic) NSMutableData             *invoice;
+@property (strong, nonatomic) NSMutableData             *receipt;
 @property BWAccount                                     *account;
 @property NSString                                      *transactionId;
 @end
@@ -119,6 +120,7 @@ PaymentProcess paymentProcess;
     }
     
     self.invoice = [[NSMutableData alloc] init];
+    self.receipt = [[NSMutableData alloc] init];
     
     return YES;
 }
@@ -321,7 +323,8 @@ PaymentProcess paymentProcess;
         
         // Start sending
         [self sendData];
-
+        
+        [self.receipt setLength:0];
     }
 }
 
@@ -357,19 +360,32 @@ PaymentProcess paymentProcess;
             return;
         }
         
-        // else append if
+        // else append it
         [self.invoice appendData:data];
         
     } else if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:BEACON_WALLET_RECEIPT_CHARACTERISTIC_UUID]] && paymentProcess == PaymentProcessReceipt) {
         
-        paymentProcess = PaymentProcessAcceptConnections;
         
-        NSString* receipt = [NSString stringWithUTF8String:[request.value bytes]];
-        NSLog(@"receipt write request: %@", receipt);
+        NSData* data = request.value;
+        NSString* message = [NSString stringWithUTF8String:[data bytes]];
         
         [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
         
-        [self showReceiptView];
+        // finished with receipt write?
+        if ([message isEqualToString:@"EOM"]) {
+            
+            paymentProcess = PaymentProcessAcceptConnections;
+            
+            NSLog(@"Received receipt %@", [NSString stringWithUTF8String:self.receipt.bytes]);
+            
+            // display receipt screen
+            [self showReceiptView];
+            
+            return;
+        }
+        
+        // else append it
+        [self.receipt appendData:data];
     }
 }
 

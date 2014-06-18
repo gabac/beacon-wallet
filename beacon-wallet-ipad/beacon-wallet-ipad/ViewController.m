@@ -295,10 +295,19 @@
                     
                     NSLog(@"JSON: %@", responseObject);
                     
-                    //send the receipt
-                    [self.discoveredPeripheral writeValue:operation.responseData
-                                        forCharacteristic:self.receiptCharacteristic
-                                                     type:CBCharacteristicWriteWithResponse];
+                    // send the receipt
+                    
+                    // Get the data
+                    self.dataToSend = operation.responseData;
+                    
+                    // Reset the index
+                    self.sendDataIndex = 0;
+                    
+                    //set the characteristic
+                    self.characteristicToSendTo = self.receiptCharacteristic;
+                    
+                    // Start sending
+                    [self sendData];
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error Response: %@", operation.responseString);
