@@ -29,6 +29,7 @@ class HomeController
         $data = array(
             'links' => array(
                 'home' => $this->url->generate('home', array(), true),
+                'products' => $this->url->generate('products', array(), true),
             ),
         );
 
