@@ -2,22 +2,25 @@ FORMAT: 1A
 HOST: http://www.google.com
 
 # Beacon Wallet API
-The client requests are authenticated through the basic authentication scheme
-http://tools.ietf.org/html/rfc1945#section-11.1. Username is the Supercard number
-and password is the pin code.
+
+Some resources required authentication of the user. For these requests the client must 
+use the basic authentication headers according to http://tools.ietf.org/html/rfc1945#section-11.1. 
+The username is the Supercard number and the password is the pin code.
 
 # Group iPhone API
-API calls for the iPhone App.
+The following API calls are for the iPhone App. They require user authentication as
+the access personal account information.
 
 ## Account [/accounts/{card}]
 
-Each account is identified by a Supercard number.
+Each account is identified by a Supercard number and contains the credit 
+card information of the user for direct payment.
 
 | Field        | Type   | Description                             |
 |:-------------|:-------|:----------------------------------------|
-| card         | string | Supercard number                   |
-| cc_nr        | string | Credit card number  |
-| cc_date      | string | Expiry date of credit card  |
+| card         | string | Supercard number                        |
+| cc_nr        | string | Credit card number                      |
+| cc_date      | string | Expiry date of credit card              |
 | cc_ccv       | string | CCV code of creditcard                  |
 
 + Parameters
@@ -33,6 +36,7 @@ Each account is identified by a Supercard number.
     + Body
 
             {}
+
 + Response 200 (application/json)
     + Body
 
@@ -63,24 +67,6 @@ Each account is identified by a Supercard number.
                 "cc_nr":"510143256345234",
                 "cc_date":"08-15"
             }
-
-## Transactions [/accounts/{card}/transactions]
-
-Transactions of a user.
-
-+ Parameters
-    + card (string, `2501032235098`) ... Supercard number
-
-### Get all transactions [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-                "transactions": [
-                ]
-            }
-
 
 ## Product Collection [/products]
 
@@ -154,7 +140,8 @@ to avoid unnecessary data being sent over the network.
 
 # Group iPad API
 
-API resources used by the POS iPad.
+These API resources are used by the POS iPad to checkout in the store.
+The authentication is encrypted in the request body.
 
 ## Transaction [/transactions]
 
@@ -162,9 +149,10 @@ To create a new transaction the cart is sent to the server.
 
 The request is an encrypted JSON string in Base64 and the response
 also includes a signature in Base64. The following code shows the pure 
-JSON of the cart and the invoice for better understanding.
+JSON of the cart request and the transaction response for better 
+understanding.
 
-### Cart
+### Cart request JSON
 
 ```
 {
@@ -177,14 +165,13 @@ JSON of the cart and the invoice for better understanding.
 }
 ```
 
-### Invoice
+### Transaction response JSON
 
 ```
 {
     "id": 123,
     "status": "pending",
     "card": "2501032235098",
-    "branch": 23432,
     "amount": 123.35,
     "products": [
         {"id": 123, "quantity": 2, "amount": 50},
@@ -212,10 +199,11 @@ A transaction gets payed by sending the card and the PIN to the server.
 
 The request is an encrypted JSON string in Base64 and the response
 also includes a signature in Base64. The following code shows the pure 
-JSON values for better understanding here.
+JSON of the payment request and the transaction response for better 
+understanding.
 
 
-### Payment
+### Payment request JSON
 
 ```
 {
@@ -225,14 +213,13 @@ JSON values for better understanding here.
 }
 ```
 
-### Receipt
+### Transaction response JSON
 
 ```
 {
     "id": 123,
     "status": "complete",
     "card": "2501032235098",
-    "branch": 23432,
     "amount": 123.35,
     "products": [
         {"id": 123, "quantity": 2, "amount": 50},
