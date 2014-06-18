@@ -227,7 +227,7 @@
             // send to server
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             NSDictionary *parameters = @{@"cart": cartBase64};
-            [manager POST:@"http://beaconwallet.apiary-mock.com/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [manager POST:@"http://beacon-wallet.lightningapp.ch/transactions" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"JSON: %@", responseObject);
                 
                 // Get the data
@@ -282,7 +282,7 @@
                 // send to server
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                 NSDictionary *parameters = @{@"payment": paymentBase64};
-                [manager POST:@"http://beaconwallet.apiary-mock.com/transactions/payment" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [manager POST:@"http://beacon-wallet.lightningapp.ch/transactions/payment" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     
                     NSLog(@"JSON: %@", responseObject);
                     
