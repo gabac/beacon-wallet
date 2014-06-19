@@ -44,7 +44,7 @@ PaymentProcess;
 @property (strong, nonatomic) NSArray                   *products;
 @property (strong, nonatomic) BWIPhoneClient            *iPhoneAPI;
 @property BWPaymentViewController                       *paymentViewController;
-@property NSString                                      *totalAmount;
+@property NSNumber                                      *totalAmount;
 @property NSInteger                                     sendDataIndex;
 @property NSData                                        *dataToSend;
 @property CBMutableCharacteristic                       *characteristicToSendTo;
@@ -356,7 +356,7 @@ PaymentProcess paymentProcess;
             NSNumber *amount = [transaction objectForKey:@"amount"];
             
             // display invoice screen
-            [self startPaymentProcessWithAmount: amount.stringValue];
+            [self startPaymentProcessWithAmount: amount];
             
             return;
         }
@@ -602,7 +602,7 @@ PaymentProcess paymentProcess;
 
 #pragma mark Helper methods for views
 
-- (void) startPaymentProcessWithAmount:(NSString *)amount {
+- (void) startPaymentProcessWithAmount:(NSNumber *)amount {
     //we need it later
     self.totalAmount = amount;
     

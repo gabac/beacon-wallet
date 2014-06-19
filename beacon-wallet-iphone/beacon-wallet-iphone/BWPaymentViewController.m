@@ -35,9 +35,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if([self.totalAmountNumber intValue] <= 0) {
-        self.totalAmountNumber = @"0.0";
+        self.totalAmountNumber = @0;
     }
-    self.totalAmount.text = self.totalAmountNumber;
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *numberAsString = [numberFormatter stringFromNumber:self.totalAmountNumber];
+    
+    self.totalAmount.text = numberAsString;
 }
 
 - (void)didReceiveMemoryWarning

@@ -68,6 +68,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *numberAsString = [numberFormatter stringFromNumber:self.product.price];
+    
     switch (indexPath.row) {
         case 0:
             //ProductId
@@ -82,7 +86,7 @@
         case 2:
             //name
             cell.textLabel.text = @"Preis";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"CHF %@", self.product.price];
+            cell.detailTextLabel.text = numberAsString;
             break;
         default:
             //infos

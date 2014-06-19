@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *totalAmount;
 @property (assign) NSObject <BWPaymentViewControllerDelegate> *delegate;
-@property NSString *totalAmountNumber;
+@property NSNumber *totalAmountNumber;
 
 @end
 

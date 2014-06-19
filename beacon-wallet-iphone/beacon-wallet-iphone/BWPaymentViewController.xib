@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <objects>
@@ -37,16 +38,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbI-36-AZC">
-                    <rect key="frame" x="136" y="237" width="24" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="NNQ-Ex-7oM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHF" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rC-3L-YhJ">
-                    <rect key="frame" x="168" y="237" width="35" height="21"/>
+                    <rect key="frame" x="148" y="237" width="24" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -54,16 +46,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3rC-3L-YhJ" firstAttribute="baseline" secondItem="jbI-36-AZC" secondAttribute="baseline" id="08E-Fi-H9f"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="centerX" secondItem="yQA-pj-ewT" secondAttribute="centerX" id="0Mw-H5-WJ6"/>
                 <constraint firstItem="yQA-pj-ewT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="48E-EA-XjC"/>
-                <constraint firstItem="3rC-3L-YhJ" firstAttribute="leading" secondItem="jbI-36-AZC" secondAttribute="trailing" constant="8" symbolic="YES" id="Boa-cx-6CJ"/>
-                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="237" id="D8j-ft-zbM"/>
-                <constraint firstItem="3rC-3L-YhJ" firstAttribute="top" secondItem="WmB-KO-gN1" secondAttribute="bottom" constant="8" symbolic="YES" id="J1k-VM-2R3"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="WmB-KO-gN1" secondAttribute="bottom" constant="8" symbolic="YES" id="KXb-Hq-278"/>
+                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="237" id="Pkw-Sb-COG"/>
                 <constraint firstAttribute="bottom" secondItem="R2E-T0-KqN" secondAttribute="bottom" constant="20" symbolic="YES" id="mXh-xe-A0p"/>
-                <constraint firstItem="jbI-36-AZC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="136" id="n86-Pg-hjU"/>
                 <constraint firstItem="yQA-pj-ewT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vFH-Jf-OcH"/>
                 <constraint firstItem="R2E-T0-KqN" firstAttribute="centerX" secondItem="yQA-pj-ewT" secondAttribute="centerX" id="vTa-ir-Yv1"/>
-                <constraint firstItem="jbI-36-AZC" firstAttribute="top" secondItem="WmB-KO-gN1" secondAttribute="bottom" constant="8" symbolic="YES" id="vtM-4Q-Of9"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
