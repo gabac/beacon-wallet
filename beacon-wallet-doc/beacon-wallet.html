@@ -284,7 +284,8 @@ div.chapter {
     counter-reset: sources;
 }
 
-#sources li {
+#sources li,
+#figures li {
     padding-left: 60px;
     padding-bottom: 0.75em;
 }
@@ -319,6 +320,7 @@ div.chapter {
 #figure-aufwand table tr.total td {
     font-weight: bold;
 }
+
 
 @media screen {
 
@@ -486,6 +488,9 @@ function figures() {
 
         caption = captions[i];
         figure = caption.parentNode;
+        id = 'figure-' + i;
+
+        figure.setAttribute('id', id);
 
         caption.innerHTML = 'Abb. ' + (i + 1) + ' ' + caption.innerHTML;
 
