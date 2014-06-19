@@ -544,7 +544,7 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
 <ul>
     <li>MySQL-Datenbank mit Beispielprodukten und Testkunden</li>
     <li>API für den Zugriff auf die Datenbank</li>
-    <li>iPhone App für den Zugriff auf das Backendsystem, wie auch die Integration von Beacons</li>
+    <li>iPhone App für den Zugriff auf das Back-End-System, wie auch die Integration von Beacons</li>
     <li>iPad App für die Kommunikation mit dem iPhone und daraus resultierende Bezahlung des Einkaufes</li>
     <li>Kommunikationsprotokoll für die Bezahlung zwischen iPhone und iPad App</li>
 </div>
@@ -552,7 +552,7 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
 <div class="chapter">
     <h2>Projektmanagement</h2>
     <h3>Projektteam</h3>
-    <p>Das Projektteam setzt sich aus Fabian Vogler und Cyril Gabathuler zusammen. Fabian Vogler übernimmt die Entwicklung der Backendkomponente, während sich Cyril Gabathuler und die Entwicklung der iOS Apps kümmert. Weiter wird Cyril sich um die Integration der iBeacons kümmern und Fabian die sichere Bezahlung zwischen dem iPhone und dem iPad übernehmen.</p>
+    <p>Das Projektteam setzt sich aus Fabian Vogler und Cyril Gabathuler zusammen. Fabian Vogler übernimmt die Entwicklung der Back-End-Komponente, während sich Cyril Gabathuler und die Entwicklung der iOS Apps kümmert. Weiter wird Cyril sich um die Integration der iBeacons kümmern und Fabian die sichere Bezahlung zwischen dem iPhone und dem iPad übernehmen.</p>
     
     <h3>Projektplanung</h3>
     <p>
@@ -1950,16 +1950,60 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <div class="chapter">
 <h2>Fazit</h2>
 <h3>iBeacons</h3>
-<p>Die Implementation der iBeacons hat ohne grössere Probleme funktioniert. Dank der Hardware von <a href="http://estimote.com">Estimote</a> war auch das Testen ohne Problem möglich. Eine Anwendung der iBeacons innerhalb einer Filiale sollte sich jeder Detailhändler gut überlegen. Die Implementation ist sehr einfach und für Kunden kann sich ein grosser Mehrwert ergeben.
-Auch Apple setzt immer mehr auf iBeacons und ermöglicht neuere und bessere Funktionen. So wird z.B. mit iOS8 (ab Herbst erhältlich), sogar ein Indoor Tracking möglich.</p>
-<p>Für Detailhändler wie Coop kann dies eine sehr spannende Funktionalität sein. Man stelle sich vor man Sucht nach Erdnüssen. Basierend auf dem eigenen Einkaufsprofil wird eine optimale Route berechnet. Dabei wird man an Artikel vorbei geführt, welche man typischerweise kaufen würde.</p>
+<p>
+Die Implementation der iBeacons hat ohne grössere Probleme funktioniert. Dank 
+der Hardware von <a href="http://estimote.com">Estimote</a> war auch das Testen 
+problemlos möglich. Eine Anwendung der iBeacons innerhalb einer Filiale sollte 
+jeder Detailhändler in Betracht ziehen. Die Implementation ist sehr einfach und 
+für Kunden kann sich ein grosser Mehrwert ergeben.
+Auch Apple setzt immer mehr auf iBeacons und ermöglicht neuere und bessere 
+Funktionen. So wird z.B. mit iOS 8 (ab Herbst erhältlich), sogar ein Indoor 
+Tracking möglich.
+</p>
+<p>
+Für Detailhändler wie Coop kann dies eine sehr spannende Funktionalität sein. 
+Man stelle sich vor, der Kunde sucht nach Erdnüssen. Basierend auf dem 
+eigenen Einkaufsprofil könnte eine optimale Route innerhalb der aktuellen 
+Filiale zu den Erdnüssen berechnet werden. Dabei wird der Kunde an Artikeln vorbei 
+geführt, welche man typischerweise kaufen würde.
+</p>
 <h3>Bluetooth Payment</h3>
-<p>Es ist überraschend was Bluetooth BLE heutzutage alles ermöglicht. Die Spezifikation von Bluetooth ist nicht einfach zu verstehen, aber iOS bietet mit CoreBluetooth einen guten Abstraktionslayer an. Es wurde viel Zeit verbraucht in der korrekten Umsetzung der Kommunikation zwischen dem iPhone und dem iPad. Viele Fehlermeldung sind nicht wirklich eindeutig und es vergeht viel Zeit bis man z.B. merkt, dass man nicht mehr als 20 Bytes verschicken kann. Spannend war auch zu sehen, dass die Übermittlung der Daten überraschen lange geht. Erwartet wurde, dass sich der Datenaustausch im Millisekundenbereich bewegt, stattdessen vergehen mehrere Sekunden bis ein Warenkorb komplett übertragen worden ist.</p>
-<h3>Backend</h3>
+<p>
+Es ist überraschend, was Bluetooth Low Energy heutzutage alles ermöglicht. 
+Die Spezifikation von Bluetooth ist nicht einfach zu verstehen, aber iOS bietet 
+mit CoreBluetooth einen guten Abstraktionslayer an. Es wurde viel Zeit verbraucht 
+in der korrekten Umsetzung der Kommunikation zwischen dem iPhone und dem iPad. 
+Viele Fehlermeldung sind nicht wirklich eindeutig und es vergeht viel Zeit bis 
+man z.B. merkt, dass man nicht mehr als 20 Bytes verschicken kann. Spannend war 
+auch zu sehen, dass die Übermittlung der Daten verhältnismässig lange geht. 
+Erwartet wurde, dass sich der Datenaustausch im Bereich von einigen Millisekunden
+bewegt, stattdessen vergehen mehrere Sekunden bis ein Warenkorb komplett 
+übertragen worden ist.
+</p>
+<h3>Back-End</h3>
+<p>
+
+</p>
 <h3>iOS Apps</h3>
-<p>Die Entwicklung der Apps ging zügig und gut voran. Es wurden nur Standart UI Elemente und bekannte Libraries verwendet um die Entwicklung zu beschleunigen. Dennoch wurden zwei ansprechende Apps entwickelt. Zum ersten Mal wurde hier der <a href="https://developer.apple.com/xcode/interface-builder/">Interface Builder</a> eingesetzt. Dieser ermöglicht es, ein UI via Drag & Drop zu erstellen. Vor allem die Platzierung von Buttons und Texten ist durch dies viel einfacher und erspart mühsame Codearbeit.</p>
-<p>Es wurde auch versucht die CI von Coop innerhalb der Apps wieder zugeben. Dazu wurde in der iPhone App der bekannte Orangeton von Coop verwendet.</p>
-<p>Die App wurde bewusst noch für iOS 7 geschrieben, obwohl <a href="https://www.apple.com/chde/ios/ios8/">iOS 8</a> in einer Beta Version Anfangs Juni vorgestellt worden ist. Man hat sich lieber auf funktionierende Software verlassen, als neue , ungetestete Funktionen anzubieten.</p>
+<p>
+Die Entwicklung der Apps ging zügig und gut voran. Es wurden nur Standart UI 
+Elemente und bekannte Libraries verwendet um die Entwicklung zu beschleunigen. 
+Dennoch wurden zwei ansprechende Apps entwickelt. Zum ersten Mal wurde hier der 
+<a href="https://developer.apple.com/xcode/interface-builder/">Interface Builder</a> 
+eingesetzt. Dieser ermöglicht es, ein UI via Drag & Drop zu erstellen. Vor allem 
+die Platzierung von Buttons und Texten ist durch dies viel einfacher und 
+erspart mühsame Codearbeit.
+</p>
+<p>
+Es wurde auch versucht, das Corporate Design (CD) von Coop innerhalb der Apps 
+wiederzugeben. Dazu wurde in der iPhone App der bekannte Orangeton von Coop 
+verwendet.
+</p>
+<p>
+Die App wurde bewusst noch für iOS 7 geschrieben, obwohl 
+<a href="https://www.apple.com/chde/ios/ios8/">iOS 8</a> in einer Beta-Version 
+Anfangs Juni vorgestellt worden ist. Man hat sich lieber auf funktionierende 
+Software verlassen, als neue, ungetestete Funktionen zu verwenden.</p>
 </div>
 
 
