@@ -1495,7 +1495,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <p>Um ein besseres Gefühl für das Zusammenspiel der verschiedenen Tools zu geben, wurde nachfolgendes Diagramm erstellt.</p>
 
 <figure class="inline">
-    <img src="images/entwicklungsumgebung.png" width="300px"/>
+    <img src="images/entwicklungsumgebung.png" width="200px"/>
     <figcaption>Entwicklungsumgebung</figcaption>
 </figure>
 
@@ -1504,7 +1504,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <h4>iPhone</h4>
 <p>Die iPhone App wurde als <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UITabBarController_Class/Reference/Reference.html">TabBar</a> App aufgebaut. Dies ermöglicht einen schnellen Zugriff auf die verschiedenen Funktionen der App.</p>
 <figure class="inline">
-    <img src="images/iphone_main_ui.png" width="300px"/>
+    <img src="images/iphone_main_ui.png" width="150px"/>
     <figcaption>TabBar UI</figcaption>
 </figure>
 
@@ -1513,21 +1513,28 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <p>Um Barcodes der Produkte einzulesen wurde das Framework von <a href="http://www.scandit.com">Scandit</a> verwendet. Scandit ist eine Schweizer Firma, welche sich auf das Erkennen von Barcodes und QR Codes spezialisiert hat.</p>
 <p>Nach einer erfolgreichen Erkennung eines Barcodes wird dieser mit einer internen Produkte Datenbank auf dem iPhone verglichen. Diese wird beim Starten der App geladen bzw. es wird nach Updates für bestehenden Produkte gesucht. Da davon auszugehen ist, dass in einer Filiale schlechter Empfang herrscht, werden Request auf einen Server möglichst vermieden.</p>
 <figure class="inline">
-    <img src="images/iphone_scan.png" width="300px"/>
+    <img src="images/iphone_scan.png" width="150px"/>
     <figcaption>Barcode Scanner</figcaption>
 </figure>
 
 <p>Sobald ein Produkt erfolgreich erkannt wurde, ist es in der Receipt View ersichtlich. Diese View zeigt alle aktuellen Produkte dieses Einkaufes an. Natürlich ist es hier auch möglich, Produkte wieder aus dem Warenkorb zu entfernen.</p>
 <figure class="inline">
-    <img src="images/iphone_receipt.png" width="300px"/>
-    <figcaption>Barcode Scanner</figcaption>
+    <img src="images/iphone_receipt.png" width="150px"/>
+    <figcaption>Warenkorb</figcaption>
 </figure>
 
 <p>Um weitere Produktdetails zu erhalten, kann man ein Produkt selektieren. Danach werden alle Verfügbare Infos zu diesem Produkt angezeigt. Wie bereits erwähnt, werden diese Daten von einer lokalen Datenbank gelesen und es ist kein Request zu einem Server notwendig.</p>
 <figure class="inline">
-    <img src="images/iphone_product_detail.png" width="300px"/>
-    <figcaption>Barcode Scanner</figcaption>
+    <img src="images/iphone_product_detail.png" width="150px"/>
+    <figcaption>Produktdetail</figcaption>
 </figure>
+
+<p>Innerhalb einer Filiale können verschiedene iBeacons verteilt sein. Ist ein Kunde in der nähe eines solchen iBeacons öffnet sich automatisch eine Produktansicht. Dies soll ein Kunde animieren jenes Produkt zu kaufen. Man könnte mit dieser Methode auch Aktionen oder neue Produkte anpreisen.</p>
+<figure class="inline">
+    <img src="images/iphone_aktion.png" width="150px"/>
+    <figcaption>iBeacon Produktscreen</figcaption>
+</figure>
+
 
 </div>
 
