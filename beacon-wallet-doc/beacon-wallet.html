@@ -1515,7 +1515,7 @@ als Benutzername und der Pin als Passwort verwendet.
 </p>
 
 <figure>
-<pre class="code"><code>GET /accounts/{card}
+<pre class="code"><code>GET /accounts/{card} HTTP/1.1
 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 </code></pre>
 <figcaption>Request Abfrage Benutzerkonto</figcaption>
@@ -1544,7 +1544,7 @@ bei der Abfrage des Benutzerkontos notwendig.
 </p>
 
 <figure>
-<pre class="code"><code>PUT /accounts/{card}
+<pre class="code"><code>PUT /accounts/{card} HTTP/1.1
 Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 Content-Type: application/json
 
@@ -1581,7 +1581,7 @@ separaten Aufruf abgefragt werden.
 </p>
 
 <figure>
-<pre class="code"><code>GET /products
+<pre class="code"><code>GET /products HTTP/1.1
 </code></pre>
 <figcaption>Request Liste Produkte</figcaption>
 </figure>
@@ -1614,7 +1614,7 @@ bei wiederholten Abfragen mit zu senden, um unnötigen Netzwerkverkehr zu verhin
 </p>
 
 <figure>
-<pre class="code"><code>GET /products/{id}
+<pre class="code"><code>GET /products/{id} HTTP/1.1
 If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
 </code></pre>
 <figcaption>Request Produkt</figcaption>
@@ -1661,7 +1661,7 @@ enthalten. Die Anfrage soll dabei effektiv verschlüsselt übermittelt werden.
 </p>
 
 <figure>
-<pre class="code"><code>POST /transactions
+<pre class="code"><code>POST /transactions HTTP/1.1
 Content-Type: application/json
 
 {
@@ -1703,7 +1703,7 @@ Auch diese Anfrage soll verschlüsselt übermittelt werden.
 </p>
 
 <figure>
-<pre class="code"><code>POST /transactions/payment
+<pre class="code"><code>POST /transactions/payment HTTP/1.1
 Content-Type: application/json
 
 {
