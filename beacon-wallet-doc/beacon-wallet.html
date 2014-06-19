@@ -533,7 +533,25 @@ Cyril Gabathuler, <a href="mailto:gabatcyr@students.zhaw.ch">gabatcyr@students.z
 
 <div class="chapter">
 <h2>Zusammenfassung</h2>
-<p>TODO</p>
+<p>Die Arbeit soll aufzeigen, wie moderne Kundenbindung sowie bargeldlose Bezahlung im Detailhandel mittels neuer Technologien vereinfacht werden kann. Spezifisch soll die Integration von Beacons in einem Supermarkt untersucht werden. Diese Beacons kommunizieren via Bluetooth Low Energy mit einer Mobile App.</p>
+<p>Um alltägliche Use Cases aufzuzeigen, hat man sich für eine exemplarische Integration des System in eine Filiale eines lokalen Detailhandelsunternehmen (Coop) entschieden.</p>
+<p>Anhand der Kontextabgrenzung soll ersichtlich sein, wie die verschiedenen Komponenten untereinander interagieren.</p>
+<figure class="inline">
+    <img src="images/kontextabgrenzung.png" width="400px" />
+    <figcaption>Kontextabgrenzung</figcaption>
+</figure>
+<p>Der Kunde interagiert mit den Produkten, welche der Coop anbieten. Um diese in seinen virtuellen Warenkorb zu legen, muss er den Barcode der Produkte scannen. Dazu verwendet er die iPhone-App. Sobald sein Einkauf abgeschlossen ist, begibt sich der Kunde zum Kassenbereich. Um eine Zahlung auszuführen, muss er sich in der Nähe eines iPads befinden. Das iPad nimmt dann die Zahlung entgegen und führt diese mithilfe der Server-Komponte aus. Die Transaktion wird in einer Datenbank gespeichert. Die Datenbank enthält auch alle Produkte, welche von Coop angeboten werden und vom iPhone angezeigt werden können.</p>
+<p>Nachfolgend ist ein Screenshot der iPad App zu sehen. Man soll sich dies als eine Selfcheckout Kasse vorstellen. Sobald ein iPhone in der Nähe dieses iPad ist, beginnt der Bezahlungsvorgange.</p>
+<figure class="inline">
+    <img src="images/ipad_main_ui.png" class="border" width="300"/>
+    <figcaption>iPad UI</figcaption>
+</figure>
+<p>Mit Hilfe der iPhone App lassen sich die Produkte anhand ihres Barcodes einscannen. Die App hat einen persönlichen Warenkorb, in welchem man weitere Informationen zu einem Produkt erfahren kann. Auch lassen sich Produkte wieder aus dem Warenkorb entfernen.</p>
+<figure class="inline">
+    <img src="images/iphone_scan.png" class="border" width="300"/>
+    <figcaption>Barcode Scanner</figcaption>
+</figure>
+<p>Die Kommunikation zwischen dem iPhone und dem iPad geschieht vollständig über Bluetooth. Man kann davon ausgehen, dass in einer Filiale schlechter Empfang herrscht. Daher muss das iPhone keine Serverrequest machen und hält lokal eine eigene Produktdatenbank. Die gesamte Kommunikation wird auch asynchron verschlüsselt um einen sicheren Bezahlungsvorgang zu gewährleisten.</p>
 
 </div>
 
