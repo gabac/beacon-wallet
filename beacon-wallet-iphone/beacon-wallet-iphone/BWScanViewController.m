@@ -60,6 +60,7 @@
     self.scanditSDKBarcodePicker.overlayController.delegate = self;
     
     [self.view addSubview:self.scanditSDKBarcodePicker.view];
+    [self getProductForBarcode:@"123"];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -120,9 +121,11 @@
     for(int i = 0; i < [self.products count]; i++) {
         BWProduct *product = [self.products objectAtIndex:i];
         
-        for(int j = 0; j < [product.barcodes count]; j++) {
-            if ([product.barcodes[j] isEqualToString:barcode]) {
-                return product;
+        if([product.barcodes respondsToSelector:@selector(count)]) {
+            for(int j = 0; j < [product.barcodes count]; j++) {
+                if ([product.barcodes[j] isEqualToString:barcode]) {
+                    return product;
+                }
             }
         }
     }
