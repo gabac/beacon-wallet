@@ -78,7 +78,7 @@ PaymentProcess paymentProcess;
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:23099 minor:1039 identifier:@"ch.beacon-wallet"];
     self.beaconRegion.notifyEntryStateOnDisplay = YES;
     
-    self.productBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:6346 minor:34603 identifier:@"ch.beacon-wallet"];
+    self.productBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:6346 minor:34602 identifier:@"ch.beacon-wallet"];
     
     [self.locationManager startRangingBeaconsInRegion:self.productBeaconRegion];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
