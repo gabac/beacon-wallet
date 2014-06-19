@@ -1769,6 +1769,29 @@ Die Kommunikation zwischen dem iPhone und dem Server für die Bezahlung werden
 asymetrisch mit einem Public Key auf dem iPhone verschlüsselt.
 </p>
 
+<h4>Back-End</h4>
+
+<p>
+Aufgrund der eigenen Erfahrung soll die Web-Applikation mit PHP und dem 
+Framework <a href="http://silex.sensiolabs.org/">Silex</a> programmiert werden.
+Als Datenbank soll das populäre Datenbankmanagementsystem 
+<a href="http://dev.mysql.com/downloads/">MySQL</a> zum Einsatz kommen.
+</p>
+
+<p>
+Das nachfolgende Klassendiagramm beschreibt die wichtigsten Klassen der 
+umgesetzten Web-Applikation, welche als Back-End für das Software-System dient.
+Die Controller im Package <code>BeaconWallet\Controller</code> verarbeiten die
+Requests und nutzen die Services aus dem Package <code>BeaconWallet\Service</code>,
+um die Daten für die Response abzurufen.
+</p>
+
+<figure class="inline">
+    <img src="images/klassendiagramm-backend.png" />
+    <figcaption>Klassendiagramm</figcaption>
+</figure>
+
+
 </div>
 
 <div class="chapter">
@@ -1801,27 +1824,6 @@ automatische Ausführen der Tests jeweils das komplette Projekt
 automatisch auf Fehler überprüft wird.
 </p>
 
-<h3>Software</h3>
-
-<p>
-Aufgrund der eigenen Erfahrung soll die Web-Applikation mit PHP und dem 
-Framework <a href="http://silex.sensiolabs.org/">Silex</a> programmiert werden.
-Als Datenbank soll das populäre Datenbankmanagementsystem 
-<a href="http://dev.mysql.com/downloads/">MySQL</a> zum Einsatz kommen.
-</p>
-
-<p>
-Das nachfolgende Klassendiagramm beschreibt die wichtigsten Klassen der 
-umgesetzten Web-Applikation, welche als Back-End für das Software-System dient.
-Die Controller im Package <code>BeaconWallet\Controller</code> verarbeiten die
-Requests und nutzen die Services aus dem Package <code>BeaconWallet\Service</code>,
-um die Daten für die Response abzurufen.
-</p>
-
-<figure class="inline">
-    <img src="images/klassendiagramm-backend.png" />
-    <figcaption>Klassendiagramm</figcaption>
-</figure>
 
 <h3 class="break">Dokumentation</h3>
 
