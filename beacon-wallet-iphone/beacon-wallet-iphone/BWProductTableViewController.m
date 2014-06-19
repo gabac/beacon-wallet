@@ -90,8 +90,8 @@
             break;
         default:
             //infos
-            NSLog(@"index %lu", (indexPath.row - [self.product.info count] - 1));
-            NSDictionary *info = [self.product.info objectAtIndex:(indexPath.row - [self.product.info count] - 1)];
+            NSLog(@"index %lu", (indexPath.row - [self.product.info count]));
+            NSDictionary *info = [self.product.info objectAtIndex:(indexPath.row - [self.product.info count])];
             
             cell.textLabel.text = [info valueForKey:@"name"];
             cell.detailTextLabel.text = [info valueForKey:@"value"];

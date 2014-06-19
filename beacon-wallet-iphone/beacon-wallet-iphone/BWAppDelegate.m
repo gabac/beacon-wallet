@@ -631,7 +631,7 @@ PaymentProcess paymentProcess;
     BWProductTableViewController *productTableViewController = [[BWProductTableViewController alloc] initWithStyle:UITableViewStylePlain];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:productTableViewController action:@selector(done)];
     productTableViewController.navigationItem.rightBarButtonItem = doneButton;
-    productTableViewController.product = [self.products objectAtIndex:35];
+    productTableViewController.product = [self.products objectAtIndex:37];
     
     UINavigationController *productScreen = [[UINavigationController alloc] initWithRootViewController:productTableViewController];
     
