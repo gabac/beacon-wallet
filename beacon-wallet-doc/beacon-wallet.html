@@ -1535,6 +1535,23 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>iBeacon Produktscreen</figcaption>
 </figure>
 
+<h4>iPad</h4>
+<p>Das UI der iPad App ist sehr simple und klar gehalten. Da man das iPad als Selfcheckout Kasse verwendet, ist auch keine direkte Interaktion mit der App möglich. Nur im Zusammenspiel mit dem iPhone reagiert das iPad. Darauf wird im nächsten Kapitel eingegangen.</p>
+<figure class="inline">
+    <img src="images/ipad_main_ui.png" width="300px"/>
+    <figcaption>iPad UI</figcaption>
+</figure>
+
+<h4>Bezahlung</h4>
+<p>Dieses Kapitel beschreibt, Schritt für Schritt, wie das Zusammenspiel der iPhone App und der iPad App während dem Bezahlvorgang abläuft.</p>
+
+<p>Um zu erkennen, ob sich ein Kunde in der Nähe des iPads befindet, wird die Empfangsstärke des Bluetooths Signals verwendet. Das iPad beginnt den Zahlungsprozess sobald die Empfangsstärke kleiner als <italic>-35dB</italic> ist. Um dem User ein Hinweis zu geben, dass der Zahlungsprozess gestartet hat, wird das UI grün und ein ein entsprechender Hinweistext erscheint. Da iPad liest nun den Warenkorb des iPhones.</p>
+
+<p>Bluetooth LE erlaubt nur eine Packetgrösse von 20 Bytes. Ein typischer Warenkorb ist aber deutlich grösser als die maximal zugelassen Packetgrösse. Um trotzdem grössere Daten verschicke zu können, werden 20 Bytes grosse Chunks an das iPad gesendet. Um das Ende zu signalisieren wird ein Packet mit dem Inhalt <italic>EOM</italic> versendet. Das iPad setzt alle Chunks wieder zusammen und erhält so den gesamten Warenkorb.</p>
+<figure class="inline">
+    <img src="images/bluetooth_chunks.png" width="300px"/>
+    <figcaption>Bluetooth Chunks</figcaption>
+</figure>
 
 </div>
 
