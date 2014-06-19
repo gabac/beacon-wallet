@@ -43,6 +43,25 @@
     }
 }
 
+@page front {
+
+    @top-left {
+        content: none;
+    }
+
+    @top-right {
+        content: none;
+    }
+
+    @bottom-left {
+        content: none;
+    }
+
+    @bottom-right {
+        content: none;
+    }
+}
+
 html { 
     color: #333;
     font-size: 10pt;
@@ -224,6 +243,7 @@ div.chapter {
 }
 
 #front {
+    page: front;
     page-break-after: always;
 }
 
