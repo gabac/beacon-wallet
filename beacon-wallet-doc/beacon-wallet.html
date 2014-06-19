@@ -1738,7 +1738,8 @@ Content-Type: application/json
 Das Software-System basiert auf dem Client-Server-Prinzip. Auf einem 
 zentralen Server werden die Daten gespeichert und verwaltet. Eine 
 PHP-Applikation erlaubt den Zugriff auf diese Daten über das Internet. Als 
-Datenbank kommt das RMDBS von MySQL zum Einsatz.
+Datenbank kommt das RMDBS von <a href="http://dev.mysql.com/downloads/">MySQL</a> 
+zum Einsatz.
 </p>
 
 <p>
@@ -1761,18 +1762,16 @@ Die Kommunikation zwischen dem iPhone und dem Server für die Bezahlung wird
 asymmetrisch mit einem Public Key auf dem iPhone verschlüsselt.
 </p>
 
-<h4>Back-End</h4>
+<h4 class="break">Back-End</h4>
 
 <p>
 Aufgrund der eigenen Erfahrung soll die Web-Applikation mit PHP und dem 
 Framework <a href="http://silex.sensiolabs.org/">Silex</a> programmiert werden.
-Als Datenbank soll das populäre Datenbankmanagementsystem 
-<a href="http://dev.mysql.com/downloads/">MySQL</a> zum Einsatz kommen.
 </p>
 
 <p>
 Das nachfolgende Klassendiagramm beschreibt die wichtigsten Klassen der 
-umgesetzten Web-Applikation, welche als Back-End für das Software-System dient.
+Web-Applikation, welche als Back-End für das Software-System dient.
 Die Controller im Package <code>BeaconWallet\Controller</code> verarbeiten die
 Requests und nutzen die Services aus dem Package <code>BeaconWallet\Service</code>,
 um die Daten für die Response abzurufen.
@@ -1800,7 +1799,7 @@ Getestet wurde die Software mit dem Test-Framework <a href="http://phpunit.de/">
 Gespeichert wurde der Quellentext lokal auf dem Computer des Entwicklers sowie 
 auf dem Versionsverwaltungsdienst <a href="https://github.com/">GitHub</a>.
 Bei jedem Commit wurden zudem die Tests automatisch auf dem Continious Integration-Dienst
-<a href="https://travis-ci.org/">Travis CI</a>. Zur Installation der Abhängigkeiten und 
+<a href="https://travis-ci.org/">Travis CI</a> ausgeführt. Zur Installation der Abhängigkeiten und 
 zur Ausführung der Tests werden auf Travis CI ebenfalls wieder Composer und PHPUnit verwendet.
 Dieser Ablauf wird auch in folgender Abbildung dargestellt.
 </p>
@@ -1813,7 +1812,7 @@ Dieser Ablauf wird auch in folgender Abbildung dargestellt.
 <p>
 Dieser Aufbau der Entwicklungsumgebung hat den Vorteil, dass durch das 
 automatische Ausführen der Tests jeweils das komplette Projekt
-automatisch auf Fehler überprüft wird.
+automatisch auf Fehler überprüft wird und das ganze Team benachrichtigt wird.
 </p>
 
 <h3>Erfassung Testprodukte</h3>
@@ -1905,7 +1904,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <h2>Umsetzung iOS</h2>
 
 <h3>Entwicklungsumgebung</h3>
-<p>Für die Entwicklung wurde auf verschiedene Open Source Tools zurück gegriffen. Zum einen wurde für die Source Code Verwaltung <a href="https://github.com/gabac/beacon-wallet">GitHub</a> verwendet. Um Unit Tests zu schreiben wurde das Framework <a href="https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/UnitTestYourApp/UnitTestYourApp.html">XCTest</a> verwendet. Die Tests werden auf einem Continuous Integration Server von <a href="https://travis-ci.org/gabac/beacon-wallet">Travis</a> ausgeführt. Für die Ausführung und den Build der Apps wird das Tool <a href="https://github.com/facebook/xctool">xctool</a> verwendet. Dies sorgt sich auch um alle Abhängigkeiten einer App via <a href="http://cocoapods.org">Cocopods</a> aufzulösen.</p>
+<p>Für die Entwicklung wurde auf verschiedene Open Source Tools zurück gegriffen. Zum einen wurde für die Source-Code-Verwaltung <a href="https://github.com/gabac/beacon-wallet">GitHub</a> verwendet. Um Unit Tests zu schreiben, wurde das Framework <a href="https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/UnitTestYourApp/UnitTestYourApp.html">XCTest</a> verwendet. Die Tests werden auf einem Continuous Integration Server von <a href="https://travis-ci.org/gabac/beacon-wallet">Travis</a> ausgeführt. Für die Ausführung und den Build der Apps wird das Tool <a href="https://github.com/facebook/xctool">xctool</a> verwendet. Dies sorgt sich auch um alle Abhängigkeiten einer App via <a href="http://cocoapods.org">Cocopods</a> aufzulösen.</p>
 <p>Um ein besseres Gefühl für das Zusammenspiel der verschiedenen Tools zu geben, wurde nachfolgendes Diagramm erstellt.</p>
 
 <figure class="inline">
@@ -1922,7 +1921,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>TabBar UI</figcaption>
 </figure>
 
-<p>In der Account View werden die wichtigsten Daten des Users angezeigt. Dies sind die Supercard Nummer und die damit verknüpft Kreditkarte Nummer.</p>
+<p>In der Account View werden die wichtigsten Daten des Kunden angezeigt. Dies sind die Supercard-Nummer und die damit verknüpft Kreditkarten-Nummer.</p>
 
 <p>Um Barcodes der Produkte einzulesen wurde das Framework von <a href="http://www.scandit.com">Scandit</a> verwendet. Scandit ist eine Schweizer Firma, welche sich auf das Erkennen von Barcodes und QR Codes spezialisiert hat.</p>
 <p>Nach einer erfolgreichen Erkennung eines Barcodes wird dieser mit einer internen Produkte Datenbank auf dem iPhone verglichen. Diese wird beim Starten der App geladen bzw. es wird nach Updates für bestehenden Produkte gesucht. Da davon auszugehen ist, dass in einer Filiale schlechter Empfang herrscht, werden Request auf einen Server möglichst vermieden.</p>
@@ -1931,41 +1930,41 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>Barcode Scanner</figcaption>
 </figure>
 
-<p>Sobald ein Produkt erfolgreich erkannt wurde, ist es in der Receipt View ersichtlich. Diese View zeigt alle aktuellen Produkte dieses Einkaufes an. Natürlich ist es hier auch möglich, Produkte wieder aus dem Warenkorb zu entfernen.</p>
+<p class="break">Sobald ein Produkt erfolgreich erkannt wurde, ist es in der Receipt View ersichtlich. Diese View zeigt alle aktuellen Produkte dieses Einkaufes an. Natürlich ist es hier auch möglich, Produkte wieder aus dem Warenkorb zu entfernen.</p>
 <figure class="inline">
     <img src="images/iphone_receipt.png" class="border" width="300"/>
     <figcaption>Warenkorb</figcaption>
 </figure>
 
-<p>Um weitere Produktdetails zu erhalten, kann man ein Produkt selektieren. Danach werden alle Verfügbare Infos zu diesem Produkt angezeigt. Wie bereits erwähnt, werden diese Daten von einer lokalen Datenbank gelesen und es ist kein Request zu einem Server notwendig.</p>
+<p class="break">Um weitere Produktdetails zu erhalten, kann man ein Produkt selektieren. Danach werden alle Verfügbare Infos zu diesem Produkt angezeigt. Wie bereits erwähnt, werden diese Daten von einer lokalen Datenbank gelesen und es ist kein Request zu einem Server notwendig.</p>
 <figure class="inline">
     <img src="images/iphone_product_detail.png" class="border" width="300"/>
     <figcaption>Produktdetail</figcaption>
 </figure>
 
-<p>Innerhalb einer Filiale können verschiedene iBeacons verteilt sein. Ist ein Kunde in der Nähe eines solchen iBeacons, öffnet sich automatisch eine Produktansicht. Dies soll ein Kunde animieren jenes Produkt zu kaufen. Man könnte mit dieser Methode auch Aktionen oder neue Produkte anpreisen.</p>
+<p class="break">Innerhalb einer Filiale können verschiedene iBeacons verteilt sein. Ist ein Kunde in der Nähe eines solchen iBeacons, öffnet sich automatisch eine Produktansicht. Dies soll den Kunde animieren, jenes Produkt zu kaufen. Man könnte mit dieser Methode auch Aktionen oder neue Produkte anpreisen.</p>
 <figure class="inline">
     <img src="images/iphone_aktion.png" class="border" width="300"/>
     <figcaption>iBeacon Produktscreen</figcaption>
 </figure>
 
-<h4>iPad</h4>
-<p>Das UI der iPad App ist sehr simple und klar gehalten. Da man das iPad als Selfcheckout Kasse verwendet, ist auch keine direkte Interaktion mit der App möglich. Nur im Zusammenspiel mit dem iPhone reagiert das iPad. Darauf wird im nächsten Kapitel eingegangen.</p>
+<h4 class="break">iPad</h4>
+<p>Das UI der iPad App ist sehr simple und klar gehalten. Da man das iPad als Selbstbedienungskasse verwendet, ist auch keine direkte Interaktion mit der App möglich. Nur im Zusammenspiel mit dem iPhone reagiert das iPad. Darauf wird im nächsten Kapitel eingegangen.</p>
 <figure class="inline">
     <img src="images/ipad_main_ui.png" class="border" width="300"/>
     <figcaption>iPad UI</figcaption>
 </figure>
 
-<h4>Bezahlung</h4>
+<h4 class="break">Bezahlung</h4>
 <p>Dieses Kapitel beschreibt, Schritt für Schritt, wie das Zusammenspiel der iPhone App und der iPad App während dem Bezahlvorgang abläuft.</p>
 
-<p>Um zu erkennen, ob sich ein Kunde in der Nähe des iPads befindet, wird die Empfangsstärke des Bluetooths Signals verwendet. Das iPad beginnt den Zahlungsprozess sobald die Empfangsstärke kleiner als <italic>-35dB</italic> ist. Um dem User ein Hinweis zu geben, dass der Zahlungsprozess gestartet hat, wird das UI grün und ein ein entsprechender Hinweistext erscheint. Da iPad liest nun den Warenkorb des iPhones.</p>
+<p>Um zu erkennen, ob sich ein Kunde in der Nähe des iPads befindet, wird die Empfangsstärke des Bluetooths Signals verwendet. Das iPad beginnt den Zahlungsprozess sobald die Empfangsstärke kleiner als <italic>-35dB</italic> ist. Um dem Kunden ein Hinweis zu geben, dass der Zahlungsprozess gestartet hat, wird das UI grün und ein ein entsprechender Hinweistext erscheint. Da iPad liest nun den Warenkorb des iPhones.</p>
 <figure class="inline">
     <img src="images/ipad_sending_cart.png" class="border" width="300"/>
     <figcaption>iPad Warenkorb Übermittlung</figcaption>
 </figure>
 
-<p>Folgende Informationen werden dem iPad übermittelt.</p>
+<p class="break">Folgende Informationen werden dem iPad übermittelt.</p>
 <pre class="code">
  <code>{
     "card": "2501032235098",
@@ -1983,13 +1982,13 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>Bluetooth Chunks</figcaption>
 </figure>
 
-<p>Im nächsten Schritt wird dem Kunden sein Total auf dem iPhone angezeigt und er kann die Bezahlung bestätigen. Das Total wurde vom iPad berechnet, da nur das iPad die aktuellen Preis für die Produkte kennt. Diese Total wurde dann wiederum vom iPad an das iPhone übermittelt.</p>
+<p class="break">Im nächsten Schritt wird dem Kunden sein Total auf dem iPhone angezeigt und er kann die Bezahlung bestätigen. Das Total wird auf dem Server berechnet, da nur der Server die aktuellen Preis für die Produkte kennt. Das Total wird dann wiederum vom Server via iPad an das iPhone übermittelt.</p>
 <figure class="inline">
     <img src="images/iphone_payment.png" class="border" width="300"/>
     <figcaption>iPhone Total</figcaption>
 </figure>
 
-<p>Das iPhone erhält das Total in Form der Response vom Server, welche vom iPad abgesetzt worden ist.</p>
+<p class="break">Das iPhone erhält das Total in Form der Response vom Server, welche vom iPad abgesetzt worden ist.</p>
 <pre class="code">
  <code>{
     "id": 123,
@@ -2003,13 +2002,13 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     ]
 }</code></pre>
 
-<p>Das iPad wartet nun auf die Bestätigung vom User.</p>
+<p>Das iPad wartet nun auf die Bestätigung vom Kunden.</p>
 <figure class="inline">
     <img src="images/ipad_confirm.png" class="border" width="300"/>
     <figcaption>iPad erwartet Bestätigung</figcaption>
 </figure>
 
-<p>Die Bestätigung, welche an das iPad gesendet wird, sieht wie folgt aus.</p>
+<p class="break">Die Bestätigung, welche an das iPad gesendet wird, sieht wie folgt aus.</p>
 <pre class="code">
  <code>{
      "amount": 123.35,
@@ -2020,13 +2019,13 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 </code></pre>
     
 
-<p>Sobald der User die Bestätigung auf dem iPhone getätigt hat, wird dies dem iPad mitgeteilt und die Bezahlung wird auf dem Server abgewickelt. Wurde die Transaktion erfolgreich durchgeführt wird dies dem Kunden dargestellt.</p>
+<p>Sobald der Kunde die Bestätigung auf dem iPhone getätigt hat, wird dies dem iPad mitgeteilt und die Bezahlung wird auf dem Server abgewickelt. Wurde die Transaktion erfolgreich durchgeführt wird dies dem Kunden dargestellt.</p>
 <figure class="inline">
     <img src="images/ipad_done.png" class="border" width="300"/>
     <figcaption>Erfolgreiche Transaktion</figcaption>
 </figure>
 
-<p>Die Bestätigung der erfolgreichen Transaktion wird dem iPhone übertragen</p>
+<p class="break">Die Bestätigung der erfolgreichen Transaktion wird zum iPhone übertragen.</p>
 <pre class="code">
  <code>{
     "id": 123,
@@ -2040,9 +2039,9 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     ]
 }</code></pre>
 
-<p>Auch auf dem iPhone des Users wird eine Bestätigung angezeigt. Nun wird sein aktueller Warenkorb auf dem iPhone gelöscht und er wäre bereit für einen nächsten Einkauf. In keinem von diesen Schritten musste das iPhone mit einem Server kommunizieren. Die gesamte Kommunikation wurde via Bluetooth ausgeführt und ist verschlüsselt. Für Dokumentation wurden jedoch die unverschlüsselten Daten dargestellt. </p>
+<p>Auch auf dem iPhone des Kunden wird eine Bestätigung angezeigt. Nun wird sein aktueller Warenkorb auf dem iPhone gelöscht und er wäre bereit für einen nächsten Einkauf. In keinem von diesen Schritten musste das iPhone direkt mit einem Server kommunizieren. Die gesamte Kommunikation wurde via Bluetooth ausgeführt und ist verschlüsselt. Zur besseren Lesbarkeit wurden hier jedoch die unverschlüsselten Daten dargestellt.</p>
 <figure class="inline">
-    <img src="images/iphone_done.png" class="border" width="300"/>
+    <img src="images/iphone_done.png" class="border" width="200"/>
     <figcaption>Bestätigung der Transaktion</figcaption>
 </figure>
 
