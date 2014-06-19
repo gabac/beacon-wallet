@@ -60,7 +60,7 @@
     self.scanditSDKBarcodePicker.overlayController.delegate = self;
     
     [self.view addSubview:self.scanditSDKBarcodePicker.view];
-    [self getProductForBarcode:@"123"];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
