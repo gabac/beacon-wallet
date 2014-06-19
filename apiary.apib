@@ -157,7 +157,6 @@ understanding.
 ```
 {
     "card": "2501032235098",
-    "branch": 23432,
     "products": [
         {"id": 123, "quantity": 2},
         {"id": 456, "quantity": 1}
@@ -189,7 +188,7 @@ understanding.
 + Response 200 (application/json)
 
         {
-            "transaction": "{\"id\": 123,\"status\": \"pending\",\"card\": \"2501032235098\",\"branch\": 23432,\"amount\": 123.35,\"products\": [{\"id\": 123, \"quantity\": 2, \"amount\": 50},{\"id\": 456, \"quantity\": 1, \"amount\": 23.35}]}",
+            "transaction": "{\"id\": 123,\"status\": \"pending\",\"card\": \"2501032235098\",\"amount\": 123.35,\"products\": [{\"id\": 123, \"quantity\": 2, \"amount\": 50},{\"id\": 456, \"quantity\": 1, \"amount\": 23.35}]}",
             "signature": "LAIFtnO8J0qYY3C0lBZG9REtTPi+1"
         }
 
@@ -237,7 +236,7 @@ understanding.
 + Response 200 (application/json)
 
         {
-            "transaction": "{\"id\": 123,\"status\": \"complete\",\"card\": \"2501032235098\",\"branch\": 23432,\"amount\": 123.35,\"products\": [{\"id\": 123, \"quantity\": 2, \"amount\": 50},{\"id\": 456, \"quantity\": 1, \"amount\": 23.35}]}",
+            "transaction": "{\"id\": 123,\"status\": \"complete\",\"card\": \"2501032235098\",\"amount\": 123.35,\"products\": [{\"id\": 123, \"quantity\": 2, \"amount\": 50},{\"id\": 456, \"quantity\": 1, \"amount\": 23.35}]}",
             "signature": "LAIFtnO8J0qYY3C0lBZG9REtTPi+1"
         }
 
