@@ -1491,8 +1491,31 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <h2>Umsetzung iOS</h2>
 
 <h3>Entwicklungsumgebung</h3>
+<p>Für die Entwicklung wurde auf verschiedene Open Source Tools zurück gegriffen. Zum einen wurde für die Source Code Verwaltung <a href="https://github.com/gabac/beacon-wallet">GitHub</a> verwendet. Um Unit Tests zu schreiben wurde das Framework <a href="https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/UnitTestYourApp/UnitTestYourApp.html">XCTest</a> verwendet. Die Tests werden auf einem Continuous Integration Server von <a href="https://travis-ci.org/gabac/beacon-wallet">Travis</a> ausgeführt. Für die Ausführung und den Build der Apps wird das Tool <a href="https://github.com/facebook/xctool">xctool</a> verwendet. Dies sorgt sich auch um alle Abhängigkeiten einer App via <a href="http://cocoapods.org">Cocopods</a> aufzulösen.</p>
+<p>Um ein besseres Gefühl für das Zusammenspiel der verschiedenen Tools zu geben, wurde nachfolgendes Diagramm erstellt.</p>
+
+<figure class="inline">
+    <img src="images/entwicklungsumgebung.png" width="300px"/>
+    <figcaption>Entwicklungsumgebung</figcaption>
+</figure>
 
 <h3>Software</h3>
+<p>Im folgenden Kapitel wird einzeln auf die verschiedenen Funktionen der Apps für das iPhone, sowie für das iPad eingegangen.</p>
+<h4>iPhone</h4>
+<p>Die iPhone App wurde als <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UITabBarController_Class/Reference/Reference.html">TabBar</a> App aufgebaut. Dies ermöglicht einen schnellen Zugriff auf die verschiedenen Funktionen der App.</p>
+<figure class="inline">
+    <img src="images/iphone_main_ui.png" width="300px"/>
+    <figcaption>TabBar UI</figcaption>
+</figure>
+
+<p>In der Account View werden die wichtigsten Daten des Users angezeigt. Dies sind die Supercard Nummer und die damit verknüpft Kreditkarte Nummer.</p>
+
+<p>Um Barcodes der Produkte einzulesen wurde das Framework von <a href="http://www.scandit.com">Scandit</a> verwendet. Scandit ist eine Schweizer Firma, welche sich auf das Erkennen von Barcodes und QR Codes spezialisiert hat.</p>
+<p>Nach einer erfolgreichen Erkennung eines Barcodes wird dieser mit einer internen Produkte Datenbank auf dem iPhone verglichen. Diese wird beim Starten der App geladen bzw. es wird nach Updates für bestehenden Produkte gesucht. Da davon auszugehen ist, dass in einer Filiale schlechter Empfang herrscht, werden Request auf einen Server möglichst vermieden.</p>
+<figure class="inline">
+    <img src="images/iphone_scan.png" width="300px"/>
+    <figcaption>Barcode Scanner</figcaption>
+</figure>
 
 </div>
 
