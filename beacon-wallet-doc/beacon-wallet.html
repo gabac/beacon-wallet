@@ -1408,6 +1408,286 @@ die App weiss, dass die Ansicht zur Bezahlung aktiviert werden soll.
     <figcaption>Platzierung der iBeacons</figcaption>
 </figure>
 
+<h3 class="break">API</h3>
+
+<p>
+Für die Kommunikation zwischen den iOS-Apps und dem Back-End soll eine REST API
+mit folgenden Funktionen entwickelt werden.
+</p>
+
+<figure class="inline">
+    <table width="100%">
+        <tbody>
+            <tr>
+                <th>HTTP-Methode</th>
+                <th>Resource</th>
+                <th>Funktion</th>
+            </tr>
+            <tr>
+                <td><code>GET</code></td>
+                <td><code>/accounts/{card}</code></td>
+                <td>Abfrage des Benutzerkontos</td>
+            </tr>
+            <tr>
+                <td><code>PUT</code></td>
+                <td><code>/accounts/{card}</code></td>
+                <td>Änderungen am Benutzerkonto vornehmen</td>
+            </tr>
+            <tr>
+                <td><code>GET</code></td>
+                <td><code>/products</code></td>
+                <td>Abfrage einer Liste aller Produkte</td>
+            </tr>
+            <tr>
+                <td><code>GET</code></td>
+                <td><code>/products/{id}</code></td>
+                <td>Abfrage eines Produkts</td>
+            </tr>
+            <tr>
+                <td><code>POST</code></td>
+                <td><code>/transactions</code></td>
+                <td>Erstellen eines neuen Bezahlvorgangs</td>
+            </tr>
+            <tr>
+                <td><code>POST</code></td>
+                <td><code>/transactions/payment</code></td>
+                <td>Abschliessen eines Bezahlvorgangs</td>
+            </tr>
+        </tbody>
+    </table>
+    <figcaption>Übersicht API</figcaption>
+</figure>
+
+<h4>Abfrage des Benutzerkontos</h4>
+
+<p>
+Jedes Benutzerkonto wird anhand der Supercard-Nummer identifiziert und enthält
+Kreditkarten-Informationen für die direkte Bezahlung. Die Authentifizierung erfolgt 
+dabei nach <a href="#ref-rfc7235">RFC 7235</a>. Dabei ist wir die Supercard-Nummer
+als Benutzername und der Pin als Passwort verwendet.
+</p>
+
+<figure>
+<pre class="code"><code>GET /accounts/{card}
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+</code></pre>
+<figcaption>Request Abfrage Benutzerkonto</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "card": "2501032235098",
+    "cc_nr":"510143256345234",
+    "cc_date":"08-15"
+}
+</code></pre>
+<figcaption>Response Abfrage Benutzerkonto</figcaption>
+</figure>
+
+
+<h4>Änderungen am Benutzerkonto vornehmen</h4>
+
+<p>
+Um die Kreditkarte oder den Pin eines Benutzerkontos zu ändern, kann der 
+folgende Aufruf verwendet werden. Erneut ist die gleiche Authentifizierung wie
+bei der Abfrage des Benutzerkontos notwendig.
+</p>
+
+<figure>
+<pre class="code"><code>PUT /accounts/{card}
+Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+Content-Type: application/json
+
+{
+    "pin":"1234",
+    "cc_nr":"510143256345234",
+    "cc_date":"08-15",
+    "cc_ccv":"521"
+}
+</code></pre>
+<figcaption>Request Änderungen Benutzerkonto</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "card": "2501032235098",
+    "cc_nr":"510143256345234",
+    "cc_date":"08-15"
+}
+</code></pre>
+<figcaption>Response Änderungen Benutzerkonto</figcaption>
+</figure>
+
+
+<h4>Abfrage einer Liste aller Produkte</h4>
+
+<p>
+Dieser Aufruf gibt eine Liste mit den IDs aller Produkte zurück.
+Aufgrund dieser Liste können dann die Details für die Produkte mit einem
+separaten Aufruf abgefragt werden.
+</p>
+
+<figure>
+<pre class="code"><code>GET /products
+</code></pre>
+<figcaption>Request Liste Produkte</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "products": [
+        {
+            "id": 37
+        },
+        {
+            "id": 53285
+        }
+    ]
+}
+</code></pre>
+<figcaption>Response Liste Produkte</figcaption>
+</figure>
+
+
+<h4>Abfrage eines Produkts</h4>
+
+<p>
+Um sämtliche Produktinformationen für ein Produkt zu erhalten, ist dieser
+Aufruf notwendig. Es wird empfohlen, denn <code>If-Modified-Since</code> HTTP-Header
+bei wiederholten Abfragen mit zu senden, um unnötigen Netzwerkverkehr zu verhindern.
+</p>
+
+<figure>
+<pre class="code"><code>GET /products/{id}
+If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+</code></pre>
+<figcaption>Request Produkt</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+Last-Modified: Sat, 29 Oct 1994 19:43:31 GMT
+
+{
+    "id": "37",
+    "name": "Barilla Spaghetti No.5",
+    "price": "2.10",
+    "info": [
+        {
+            "name": "Herkunft",
+            "value": "Produktionsland Italien"
+        },
+        {
+            "name": "Zusammensetzung",
+            "value": "Hartweizengriess, Wasser."
+        },
+        {
+            "name": "Verwendung",
+            "value": "Italienische Teigwaren (Spaghetti) aus Hartweizengriess"
+        }
+    ],
+    "barcodes": [
+        "8076800195057"
+    ]
+}
+</code></pre>
+<figcaption>Response Produkt</figcaption>
+</figure>
+
+
+<h4>Erstellen eines neuen Bezahlvorgangs</h4>
+
+<p>
+Dieser Aufruf wird ausgeführt, wenn der Kunde an der Kasse bezahlen möchte.
+In der Antwort ist unter anderem die ID der Transaktion sowie der Gesamtbetrag
+enthalten. Die Anfrage soll dabei effektiv verschlüsselt übermittelt werden.
+</p>
+
+<figure>
+<pre class="code"><code>POST /transactions
+Content-Type: application/json
+
+{
+    "card": "2501032235098",
+    "products": [
+        {"id": 123, "quantity": 2},
+        {"id": 456, "quantity": 1}
+    ]
+}
+</code></pre>
+<figcaption>Request neuer Bezahlvorgang</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 123,
+    "status": "pending",
+    "card": "2501032235098",
+    "amount": 123.35,
+    "products": [
+        {"id": 123, "quantity": 2, "amount": 50},
+        {"id": 456, "quantity": 1, "amount": 23.35}
+    ]
+}
+</code></pre>
+<figcaption>Response neuer Bezahlvorgang</figcaption>
+</figure>
+
+
+<h4 class="break">Abschliessen eines Bezahlvorgangs</h4>
+
+<p>
+Um die Bezahlung eines Kunden abzuschliessen, muss dieser Aufruf durchgeführt 
+werden. Die Anfrage enthält die ID der Transaktion sowie den Pin des Kunden.
+Auch diese Anfrage soll verschlüsselt übermittelt werden.
+</p>
+
+<figure>
+<pre class="code"><code>POST /transactions/payment
+Content-Type: application/json
+
+{
+    "id": 123,
+    "card": "2501032235098",
+    "pin": "1234"
+}
+</code></pre>
+<figcaption>Request Abschluss Bezahlvorgang</figcaption>
+</figure>
+
+<figure>
+<pre class="code"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 123,
+    "status": "complete",
+    "card": "2501032235098",
+    "amount": 123.35,
+    "products": [
+        {"id": 123, "quantity": 2, "amount": 50},
+        {"id": 456, "quantity": 1, "amount": 23.35}
+    ]
+}
+</code></pre>
+<figcaption>Response Abschluss Bezahlvorgang</figcaption>
+</figure>
+
+
+
 <h3 class="break">Architektur</h3>
 <figure class="inline">
     <img src="images/architektur.png" width="400px" />
@@ -1724,6 +2004,7 @@ Hexadezimalsystem: Dieses Stellwertsystem wird zur Basis 16 dargestellt. Im Unte
 <p id="ref-scrum" class="ref">Ken Schwaber, Mike Beedle: Agile Software Development with Scrum, 2001, 978-0130676344</p>
 <p id="ref-secure-payment" class="ref">Kungpisdan, S.; Srinivasan, B.; Phu Dung Le: A secure account-based mobile payment protocol, 2004</p>
 <p id="ref-ikp" class="ref">Bellare, M.; Garay, J.A.; Hauser, R.; Herzberg, A.; Krawczyk, H.; Steiner, M.; Tsudik, G.; Van Herreweghen, E.; Waidner, M.: Design, implementation, and deployment of the iKP secure electronic payment system, 2000</p>
+<p id="ref-rfc7235" class="ref">Fielding, R.; Reschke, J.: RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication, 2014, ISSN: 2070-1721</p>
 
 <h3 class="break">Abbildungsverzeichnis</h3>
 
