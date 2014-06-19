@@ -1986,7 +1986,21 @@ bewegt, stattdessen vergehen mehrere Sekunden bis ein Warenkorb komplett
 </p>
 <h3>Back-End</h3>
 <p>
-
+Da bereits bekannte und stabile Technologien eingesetzt wurden, konnte die REST-API
+effizient umgesetzt werden. Die API wurde bereits vorab detailiert dokumentiert 
+und so konnten einfach Integrationstests für abgeleitet und implementiert werden. 
+Die Entschlüsselung der Bezahlungsanfragen mit OpenSSL musste zuerst erlernt 
+werden, funktionierte dann aber ebenfalls ohne Probleme. Interessant war auch 
+der Einsatz der asymetrischen Verschlüsselung mit unterschiedlichen 
+Technologien (Objective-C und PHP).
+</p>
+<p>
+Dank von Silex mitgelieferten Hilfsmethoden beschränkte sich die Implementierung
+des HTTP-Headers <code>If-Modified-Since</code> auf wenige Zeilen Code. In der 
+Anwendung zeigte sich jedoch, dass es empfehlenswert ist, einen Basisbestand 
+der Produkte direkt in die iOS-App zu integrieren. Der HTTP-Header nützlich, um 
+Netzwerkverkehr für Aktualisierungen zu reduzieren und die Antworten einfach zu 
+cachen, es braucht aber eine zusätzliche Strategie für die erste Übertragung.
 </p>
 <h3>iOS Apps</h3>
 <p>
