@@ -11,6 +11,7 @@
 #import "BWWelcomeViewController.h"
 #import "BWReceiptViewController.h"
 #import "BWUpdateAppViewController.h"
+#import "BWProductTableViewController.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -77,8 +78,9 @@ PaymentProcess paymentProcess;
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:23099 minor:1039 identifier:@"ch.beacon-wallet"];
     self.beaconRegion.notifyEntryStateOnDisplay = YES;
     
-    //not useful for entering a branch
-    //[self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    self.productBeaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid major:6346 minor:34603 identifier:@"ch.beacon-wallet"];
+    
+    [self.locationManager startRangingBeaconsInRegion:self.productBeaconRegion];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
    
     
@@ -200,7 +202,7 @@ PaymentProcess paymentProcess;
         
         [beacons enumerateObjectsUsingBlock:^(CLBeacon *beacon, NSUInteger idx, BOOL *stop) {
             //check if its a cashier
-            if([beacon.minor isEqualToNumber:@1]) {
+            if([beacon.minor isEqualToNumber:@34602]) {
                 NSString * const proximities[] = {
                     [CLProximityFar] = @"far",
                     [CLProximityImmediate] = @"immediate",
@@ -209,15 +211,12 @@ PaymentProcess paymentProcess;
                 };
                 
                 
-                NSLog(@"did range cashier beacons %@", proximities[beacon.proximity]);
+                NSLog(@"did range product beacon %@", proximities[beacon.proximity]);
                 //it has to be near to pay
                 if(beacon.proximity == CLProximityImmediate) {
-                    NSLog(@"start the payment process");
+                    NSLog(@"show the product");
                     
-                    [self startPaymentProcessWithAmount:@"123.40"];
-                    
-                    //stop ranging
-                    [self.locationManager stopRangingBeaconsInRegion:self.cashierBeaconRegion];
+                    [self showProductScreen];
                     
                     *stop = TRUE;
                 }
@@ -618,6 +617,25 @@ PaymentProcess paymentProcess;
     BWReceiptViewController *receiptViewController = [[BWReceiptViewController alloc] initWithNibName:@"BWReceiptViewController" bundle:[NSBundle mainBundle]];
     
     [self.tabBarViewController presentViewController:receiptViewController animated:YES completion:nil];
+    
+}
+
+- (void) showProductScreen {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir = [paths objectAtIndex: 0];
+    NSString* docFile = [docDir stringByAppendingPathComponent: @"Products"];
+    
+    self.products = [NSKeyedUnarchiver unarchiveObjectWithFile:docFile];
+    
+    BWProductTableViewController *productTableViewController = [[BWProductTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:productTableViewController action:@selector(done)];
+    productTableViewController.navigationItem.rightBarButtonItem = doneButton;
+    productTableViewController.product = [self.products objectAtIndex:5];
+    
+    UINavigationController *productScreen = [[UINavigationController alloc] initWithRootViewController:productTableViewController];
+    
+    [self.tabBarViewController presentViewController:productScreen animated:YES completion:nil];
     
 }
 

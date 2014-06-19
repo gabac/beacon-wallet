@@ -25,6 +25,7 @@
 @property (strong, nonatomic) BWReceiptTableViewController   *receiptTableViewController;
 @property BWLoginViewViewController *loginViewController;
 @property CLBeaconRegion *beaconRegion;
+@property CLBeaconRegion *productBeaconRegion;
 @property CLBeaconRegion *cashierBeaconRegion;
 @property CLLocationManager *locationManager;
 

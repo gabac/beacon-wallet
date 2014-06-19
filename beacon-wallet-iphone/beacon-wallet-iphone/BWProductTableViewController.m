@@ -43,6 +43,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) done {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
