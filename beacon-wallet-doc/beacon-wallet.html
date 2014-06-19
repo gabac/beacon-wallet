@@ -1449,6 +1449,31 @@ asymetrisch mit einem Public Key auf dem iPhone verschlüsselt.
 
 <h3>Entwicklungsumgebung</h3>
 
+<p>
+Folgende Software wurde für die Entwicklung des Back-Ends eingesetzt: Zum Schreiben
+des Quellentexts wurde der Texteditor <a href="https://chocolatapp.com/">Chocolat</a>
+verwendet. Die Abhängigkeiten zu Software-Bibliotheken wurde mit der Paketverwaltung
+<a href="https://getcomposer.org/">Composer</a> definiert und installiert.
+Getestet wurde die Software mit dem Test-Framework <a href="http://phpunit.de/">PHPUnit</a>.
+Gespeichert wurde der Quellentext lokal auf dem Computer des Entwicklers sowie 
+auf dem Versionsverwaltungsdienst <a href="https://github.com/">GitHub</a>.
+Bei jedem Commit wurden zudem die Tests automatisch auf dem Continious Integration-Dienst
+<a href="https://travis-ci.org/">Travis CI</a>. Zur Installation der Abhängigkeiten und 
+zur Ausführung der Tests werden auf Travis CI ebenfalls wieder Composer und PHPUnit verwendet.
+Dieser Ablauf wird auch in folgender Abbildung dargestellt.
+</p>
+
+<figure class="inline">
+    <img src="images/entwicklungsumgebung-back-end.png" width="360" />
+    <figcaption>Entwicklungsumgebung Back-End</figcaption>
+</figure>
+
+<p>
+Dieser Aufbau der Entwicklungsumgebung hat den Vorteil, dass durch das 
+automatische Ausführen der Tests jeweils das komplette Projekt
+automatisch auf Fehler überprüft wird.
+</p>
+
 <h3>Software</h3>
 
 <p>
