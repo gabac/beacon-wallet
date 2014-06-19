@@ -901,8 +901,8 @@ Hat der Kunde den Einkauf beendet, bezahlt er direkt aus der App heraus. Dazu le
 <p>Folgende Interviewfragen wurden Coop gestellt:</p>
 <ul>
     <li>Denke Sie, dass die Bezahlung mittels einem Smartphone eine zukunftsträchtige Bezahlmethode ist?</li>
-    <li>Mit <a href="http://www.coop.ch/pb/site/retail/node/70518401/Lde/index.html">passabene</a> haben Sie bereits eine Lösung um mit einem Smartphone zu bezahlen. Sind Sie zufrieden mit der Adapotion von passabene? Bekommen Sie positives Kundenfeedback?</li>
-    <li>Wurden schonmal Tests durchgeführt, welche die Bezahlung via Bluetooth ermöglichen? Damit würde die Notwendigkeit für ein WLAN Empfang bei den Kunden entfallen.</li>
+    <li>Mit <a href="http://www.coop.ch/pb/site/retail/node/70518401/Lde/index.html">passabene</a> haben Sie bereits eine Lösung um mit einem Smartphone zu bezahlen. Sind Sie zufrieden mit der Adaption von passabene? Bekommen Sie positives Kundenfeedback?</li>
+    <li>Wurden schon mal Tests durchgeführt, welche die Bezahlung via Bluetooth ermöglichen? Damit würde die Notwendigkeit für ein WLAN Empfang bei den Kunden entfallen.</li>
     <li>Haben Sie sich schon Gedanken gemacht, wie man iBeacons innerhalb von Coop nutzen könnten? Wenn ja, könnten Sie uns eine typische Verwendung beschreiben?</li>
     <li>Mit iBeacons und einem Kundenkonto wäre ein «Kundentracking» möglich, sehen Sie darin eine Gefahr für die Privatsphäre der Kunden?</li>
     <li>Könnten Sie sich vorstellen, die Lokalisierung der Kunden auch als Navigationshilfe innerhalb der Filiale zu verwenden? Folgendes Beispiel kommt uns in den Sinn: Der Kunde sucht nach Raketenglace, mit Hilfe der iBeacons wird die Position des Kundens innerhalb des Lades bestimmt. Nun wird basierend auf seinen typischen Einkaufsgewohnheiten die optimale Route, z.B. vorbei an Milch und Brot, zu den Raketenglace berechnet.</li>
@@ -1055,7 +1055,7 @@ angeboten werden und vom iPhone angezeigt werden können.
             </tr>
             <tr>
                 <td>Beschreibung</td>
-                <td>Sobald sich der Kunde in der nähe der Kasse befindet, wird er aufgefordert seinen Einkauf zu bezahlen. Löst er eine Bezahlung aus, wird eine sichere Verbindung zu der Kasse aufgebaut.</td>
+                <td>Sobald sich der Kunde in der Nähe der Kasse befindet, wird er aufgefordert seinen Einkauf zu bezahlen. Löst er eine Bezahlung aus, wird eine sichere Verbindung zu der Kasse aufgebaut.</td>
             </tr>
             <tr>
                 <td>Vorbedingungen</td>
@@ -1135,7 +1135,7 @@ angeboten werden und vom iPhone angezeigt werden können.
             </tr>
             <tr>
                 <td>Geprüfte Use cases</td>
-                <td>Uses cases, welche durche diese Akzeptanz Tests geprüft werden</td>
+                <td>Uses cases, welche durch diese Akzeptanz Tests geprüft werden</td>
             </tr>
             <tr>
                 <td>Aktivität</td>
@@ -1337,7 +1337,7 @@ Die Anforderungen unseres System schränken sich auf folgende Liste ein:
 <ul>
 <li>Die Authentifizierung des Kunden muss sicher gestellt werden.</li>
 <li>Die Bezahlung muss ohne Internetverbindung auf dem iPhone des Kunden möglich sein.</li>
-<li>Die Authorisierung einer Bezahlung darf nur einmal verwendet werden können.</li>
+<li>Die Autorisierung einer Bezahlung darf nur einmal verwendet werden können.</li>
 <li>Die aktuellsten Produktpreise müssen vom Server abgerufen werden.</li>
 <li>Die Kommunikation soll über Bluetooth Low Energy erfolgen.</li>
 <li>Das iPad soll als Selbstbedienungskasse funktionieren und keine Interaktion benötigen (z.B. kein Pairing).</li>
@@ -1443,7 +1443,7 @@ In der Coop-Filiale werden iBeacons strategisch verteilt, um gewisse Funktionen
 zu erfüllen. Ein iBeacon im Eingangsbereich weist dem Kunden mit einer 
 Benachrichtigung auf die Verfügbarkeit der App-Funktionalität innerhalb dieser 
 Filiale hin. Nährt sich der Kunde einem Produkt, welches mit einem iBeacon 
-ausgestatet ist, werden innerhalb der App sofort dessen Produktinformationen 
+ausgestattet ist, werden innerhalb der App sofort dessen Produktinformationen 
 angezeigt. Die iPads an der Kasse senden ebenfalls ein iBeacon-Signal aus, damit
 die App weiss, dass die Ansicht zur Bezahlung aktiviert werden soll.
 </p>
@@ -1757,7 +1757,7 @@ werden kann.
 Für die Abfrage der Produktinformationen ist keine Authentifizierung notwendig. 
 Das iPad authentifiziert sich mit dem Benutzeraccount des Kassierers.
 Die Kommunikation zwischen dem iPhone und dem Server für die Bezahlung werden 
-asymetrisch mit einem Public Key auf dem iPhone verschlüsselt.
+asymmetrisch mit einem Public Key auf dem iPhone verschlüsselt.
 </p>
 
 <h4>Back-End</h4>
@@ -1888,7 +1888,7 @@ generiert Beispiel-Aufrufe für unterschiedliche Programmiersprachen.
 </p>
 
 <p>
-Zustätzlich stellt Apiary automatisch anhand der dokumentierten Resourcen für 
+Zustätzlich stellt Apiary automatisch anhand der dokumentierten Ressourcen für 
 diese einen Mock-Server zur Verfügung. Dieser konnte während der Entwicklung des 
 Bezahlungssystems auf den iOS-Geräten verwendet werden.
 </p>
@@ -1988,7 +1988,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>iPhone Total</figcaption>
 </figure>
 
-<p>Das iPhone erhält das Total in Form der Response vom Server, welche vom iPad abgsetzt worden ist.</p>
+<p>Das iPhone erhält das Total in Form der Response vom Server, welche vom iPad abgesetzt worden ist.</p>
 <pre class="code">
  <code>{
     "id": 123,
@@ -2084,11 +2084,11 @@ bewegt, stattdessen vergehen mehrere Sekunden bis ein Warenkorb komplett
 <h3>Back-End</h3>
 <p>
 Da bereits bekannte und stabile Technologien eingesetzt wurden, konnte die REST-API
-effizient umgesetzt werden. Die API wurde bereits vorab detailiert dokumentiert 
+effizient umgesetzt werden. Die API wurde bereits vorab detailliert dokumentiert 
 und so konnten einfach Integrationstests für abgeleitet und implementiert werden. 
 Die Entschlüsselung der Bezahlungsanfragen mit OpenSSL musste zuerst erlernt 
 werden, funktionierte dann aber ebenfalls ohne Probleme. Interessant war auch 
-der Einsatz der asymetrischen Verschlüsselung mit unterschiedlichen 
+der Einsatz der asymmetrischen Verschlüsselung mit unterschiedlichen 
 Technologien (Objective-C und PHP).
 </p>
 <p>
