@@ -1583,6 +1583,18 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>iPad Warenkorb Übermittlung</figcaption>
 </figure>
 
+<p>Folgende Informationen werden dem iPad übermittelt.</p>
+<pre class="code">
+ <code>{
+    "card": "2501032235098",
+    "products": [
+        {
+            "id": "12",
+            "quantity": 1
+        }
+    ]
+}</code></pre>
+
 <p>Bluetooth LE erlaubt nur eine Packetgrösse von 20 Bytes. Ein typischer Warenkorb ist aber deutlich grösser als die maximal zugelassen Packetgrösse. Um trotzdem grössere Daten verschicke zu können, werden 20 Bytes grosse Chunks an das iPad gesendet. Um das Ende zu signalisieren wird ein Packet mit dem Inhalt <italic>EOM</italic> versendet. Das iPad setzt alle Chunks wieder zusammen und erhält so den gesamten Warenkorb.</p>
 <figure class="inline">
     <img src="images/bluetooth_chunks.png" width="500"/>
@@ -1595,17 +1607,56 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
     <figcaption>iPhone Total</figcaption>
 </figure>
 
+<p>Das iPhone erhält das Total in Form der Response vom Server, welche vom iPad abgsetzt worden ist.</p>
+<pre class="code">
+ <code>{
+    "id": 123,
+    "status": "pending",
+    "card": "2501032235098",
+    "branch": 23432,
+    "amount": 123.35,
+    "products": [
+        {"id": 123, "quantity": 2, "amount": 50},
+        {"id": 456, "quantity": 1, "amount": 23.35}
+    ]
+}</code></pre>
+
 <p>Das iPad wartet nun auf die Bestätigung vom User.</p>
 <figure class="inline">
     <img src="images/ipad_confirm.png" width="300"/>
     <figcaption>iPad erwartet Bestätigung</figcaption>
 </figure>
 
+<p>Die Bestätigung, welche an das iPad gesendet wird, sieht wie folgt aus.</p>
+<pre class="code">
+ <code>{
+     "amount": 123.35,
+     "card": "2501032235098",
+     "id": "123sd53vd",
+     "pin": "1234"
+ }
+</code></pre>
+    
+
 <p>Sobald der User die Bestätigung auf dem iPhone getätigt hat, wird dies dem iPad mitgeteilt und die Bezahlung wird auf dem Server abgewickelt. Wurde die Transaktion erfolgreich durchgeführt wird dies dem Kunden dargestellt.</p>
 <figure class="inline">
     <img src="images/ipad_done.png" width="300"/>
     <figcaption>Erfolgreiche Transaktion</figcaption>
 </figure>
+
+<p>Die Bestätigung der erfolgreichen Transaktion wird dem iPhone übertragen</p>
+<pre class="code">
+ <code>{
+    "id": 123,
+    "status": "complete",
+    "card": "2501032235098",
+    "branch": 23432,
+    "amount": 123.35,
+    "products": [
+        {"id": 123, "quantity": 2, "amount": 50},
+        {"id": 456, "quantity": 1, "amount": 23.35}
+    ]
+}</code></pre>
 
 <p>Auch auf dem iPhone des Users wird eine Bestätigung angezeigt. Nun wird sein aktueller Warenkorb auf dem iPhone gelöscht und er wäre bereit für einen nächsten Einkauf. In keinem von diesen Schritten musste das iPhone mit einem Server kommunizieren. Die gesamte Kommunikation wurde via Bluetooth ausgeführt.</p>
 <figure class="inline">
