@@ -1495,7 +1495,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <p>Um ein besseres Gefühl für das Zusammenspiel der verschiedenen Tools zu geben, wurde nachfolgendes Diagramm erstellt.</p>
 
 <figure class="inline">
-    <img src="images/entwicklungsumgebung.png" width="200px"/>
+    <img src="images/entwicklungsumgebung.png" width="500"/>
     <figcaption>Entwicklungsumgebung</figcaption>
 </figure>
 
@@ -1504,7 +1504,7 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <h4>iPhone</h4>
 <p>Die iPhone App wurde als <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UITabBarController_Class/Reference/Reference.html">TabBar</a> App aufgebaut. Dies ermöglicht einen schnellen Zugriff auf die verschiedenen Funktionen der App.</p>
 <figure class="inline">
-    <img src="images/iphone_main_ui.png" width="150px"/>
+    <img src="images/iphone_main_ui.png" width="300"/>
     <figcaption>TabBar UI</figcaption>
 </figure>
 
@@ -1513,32 +1513,32 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <p>Um Barcodes der Produkte einzulesen wurde das Framework von <a href="http://www.scandit.com">Scandit</a> verwendet. Scandit ist eine Schweizer Firma, welche sich auf das Erkennen von Barcodes und QR Codes spezialisiert hat.</p>
 <p>Nach einer erfolgreichen Erkennung eines Barcodes wird dieser mit einer internen Produkte Datenbank auf dem iPhone verglichen. Diese wird beim Starten der App geladen bzw. es wird nach Updates für bestehenden Produkte gesucht. Da davon auszugehen ist, dass in einer Filiale schlechter Empfang herrscht, werden Request auf einen Server möglichst vermieden.</p>
 <figure class="inline">
-    <img src="images/iphone_scan.png" width="150px"/>
+    <img src="images/iphone_scan.png" width="300"/>
     <figcaption>Barcode Scanner</figcaption>
 </figure>
 
 <p>Sobald ein Produkt erfolgreich erkannt wurde, ist es in der Receipt View ersichtlich. Diese View zeigt alle aktuellen Produkte dieses Einkaufes an. Natürlich ist es hier auch möglich, Produkte wieder aus dem Warenkorb zu entfernen.</p>
 <figure class="inline">
-    <img src="images/iphone_receipt.png" width="150px"/>
+    <img src="images/iphone_receipt.png" width="300"/>
     <figcaption>Warenkorb</figcaption>
 </figure>
 
 <p>Um weitere Produktdetails zu erhalten, kann man ein Produkt selektieren. Danach werden alle Verfügbare Infos zu diesem Produkt angezeigt. Wie bereits erwähnt, werden diese Daten von einer lokalen Datenbank gelesen und es ist kein Request zu einem Server notwendig.</p>
 <figure class="inline">
-    <img src="images/iphone_product_detail.png" width="150px"/>
+    <img src="images/iphone_product_detail.png" width="300"/>
     <figcaption>Produktdetail</figcaption>
 </figure>
 
 <p>Innerhalb einer Filiale können verschiedene iBeacons verteilt sein. Ist ein Kunde in der nähe eines solchen iBeacons öffnet sich automatisch eine Produktansicht. Dies soll ein Kunde animieren jenes Produkt zu kaufen. Man könnte mit dieser Methode auch Aktionen oder neue Produkte anpreisen.</p>
 <figure class="inline">
-    <img src="images/iphone_aktion.png" width="150px"/>
+    <img src="images/iphone_aktion.png" width="300"/>
     <figcaption>iBeacon Produktscreen</figcaption>
 </figure>
 
 <h4>iPad</h4>
 <p>Das UI der iPad App ist sehr simple und klar gehalten. Da man das iPad als Selfcheckout Kasse verwendet, ist auch keine direkte Interaktion mit der App möglich. Nur im Zusammenspiel mit dem iPhone reagiert das iPad. Darauf wird im nächsten Kapitel eingegangen.</p>
 <figure class="inline">
-    <img src="images/ipad_main_ui.png" width="300px"/>
+    <img src="images/ipad_main_ui.png" width="300"/>
     <figcaption>iPad UI</figcaption>
 </figure>
 
@@ -1546,12 +1546,41 @@ Bezahlungssystems auf den iOS-Geräten verwendet werden.
 <p>Dieses Kapitel beschreibt, Schritt für Schritt, wie das Zusammenspiel der iPhone App und der iPad App während dem Bezahlvorgang abläuft.</p>
 
 <p>Um zu erkennen, ob sich ein Kunde in der Nähe des iPads befindet, wird die Empfangsstärke des Bluetooths Signals verwendet. Das iPad beginnt den Zahlungsprozess sobald die Empfangsstärke kleiner als <italic>-35dB</italic> ist. Um dem User ein Hinweis zu geben, dass der Zahlungsprozess gestartet hat, wird das UI grün und ein ein entsprechender Hinweistext erscheint. Da iPad liest nun den Warenkorb des iPhones.</p>
+<figure class="inline">
+    <img src="images/ipad_sending_cart.png" width="300"/>
+    <figcaption>iPad Warenkorb Übermittlung</figcaption>
+</figure>
 
 <p>Bluetooth LE erlaubt nur eine Packetgrösse von 20 Bytes. Ein typischer Warenkorb ist aber deutlich grösser als die maximal zugelassen Packetgrösse. Um trotzdem grössere Daten verschicke zu können, werden 20 Bytes grosse Chunks an das iPad gesendet. Um das Ende zu signalisieren wird ein Packet mit dem Inhalt <italic>EOM</italic> versendet. Das iPad setzt alle Chunks wieder zusammen und erhält so den gesamten Warenkorb.</p>
 <figure class="inline">
-    <img src="images/bluetooth_chunks.png" width="300px"/>
+    <img src="images/bluetooth_chunks.png" width="500"/>
     <figcaption>Bluetooth Chunks</figcaption>
 </figure>
+
+<p>Im nächsten Schritt wird dem Kunden sein Total auf dem iPhone angezeigt und er kann die Bezahlung bestätigen. Das Total wurde vom iPad berechnet, da nur das iPad die aktuellen Preis für die Produkte kennt. Diese Total wurde dann wiederum vom iPad an das iPhone übermittelt.</p>
+<figure class="inline">
+    <img src="images/iphone_payment.png" width="300"/>
+    <figcaption>iPhone Total</figcaption>
+</figure>
+
+<p>Das iPad wartet nun auf die Bestätigung vom User.</p>
+<figure class="inline">
+    <img src="images/ipad_confirm.png" width="300"/>
+    <figcaption>iPad erwartet Bestätigung</figcaption>
+</figure>
+
+<p>Sobald der User die Bestätigung auf dem iPhone getätigt hat, wird dies dem iPad mitgeteilt und die Bezahlung wird auf dem Server abgewickelt. Wurde die Transaktion erfolgreich durchgeführt wird dies dem Kunden dargestellt.</p>
+<figure class="inline">
+    <img src="images/ipad_done.png" width="300"/>
+    <figcaption>Erfolgreiche Transaktion</figcaption>
+</figure>
+
+<p>Auch auf dem iPhone des Users wird eine Bestätigung angezeigt. Nun wird sein aktueller Warenkorb auf dem iPhone gelöscht und er wäre bereit für einen nächsten Einkauf. In keinem von diesen Schritten musste das iPhone mit einem Server kommunizieren. Die gesamte Kommunikation wurde via Bluetooth ausgeführt.</p>
+<figure class="inline">
+    <img src="images/iphone_done.png" width="300"/>
+    <figcaption>Bestätigung der Transaktion</figcaption>
+</figure>
+
 
 </div>
 
