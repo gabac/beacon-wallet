@@ -1824,8 +1824,69 @@ automatische Ausführen der Tests jeweils das komplette Projekt
 automatisch auf Fehler überprüft wird.
 </p>
 
+<h3>Erfassung Testprodukte</h3>
 
-<h3 class="break">Dokumentation</h3>
+<p>
+Um nicht alle Produktinformationen für Testprodukte manuell erfassen zu müssen,
+wurde nach einer verfügbaren Schnittstelle für Produkte gesucht. Auf der 
+<a href="https://produkte.migros.ch/">Produkteseite von Migros</a> finden sich 
+ausführliche Informationen über diverse Markenprodukte inkl. Barcode. Leider steht
+dort aber keine API zur Verfügung, über welche man die Produkte abfragen könnte.
+Zudem finden sich dort nur wenige Produkte, welche auch im Coop angeboten werden.
+</p>
+
+<p>
+Als weitere Quelle wurde die <a href="http://www.coop.ch/apps">iPhone-App von Coop</a> analysiert, indem der 
+Netzwerkverkehr der App aufgezeichnet und untersucht wurde. Man findet dort
+Aufrufe zu einer API, über welche einzelne Produktinformationen ausgelesen werden
+können, jedoch jeweils nur von den aktuellen Aktionen und ohne nützliche 
+Zusatzinformationen zu den Produkten.
+</p>
+
+<p>
+Bei der Aufzeichnung des Netzwerkverkehrs der <a href="http://www.coopathome.ch/mobile-apps_de/">coop@home-App</a>
+zeigte sich, dass dort eine API zur Abfrage des gesamten Produktesortiments 
+gruppiert nach Kategorien verwendet wird. Für diese API wurde dann ein Programm
+geschrieben, dass alle Produkte der Kategorien Teigwaren, Chips, Tafelschokolade,
+Müsli und Zahnpflege abruft und in unsere Produkte-Datenbank speichert.
+Dadurch konnten insgesamt 573 Produkte inkl. Zusatzinformationen wie Herkunft 
+und Zusammensetzung gespeichert werden.
+</p>
+
+<p>
+Um die Baumstruktur der Kategorien zu erhalten, wird folgender HTTP-Aufruf
+verwendet.
+</p>
+
+<figure>
+<pre class="code"><code>
+POST /b2c_coop/api/catalogstructure.do HTTP/1.1
+Host: www.coopathome.ch
+Content-Type: application/x-www-form-urlencoded
+
+language=de&version=3.1&shop=DIREKT_DE
+</code></pre>
+<figcaption>Abfrage Kategorien coop@home</figcaption>
+</figure>
+
+<p>
+Aus der Antwort können dann die IDs der Kategorien gelesen werden 
+(z.B.&nbsp;4AD598439F98028BE10000000A030109 für Teigwaren). Mit der ID der Kategorie
+können dann die Produkte mit folgendem HTTP-Aufruf ausgelesen werden.
+</p>
+
+<figure>
+<pre class="code"><code>
+POST /b2c_coop/api/catalog.do HTTP/1.1
+Host: www.coopathome.ch
+Content-Type: application/x-www-form-urlencoded
+
+language=de&version=3.1&shop=DIREKT_DE&area=4AD598439F98028BE10000000A030109&offset=0
+</code></pre>
+<figcaption>Abfrage Produkte coop@home</figcaption>
+</figure>
+
+<h3 class="break">Dokumentation API</h3>
 
 <p>
 Die REST-API des Back-End wurde in Markdown geschrieben und mit dem 
